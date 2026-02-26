@@ -1,0 +1,1216 @@
+@use "sass:math";
+
+//===============================================================
+//  Variables
+//===============================================================
+
+// --- Spacing ---
+$space-xs: 0.25rem; // 4px
+$space-s: 0.5rem; // 8px
+$space-m: 1rem; // 16px
+$space-l: 1.5rem; // 24px
+$space-xl: 2rem; // 32px
+$space-xxl: 2.5rem; // 40px
+$space-xxxl: 3rem; // 48px
+
+// --- Colors ---
+$color-text: rgba(255, 255, 255, 0.85);
+$color-main: #fff;
+$color-base: #16243D;
+$color-star: #F2F7FF;
+$color-accent: #000;
+$color-bg: #000;
+
+// --- Typography ---
+$font-size-base: 16;
+$font-family-mincho: "Shippori Mincho", serif;
+$font-family-gothic: "Shippori Antique";
+
+// --- Breakpoints ---
+$breakpoints: (
+    "tablet": 391px,
+    "desktop": 877px
+);
+
+@mixin font-mincho() {
+    font-family: $font-family-mincho;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@mixin font-mincho-think() {
+    font-family: $font-family-mincho;
+    font-weight: 600;
+    font-style: normal;
+}
+
+@mixin font-gothic() {
+    font-family: $font-family-gothic;
+    font-weight: 400;
+    font-style: normal;
+}
+
+//===============================================================
+//  Functions
+//===============================================================
+
+// pxをremに変換する
+// @param {number} $px-value - px値
+// @return {string} - rem値
+@function rem($px-value) {
+    @return #{math.div($px-value, $font-size-base)}rem;
+}
+
+// XDのトラッキング値をemに変換する
+// @param {number} $xd-value - figmaのトラッキング値
+// @return {string} - em値
+@function ls($xd-value) {
+    @return #{math.div($xd-value, 100)}em;
+}
+
+
+//===============================================================
+//  Mixins
+//===============================================================
+
+// メディアクエリ (モバイルファースト)
+// @param {string} $breakpoint - $breakpointsのキー
+@mixin mq($breakpoint: desktop) {
+    @media (width >=map-get($breakpoints, $breakpoint)) {
+        @content;
+    }
+}
+
+// インナー幅の指定
+// @param {number} $mw - max-width
+// @param {number} $w  - width
+@mixin inner($mw-l: 880px, $mw-m: 450px, $mw-s: 342px, $w: percentage(math.div(342, 390))) {
+    max-width: $mw-s;
+    width: $w;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include mq(desktop) {
+        max-width: $mw-l;
+        margin-left: rem(100);
+    }
+}
+
+// ==============================================================
+// common
+//===============================================================
+body {
+    @include font-gothic();
+    font-size: $font-size-base;
+    letter-spacing: ls(15);
+    color: $color-text;
+    background-color: #16243D;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.bg-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; // 背景
+    pointer-events: none;
+}
+
+img {
+    max-width: 100%;
+    margin: auto;
+    vertical-align: bottom;
+}
+
+// 右サイドメニューの幅＆余白（ここを変えるだけで全体追従）
+$side-nav-w: rem(240);
+$side-nav-gap: rem(20);
+
+.side-nav {
+    display: none; // まずモバイルは非表示（ハンバーガー側を使う）
+
+    @include mq(desktop) {
+        display: block;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: rem(270);
+        height: 100dvh;
+        z-index: 2000;
+        border-left: 1px solid $color-main;
+        padding: rem(60) rem(50);
+    }
+
+    &__nav {
+        height: 100%;
+        display: grid;
+        align-content: start;
+        gap: rem(36);
+    }
+
+    &__list {
+        display: grid;
+        gap: rem(26);
+    }
+
+    &__link {
+        @include font-mincho-think();
+        letter-spacing: ls(15);
+        color: rgba($color-main, 0.65);
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+
+        @include mq(desktop) {
+            font-size: rem(20);
+        }
+
+        // 下線（HOMEだけ強調されてる感じ）
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: rem(-7);
+            width: 0;
+            height: 0.75px;
+            background: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        &:hover {
+            color: $color-main;
+        }
+
+        &:hover::after {
+            width: 100%;
+            color: $color-main;
+        }
+
+        &.is-active {
+            color: $color-main;
+
+            &::after {
+                width: 100%;
+            }
+        }
+    }
+
+    &__works {
+        border-top: 1px solid rgba($color-main, 0.7);
+        padding-top: rem(25);
+    }
+
+    &__works-title {
+        @include font-mincho-think();
+        font-size: $space-l;
+        letter-spacing: ls(24);
+        margin-bottom: rem(20);
+        color: $color-main;
+    }
+
+    &__works-list {
+        display: grid;
+        gap: rem(18);
+    }
+
+    &__works-link {
+        @include font-gothic();
+        position: relative;
+        font-size: rem(14);
+        letter-spacing: 0;
+        color: rgba($color-main, 0.7);
+        text-decoration: none;
+        display: inline-block;
+        transition: color 0.3s ease;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: rem(-5);
+            width: 0;
+            height: 0.75px;
+            background: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        &:hover,
+        &:focus-visible {
+            color: $color-main;
+        }
+
+        &:hover::after,
+        &:focus-visible::after {
+            width: 100%;
+        }
+    }
+}
+
+/* メインが右サイドメニューに被らないようにする */
+.main {
+    @include mq(desktop) {
+        padding-right: calc(#{$side-nav-w} + #{$side-nav-gap});
+    }
+}
+
+/* スマホ用ハンバーガー：PCでは消す */
+.hamburger {
+    position: fixed;
+    right: rem(16);
+    bottom: rem(70);
+    z-index: 3000;
+
+    width: rem(56);
+    height: rem(56);
+    border-radius: 50%;
+
+    background: rgba(90, 145, 225, 0.6);
+    box-shadow:
+        0 0 rem(28) rgba(90, 145, 225, 0.6),
+        0 0 rem(10) rgba(90, 145, 225, 0.6);
+
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    mix-blend-mode: screen;
+
+    /* ★ここを grid → flex に */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: rem(8);
+    padding: 0;
+    cursor: pointer;
+
+    &__line {
+        width: rem(30);
+        height: 2px;
+        background: $color-main;
+        border-radius: 999px;
+        display: block;
+        margin: 0; // ← marginは使わない
+    }
+
+    @include mq(desktop) {
+        display: none;
+    }
+}
+
+/* ドロワー本体 */
+.drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: rem(260);
+    height: 100dvh;
+    background: rgba($color-base, 0.98);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 4000;
+    padding: rem(80) rem(20) rem(20);
+
+    @include mq(desktop) {
+        display: none;
+    }
+
+    &.drawer__is-open {
+        transform: translateX(0);
+    }
+
+    &__list {
+        display: grid;
+        gap: rem(18);
+    }
+
+    &__link {
+        color: $color-main;
+        text-decoration: none;
+        letter-spacing: 0.08em;
+    }
+}
+
+/* オーバーレイ */
+.drawer__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(90, 145, 225, 0.6);
+    z-index: 2400;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.sub-title {
+    @include font-mincho-think();
+    font-size: rem(22);
+    padding-bottom: rem(5);
+    position: relative;
+    margin-bottom: rem(50);
+    text-align: left;
+    color: $color-main;
+
+    @include mq(desktop) {
+        font-size: $space-xl;
+        padding-bottom: rem(10);
+        margin-bottom: rem(70);
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        right: rem(40);
+        max-width: rem(350);
+        width: 100%;
+        bottom: 0;
+        height: 1px;
+        background-color: $color-main;
+
+        @include mq(desktop) {
+            max-width: rem(1000);
+            right: rem(100);
+        }
+    }
+}
+
+.list {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: rem(40) percentage(math.div(15, 390));
+    margin-bottom: rem(40);
+
+    &__title {
+        position: relative;
+        font-size: rem(20);
+        padding-left: rem(10);
+        color: $color-main;
+        margin-bottom: rem(20);
+        letter-spacing: ls(10);
+
+        @include mq(desktop) {
+            font-size: $space-l;
+            margin-bottom: rem(30);
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: rem(4);
+            height: rem(35);
+            background-color: rgba(74, 123, 208, 0.8);
+        }
+    }
+
+    &__text {
+        padding-left: rem(10);
+
+        @include mq(desktop) {
+            font-size: rem(18)
+        }
+    }
+}
+
+/* ------------------------ header ---------------------------*/
+.header {
+    color: $color-main;
+
+    &__inner {
+        @include inner();
+
+        @include mq(desktop) {
+            @include inner($mw-l: 880px);
+        }
+    }
+
+    &__title {
+        @include font-mincho-think();
+        font-size: rem(36);
+        margin-top: rem(30);
+
+        @include mq(desktop) {
+            font-size: rem(68);
+            margin-top: rem(40);
+        }
+    }
+
+    &__sub-title {
+        @include font-mincho();
+        font-size: rem(20);
+        margin-left: rem(100);
+        padding-bottom: rem(12);
+        position: relative; // ★ 必須
+
+        @include mq(desktop) {
+            font-size: rem(36);
+            padding-bottom: rem(17);
+            margin-left: rem(250);
+            margin-bottom: rem(240);
+        }
+    }
+
+    &__sub-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: rem(30); // ← ここで「線だけ左に寄せる」
+        width: rem(340); // 線の長さ
+        height: 2px;
+        background-color: $color-main;
+
+        @include mq(desktop) {
+            width: rem(760);
+            right: rem(220);
+        }
+    }
+}
+
+/* ------------------------ footer ---------------------------*/
+.footer {
+    &__inner {
+        @include inner();
+    }
+
+    &__label {
+        font-size: rem(18);
+        margin: rem(50) 0 rem(7) 0;
+        color: $color-main;
+
+        @include mq(desktop) {
+            margin-top: 0;
+        }
+    }
+
+    &__contact {
+        @include mq(desktop) {
+            display: grid;
+            grid-auto-flow: column;
+            gap: percentage(math.div(100, 1440));
+        }
+    }
+
+    &__item {
+        width: rem(160);
+    }
+
+    &__link {
+        position: relative;
+        display: inline-block;
+        font-size: rem(14);
+        letter-spacing: ls(15);
+        color: rgba($color-main, 0.8);
+        left: rem(30);
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: rem(-6);
+            width: rem(50);
+            height: 0.75px;
+            background: currentColor;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        &:hover::after {
+            width: rem(100);
+        }
+
+        &:hover,
+        &:focus-visible {
+            color: $color-main;
+        }
+    }
+
+    &__copy {
+        display: block;
+        font-size: rem(12);
+        color: rgba($color-main, 0.8);
+        margin: rem(100) 0 rem(30) 0;
+        text-align: center;
+    }
+}
+
+//===============================================================
+// index.html
+//===============================================================
+/* ------------------------ mainvisual ----------------------- */
+.mainvisual {
+    &__inner {
+        @include inner();
+    }
+
+    &__title {
+        font-size: $space-l;
+        letter-spacing: 0;
+        margin-top: rem(260);
+        color: $color-main;
+
+        @include mq(desktop) {
+            font-size: rem(40);
+            margin-bottom: rem(10);
+        }
+
+        &__sub-title {
+            font-size: rem(18);
+            color: $color-text;
+            letter-spacing: 0;
+            margin-bottom: rem(280);
+
+            @include mq(desktop) {
+                font-size: rem(26);
+            }
+        }
+    }
+
+    &__scroll {
+        font-size: rem(20);
+        text-align: center;
+        color: rgba($color-main, 0.8);
+        margin-bottom: rem(150);
+
+        @include mq(desktop) {
+            display: none;
+        }
+    }
+}
+
+/* ------------------------ about ----------------------- */
+.about {
+    color: $color-text;
+
+    &__inner {
+        @include inner();
+    }
+
+    &__img {
+        width: rem(150);
+        height: rem(227);
+        margin: 0 auto rem(35);
+
+        @include mq(desktop) {
+            width: rem(240);
+            height: rem(360);
+            margin: 0;
+        }
+    }
+
+    &__school {
+        text-align: center;
+        margin-bottom: rem(10);
+        font-size: rem(14);
+
+        @include mq(desktop) {
+            text-align: left;
+        }
+
+        .name {
+            margin-bottom: rem(7);
+
+            @include mq(desktop) {
+                margin-bottom: rem(10);
+            }
+        }
+
+        .department {
+            margin-bottom: rem(10);
+
+            @include mq(desktop) {
+                margin-bottom: rem(25);
+            }
+        }
+    }
+
+    &__myname {
+        text-align: center;
+        font-size: rem(28);
+        color: $color-main;
+        padding-bottom: rem(15);
+        border-bottom: 1px solid $color-main;
+        width: rem(200);
+        margin: 0 auto rem(15);
+
+        @include mq(desktop) {
+            margin: 0 0 rem(20); // auto消す
+            padding-bottom: rem(20);
+            width: auto; // 固定幅やめる（必要ならmax-widthに）
+            max-width: rem(200);
+            text-align: left;
+        }
+    }
+
+    &__profile {
+        text-align: center;
+        font-size: rem(14);
+
+        @include mq(desktop) {
+            text-align: left;
+        }
+
+        .label {
+            margin-right: rem(15);
+        }
+
+        .birthplace {
+            margin-bottom: rem(7);
+
+            @include mq(desktop) {
+                margin-bottom: rem(10);
+            }
+        }
+
+        .occupation {
+            margin: 0 auto rem(15);
+            padding-bottom: rem(15);
+            border-bottom: 1px solid $color-main;
+            width: rem(300);
+
+            @include mq(desktop) {
+                margin: 0 0 rem(20); // auto消す
+                padding-bottom: rem(20);
+                width: auto; // 固定幅やめる（必要ならmax-widthに）
+                max-width: rem(300);
+                text-align: left;
+            }
+        }
+    }
+
+    &__text {
+        text-align: center;
+
+        @include mq(desktop) {
+            text-align: left;
+        }
+    }
+
+    &__body {
+        @include mq(desktop) {
+            display: grid;
+            grid-template-columns: rem(240) 1fr; // 画像幅 + 残り
+            column-gap: rem(80); // ← pxベースのほうがデザイン通りになりやすい
+            align-items: center;
+            width: 690px;
+            /* text-align: center; */
+            margin-left: 100px;
+            max-width: rem(690);
+            margin-inline: auto;
+        }
+    }
+
+    &__view {
+        position: relative;
+        display: block;
+        letter-spacing: ls(15);
+        color: rgba(230, 230, 230, 0.8);
+        margin: rem(50) auto rem(120);
+        text-decoration: none;
+        text-align: center;
+        width: rem(135);
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: rem(-6);
+            width: rem(75);
+            height: 0.75px;
+            background: currentColor;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        &:hover::after {
+            width: rem(120);
+        }
+
+        &:hover,
+        &:focus-visible {
+            color: $color-main;
+        }
+    }
+}
+
+/* ------------------------ works ----------------------- */
+.works {
+    &__inner {
+        @include inner();
+        text-align: center;
+    }
+
+    &__box {
+        margin-bottom: rem(40);
+    }
+
+    &__label {
+        font-size: rem(14);
+        letter-spacing: 0;
+        text-align: left;
+        color: $color-main;
+    }
+
+    &__box-title {
+        font-size: rem(18);
+        color: rgba(230, 230, 230, 0.9);
+        margin-bottom: rem(10);
+        text-align: left;
+    }
+
+    &__list {
+        @include mq(desktop) {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: rem(100) rem(100);
+        }
+    }
+
+    &__img {
+        padding: rem(15);
+        background: rgba(207, 235, 244, 0.2);
+
+        @include mq(desktop) {
+            padding: rem(20);
+        }
+
+        &:hover {
+            background: rgba(207, 235, 244, 0.4);
+            transition: 0.4s;
+        }
+
+        img {
+            max-width: rem(345);
+            max-height: rem(195);
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+        }
+    }
+
+    &__item {
+        @include mq(desktop) {
+            max-width: rem(390);
+            max-height: rem(290);
+        }
+    }
+
+    &__item:last-child {
+        margin-bottom: rem(70);
+        display: none;
+
+        @include mq(desktop) {
+            display: block;
+            margin-bottom: rem(70);
+        }
+    }
+
+    &__view {
+        position: relative;
+        display: inline-block;
+        letter-spacing: ls(15);
+        color: rgba(230, 230, 230, 0.8);
+        margin: 0 auto rem(120);
+        text-decoration: none;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: rem(-6);
+            width: rem(75);
+            height: 0.75px;
+            background: currentColor;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        &:hover::after {
+            width: rem(120);
+        }
+
+        &:hover,
+        &:focus-visible {
+            color: $color-main;
+        }
+    }
+}
+
+//===============================================================
+// about.html
+//===============================================================
+.aboutp {
+    .header {
+        margin-bottom: rem(50);
+
+        &__sub-title {
+            @include mq(desktop) {
+                margin-bottom: rem(0);
+            }
+        }
+
+        @include mq(desktop) {
+            margin-bottom: rem(100);
+        }
+    }
+}
+
+/* ------------------------ aboutpro ----------------------- */
+
+.aboutpro {
+    color: $color-text;
+    font-size: rem(14);
+
+    &__certification {
+        letter-spacing: ls(5);
+    }
+
+    &__inner {
+        @include inner();
+    }
+
+    &__title {
+        font-family: $font-family-mincho;
+        font-size: $space-xl;
+        font-weight: bold;
+        text-align: center;
+        color: $color-main;
+        margin-bottom: rem(50);
+
+        @include mq(desktop) {
+            font-size: rem(44);
+        }
+    }
+
+    &__img {
+        margin-bottom: rem(20);
+        max-width: rem(240);
+        max-height: rem(140);
+        margin-left: auto;
+        margin-right: auto;
+
+        @include mq(desktop) {
+            max-width: rem(360);
+            max-height: rem(240);
+        }
+    }
+
+    &__myname {
+        color: $color-main;
+        font-size: rem(26);
+        margin-bottom: rem(20);
+
+        @include mq(desktop) {
+            font-size: $space-xl;
+        }
+
+        &__sub {
+            font-size: rem(16);
+            font-family: $font-family-mincho;
+
+            @include mq(desktop) {
+                font-size: rem(20);
+            }
+        }
+    }
+
+    &__text {
+        margin-bottom: rem(50);
+        font-size: rem(16);
+    }
+
+    &__certification-list {
+        display: grid;
+        row-gap: rem(20);
+        margin-bottom: rem(100);
+
+        @include mq(desktop) {
+            margin-bottom: rem(120);
+        }
+
+        br {
+            display: inline;
+
+            @include mq(desktop) {
+                display: none;
+            }
+        }
+    }
+
+    @include mq(desktop) {
+        &__pro {
+            display: grid;
+            grid-template-columns: 1fr rem(390);
+            column-gap: percentage(math.div(70, 1440));
+            align-items: center;
+            margin-bottom: rem(50);
+        }
+
+        &__list {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        &__certification-list {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: rem(30) percentage(math.div(50, 1440));
+
+            li {
+                min-width: 0;
+                overflow-wrap: break-word;
+
+                .nobr {
+                    white-space: nowrap;
+                }
+            }
+        }
+
+        &__certification {
+            font-size: rem(18);
+        }
+    }
+}
+
+/* ------------------------ ideal ----------------------- */
+.ideal {
+    &__inner {
+        @include inner();
+    }
+
+    &__catch {
+        font-size: rem(20);
+        margin-bottom: rem(30);
+        color: $color-main;
+
+        @include mq(desktop) {
+            font-size: $space-xl;
+            margin-bottom: rem(40);
+        }
+
+        br {
+            display: inline; // ← SPでは改行する
+        }
+    }
+
+    &__indent {
+        display: inline-block;
+        padding-left: $space-l; // SP時の字下げ（任意）
+    }
+
+    @include mq(desktop) {
+        &__catch {
+            br {
+                display: none; // ← PCでは改行しない
+            }
+        }
+
+        &__indent {
+            padding-left: 0; // ← 1行になるから字下げ不要
+        }
+    }
+
+    &__text {
+        display: grid;
+        row-gap: rem(25);
+        margin-bottom: rem(100);
+        color: $color-text;
+
+        br {
+            display: none;
+        }
+
+        @include mq(desktop) {
+            margin-bottom: rem(120);
+
+            br {
+                display: inline;
+            }
+        }
+    }
+}
+
+/* ------------------------ skill ----------------------- */
+.skill {
+    &__inner {
+        @include inner();
+    }
+
+    &__list {
+        grid-template-columns: 1fr;
+        row-gap: rem(40);
+        margin-bottom: rem(100);
+
+        @include mq(desktop) {
+            grid-template-columns: repeat(2, 1fr);
+            gap: rem(60) percentage(math.div(100, 1440));
+            margin-bottom: rem(120);
+        }
+    }
+}
+
+/* ------------------------ comment ----------------------- */
+.comment {
+    &__inner {
+        @include inner();
+    }
+
+    &__text {
+        p {
+            margin-bottom: rem(25);
+
+            br {
+                display: none;
+
+                @include mq(desktop) {
+                    display: inline;
+                }
+            }
+        }
+
+        p:last-child {
+            margin-bottom: rem(100);
+        }
+    }
+}
+
+//===============================================================
+// works.html
+//===============================================================
+.worksp {
+    .header {
+        margin-bottom: rem(50);
+
+        &__sub-title {
+            @include mq(desktop) {
+                margin-bottom: rem(0);
+            }
+        }
+
+        @include mq(desktop) {
+            margin-bottom: rem(100);
+        }
+    }
+}
+
+/* ------------------------ comment ----------------------- */
+.workslist {
+    &__inner {
+        @include inner();
+    }
+
+    &__title {
+        font-family: $font-family-mincho;
+        font-size: $space-xl;
+        font-weight: bold;
+        text-align: center;
+        color: rgba(240, 240, 240, 0.95);
+        margin-bottom: rem(50);
+
+        @include mq(desktop) {
+            font-size: rem(44);
+        }
+    }
+
+    &__box {
+        margin-bottom: rem(40);
+    }
+
+    &__label {
+        font-size: rem(14);
+        letter-spacing: 0;
+        text-align: left;
+    }
+
+    &__box-title {
+        font-size: rem(18);
+        color: rgba(230, 230, 230, 0.9);
+        margin-bottom: rem(10);
+        text-align: left;
+    }
+
+    &__list {
+        @include mq(desktop) {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: rem(100) rem(100);
+        }
+    }
+
+    &__img {
+        padding: rem(15);
+        background: rgba(207, 235, 244, 0.2);
+
+        @include mq(desktop) {
+            padding: rem(20);
+        }
+
+        &:hover {
+            background: rgba(207, 235, 244, 0.4);
+            transition: 0.4s;
+        }
+
+        img {
+            max-width: rem(345);
+            max-height: rem(195);
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+        }
+    }
+
+    &__item {
+        @include mq(desktop) {
+            max-width: rem(390);
+            max-height: rem(290);
+        }
+    }
+
+    &__item:last-child {
+        margin-bottom: rem(70);
+
+        @include mq(desktop) {
+            display: block;
+            margin-bottom: rem(120);
+        }
+    }
+
+    &__view {
+        position: relative;
+        display: inline-block;
+        letter-spacing: ls(15);
+        color: rgba(230, 230, 230, 0.8);
+        margin: 0 auto rem(120);
+        text-decoration: none;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: rem(-6);
+            width: rem(75);
+            height: 0.75px;
+            background: currentColor;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        &:hover::after {
+            width: rem(120);
+        }
+
+        &:hover,
+        &:focus-visible {
+            color: $color-main;
+        }
+    }
+}
