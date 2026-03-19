@@ -16,7 +16,7 @@ $space-xxxl: 3rem; // 48px
 // --- Colors ---
 $color-text: rgba(255, 255, 255, 0.85);
 $color-main: #fff;
-$color-base: #16243D;
+$color-base: #1A2A47;
 $color-star: #F2F7FF;
 $color-accent: #000;
 $color-bg: #000;
@@ -29,7 +29,7 @@ $font-family-gothic: "Shippori Antique";
 // --- Breakpoints ---
 $breakpoints: (
     "tablet": 391px,
-    "desktop": 877px
+    "desktop": 1200px
 );
 
 @mixin font-mincho() {
@@ -89,11 +89,16 @@ $breakpoints: (
     width: $w;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: rem(100);
 
     @include mq(desktop) {
         max-width: $mw-l;
-        margin-left: rem(100);
     }
+}
+
+@mixin list-inner {
+    padding-left: rem(10);
+    margin-bottom: rem(50);
 }
 
 // ==============================================================
@@ -104,7 +109,7 @@ body {
     font-size: $font-size-base;
     letter-spacing: ls(15);
     color: $color-text;
-    background-color: #16243D;
+    background-color: #0b1324;
     position: relative;
     overflow-x: hidden;
 }
@@ -121,12 +126,52 @@ body {
 img {
     max-width: 100%;
     margin: auto;
+    height: auto;
     vertical-align: bottom;
 }
 
+.url-wrapper {
+    text-align: center;
+}
+
+.url {
+    position: relative;
+    display: inline-block; // ← block じゃなくこれ
+    font-size: rem(14);
+    color: rgba($color-main, 0.8);
+    margin: 0 0 rem(50);
+    text-align: center;
+
+    @include mq(desktop) {
+        font-size: rem(16);
+        margin: 0 0 rem(70);
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: rem(-6);
+        width: rem(50);
+        height: 0.75px;
+        background: currentColor;
+        transform: translateX(-50%);
+        transition: width 0.3s ease;
+    }
+
+    &:hover::after {
+        width: rem(100);
+    }
+
+    &:hover,
+    &:focus-visible {
+        color: $color-main;
+    }
+}
+
 // 右サイドメニューの幅＆余白（ここを変えるだけで全体追従）
-$side-nav-w: rem(240);
-$side-nav-gap: rem(20);
+$side-nav-w: rem(300);
+$side-nav-gap: 3vw;
 
 .side-nav {
     display: none; // まずモバイルは非表示（ハンバーガー側を使う）
@@ -136,7 +181,7 @@ $side-nav-gap: rem(20);
         position: fixed;
         top: 0;
         right: 0;
-        width: rem(270);
+        width: rem(300);
         height: 100dvh;
         z-index: 2000;
         border-left: 1px solid $color-main;
@@ -190,6 +235,8 @@ $side-nav-gap: rem(20);
 
         &.is-active {
             color: $color-main;
+            pointer-events: none;
+            cursor: default;
 
             &::after {
                 width: 100%;
@@ -249,9 +296,13 @@ $side-nav-gap: rem(20);
 }
 
 /* メインが右サイドメニューに被らないようにする */
-.main {
+.header,
+.main,
+.footer {
     @include mq(desktop) {
-        padding-right: calc(#{$side-nav-w} + #{$side-nav-gap});
+        @include mq(desktop) {
+            padding-right: calc(#{$side-nav-w} + #{$side-nav-gap});
+        }
     }
 }
 
@@ -359,11 +410,13 @@ $side-nav-gap: rem(20);
     margin-bottom: rem(50);
     text-align: left;
     color: $color-main;
+    margin-left: rem(24);
 
     @include mq(desktop) {
         font-size: $space-xl;
         padding-bottom: rem(10);
         margin-bottom: rem(70);
+        margin-left: rem(100);
     }
 
     &::after {
@@ -378,7 +431,7 @@ $side-nav-gap: rem(20);
 
         @include mq(desktop) {
             max-width: rem(1000);
-            right: rem(100);
+            right: rem(130);
         }
     }
 }
@@ -394,7 +447,7 @@ $side-nav-gap: rem(20);
         font-size: rem(20);
         padding-left: rem(10);
         color: $color-main;
-        margin-bottom: rem(20);
+        margin-bottom: rem(25);
         letter-spacing: ls(10);
 
         @include mq(desktop) {
@@ -428,10 +481,10 @@ $side-nav-gap: rem(20);
     color: $color-main;
 
     &__inner {
-        @include inner();
+        margin-left: rem(24);
 
         @include mq(desktop) {
-            @include inner($mw-l: 880px);
+            margin-left: rem(100);
         }
     }
 
@@ -442,7 +495,7 @@ $side-nav-gap: rem(20);
 
         @include mq(desktop) {
             font-size: rem(68);
-            margin-top: rem(40);
+            margin: rem(40) auto 0;
         }
     }
 
@@ -456,8 +509,8 @@ $side-nav-gap: rem(20);
         @include mq(desktop) {
             font-size: rem(36);
             padding-bottom: rem(17);
-            margin-left: rem(250);
-            margin-bottom: rem(240);
+            margin-left: rem(270);
+            margin-bottom: rem(100);
         }
     }
 
@@ -465,14 +518,14 @@ $side-nav-gap: rem(20);
         content: "";
         position: absolute;
         bottom: 0;
-        right: rem(30); // ← ここで「線だけ左に寄せる」
+        right: rem(50); // ← ここで「線だけ左に寄せる」
         width: rem(340); // 線の長さ
         height: 2px;
         background-color: $color-main;
 
         @include mq(desktop) {
-            width: rem(760);
-            right: rem(220);
+            width: rem(1000);
+            right: rem(130);
         }
     }
 }
@@ -497,7 +550,8 @@ $side-nav-gap: rem(20);
         @include mq(desktop) {
             display: grid;
             grid-auto-flow: column;
-            gap: percentage(math.div(100, 1440));
+            gap: percentage(math.div(100, 880));
+            margin-left: 0;
         }
     }
 
@@ -551,12 +605,13 @@ $side-nav-gap: rem(20);
 .mainvisual {
     &__inner {
         @include inner();
+        margin-top: rem(260);
+        margin-bottom: rem(150);
     }
 
     &__title {
         font-size: $space-l;
         letter-spacing: 0;
-        margin-top: rem(260);
         color: $color-main;
 
         @include mq(desktop) {
@@ -580,7 +635,6 @@ $side-nav-gap: rem(20);
         font-size: rem(20);
         text-align: center;
         color: rgba($color-main, 0.8);
-        margin-bottom: rem(150);
 
         @include mq(desktop) {
             display: none;
@@ -589,7 +643,7 @@ $side-nav-gap: rem(20);
 }
 
 /* ------------------------ about ----------------------- */
-.about {
+.top-about {
     color: $color-text;
 
     &__inner {
@@ -715,10 +769,10 @@ $side-nav-gap: rem(20);
         display: block;
         letter-spacing: ls(15);
         color: rgba(230, 230, 230, 0.8);
-        margin: rem(50) auto rem(120);
+        margin: rem(50) auto 0;
         text-decoration: none;
         text-align: center;
-        width: rem(135);
+        width: rem(140);
 
         &::after {
             content: "";
@@ -791,7 +845,6 @@ $side-nav-gap: rem(20);
 
         img {
             max-width: rem(345);
-            max-height: rem(195);
             width: 100%;
             height: 100%;
             z-index: 1000;
@@ -801,7 +854,6 @@ $side-nav-gap: rem(20);
     &__item {
         @include mq(desktop) {
             max-width: rem(390);
-            max-height: rem(290);
         }
     }
 
@@ -820,7 +872,7 @@ $side-nav-gap: rem(20);
         display: inline-block;
         letter-spacing: ls(15);
         color: rgba(230, 230, 230, 0.8);
-        margin: 0 auto rem(120);
+        margin: 0 auto;
         text-decoration: none;
 
         &::after {
@@ -849,24 +901,7 @@ $side-nav-gap: rem(20);
 //===============================================================
 // about.html
 //===============================================================
-.aboutp {
-    .header {
-        margin-bottom: rem(50);
-
-        &__sub-title {
-            @include mq(desktop) {
-                margin-bottom: rem(0);
-            }
-        }
-
-        @include mq(desktop) {
-            margin-bottom: rem(100);
-        }
-    }
-}
-
 /* ------------------------ aboutpro ----------------------- */
-
 .aboutpro {
     color: $color-text;
     font-size: rem(14);
@@ -885,7 +920,7 @@ $side-nav-gap: rem(20);
         font-weight: bold;
         text-align: center;
         color: $color-main;
-        margin-bottom: rem(50);
+        margin: rem(50) auto;
 
         @include mq(desktop) {
             font-size: rem(44);
@@ -895,13 +930,10 @@ $side-nav-gap: rem(20);
     &__img {
         margin-bottom: rem(20);
         max-width: rem(240);
-        max-height: rem(140);
-        margin-left: auto;
-        margin-right: auto;
+        margin: rem(50) auto;
 
         @include mq(desktop) {
             max-width: rem(360);
-            max-height: rem(240);
         }
     }
 
@@ -932,17 +964,28 @@ $side-nav-gap: rem(20);
     &__certification-list {
         display: grid;
         row-gap: rem(20);
-        margin-bottom: rem(100);
+        list-style: disc;
+        padding-left: rem(22);
 
         @include mq(desktop) {
-            margin-bottom: rem(120);
-        }
+            grid-template-columns: 1.4fr 1fr;
+            gap: rem(30) percentage(math.div(50, 1440));
 
-        br {
-            display: inline;
+            li {
+                min-width: 0;
+                overflow-wrap: break-word;
 
-            @include mq(desktop) {
-                display: none;
+                .nobr {
+                    white-space: nowrap;
+                }
+            }
+
+            br {
+                display: inline;
+
+                @include mq(desktop) {
+                    display: none;
+                }
             }
         }
     }
@@ -956,23 +999,12 @@ $side-nav-gap: rem(20);
             margin-bottom: rem(50);
         }
 
-        &__list {
-            grid-template-columns: repeat(3, 1fr);
+        &__status {
+            max-height: rem(190);
         }
 
-        &__certification-list {
-            display: grid;
-            grid-template-columns: 1.4fr 1fr;
-            gap: rem(30) percentage(math.div(50, 1440));
-
-            li {
-                min-width: 0;
-                overflow-wrap: break-word;
-
-                .nobr {
-                    white-space: nowrap;
-                }
-            }
+        &__list {
+            grid-template-columns: repeat(3, 1fr);
         }
 
         &__certification {
@@ -1022,7 +1054,6 @@ $side-nav-gap: rem(20);
     &__text {
         display: grid;
         row-gap: rem(25);
-        margin-bottom: rem(100);
         color: $color-text;
 
         br {
@@ -1048,12 +1079,10 @@ $side-nav-gap: rem(20);
     &__list {
         grid-template-columns: 1fr;
         row-gap: rem(40);
-        margin-bottom: rem(100);
 
         @include mq(desktop) {
             grid-template-columns: repeat(2, 1fr);
             gap: rem(60) percentage(math.div(100, 1440));
-            margin-bottom: rem(120);
         }
     }
 }
@@ -1075,10 +1104,6 @@ $side-nav-gap: rem(20);
                     display: inline;
                 }
             }
-        }
-
-        p:last-child {
-            margin-bottom: rem(100);
         }
     }
 }
@@ -1102,10 +1127,14 @@ $side-nav-gap: rem(20);
     }
 }
 
-/* ------------------------ comment ----------------------- */
+/* ------------------------ workslist ----------------------- */
 .workslist {
     &__inner {
         @include inner();
+
+        @include mq(desktop) {
+            display: block;
+        }
     }
 
     &__title {
@@ -1114,10 +1143,11 @@ $side-nav-gap: rem(20);
         font-weight: bold;
         text-align: center;
         color: rgba(240, 240, 240, 0.95);
-        margin-bottom: rem(50);
+        margin: rem(50);
 
         @include mq(desktop) {
             font-size: rem(44);
+            margin: rem(100) 0 rem(50);
         }
     }
 
@@ -1161,7 +1191,6 @@ $side-nav-gap: rem(20);
 
         img {
             max-width: rem(345);
-            max-height: rem(195);
             width: 100%;
             height: 100%;
             z-index: 1000;
@@ -1171,16 +1200,6 @@ $side-nav-gap: rem(20);
     &__item {
         @include mq(desktop) {
             max-width: rem(390);
-            max-height: rem(290);
-        }
-    }
-
-    &__item:last-child {
-        margin-bottom: rem(70);
-
-        @include mq(desktop) {
-            display: block;
-            margin-bottom: rem(120);
         }
     }
 
@@ -1212,5 +1231,286 @@ $side-nav-gap: rem(20);
         &:focus-visible {
             color: $color-main;
         }
+    }
+}
+
+//===============================================================
+// project.html
+//===============================================================
+/* ------------------------ project ----------------------- */
+.project {
+    &__inner {
+        @include inner();
+    }
+
+    &__category {
+        font-size: rem(20);
+        color: rgba(255, 255, 255, 0.75);
+        text-align: center;
+        margin-top: rem(60);
+
+        @include mq(desktop) {
+            font-size: rem(32);
+        }
+    }
+
+    &__title {
+        font-size: rem(28);
+        color: $color-main;
+        text-align: center;
+
+        @include mq(desktop) {
+            font-size: rem(48);
+        }
+    }
+
+    &__img {
+        max-width: rem(248);
+        margin: rem(50) auto;
+
+        @include mq(desktop) {
+            max-width: rem(450);
+        }
+    }
+
+    &__list {
+        @include mq(desktop) {
+            display: grid;
+            grid-auto-flow: column;
+        }
+    }
+
+    &__item {
+        margin-bottom: rem(40);
+
+        @include mq(desktop) {
+            margin-bottom: rem(50);
+        }
+    }
+
+    &__item-text {
+        letter-spacing: ls(3);
+        line-height: 2;
+
+        @include mq(desktop) {
+            br {
+                display: none;
+            }
+        }
+    }
+}
+
+/* ------------------------ overview ----------------------- */
+.overview {
+    &__inner {
+        @include inner();
+    }
+
+    &__text {
+        p {
+            margin-bottom: rem(20);
+        }
+    }
+}
+
+/* ------------------------ process ----------------------- */
+.process {
+    &__inner {
+        @include inner();
+    }
+
+    &__item-inner {
+        @include list-inner();
+    }
+
+    &__text {
+        margin-bottom: rem(20);
+
+        br {
+            display: none;
+
+            @include mq(desktop) {
+                display: inline;
+            }
+        }
+    }
+
+    &__list {
+        list-style: disc;
+        padding-left: rem(22);
+
+        li {
+            margin-bottom: rem(20);
+        }
+    }
+
+    &__design-lead {
+        margin-bottom: rem(35);
+    }
+
+    &__img-design {
+        display: grid;
+        row-gap: rem(35);
+        margin-bottom: rem(35);
+        max-width: rem(332);
+
+        img:first-child {
+            @include mq(desktop) {
+                max-width: rem(380);
+            }
+        }
+
+        img:last-child {
+            @include mq(desktop) {
+                max-width: rem(430);
+            }
+        }
+
+        @include mq(desktop) {
+            grid-auto-flow: column;
+            column-gap: rem(50);
+        }
+    }
+
+    &__design-desc {
+        margin-bottom: rem(50);
+
+        p {
+            margin-bottom: rem(20);
+        }
+    }
+
+    &__code-img {
+        max-width: rem(332);
+        margin-bottom: rem(35);
+
+        @include mq(desktop) {
+            max-width: rem(350);
+        }
+    }
+
+    &__code-text {
+        p {
+            margin-bottom: rem(20);
+
+            br {
+                display: none;
+            }
+        }
+    }
+
+    &__body,
+    &__cms {
+        @include mq(desktop) {
+            display: grid;
+            grid-auto-flow: column;
+            gap: rem(50);
+            align-items: center;
+        }
+    }
+
+}
+
+/*--------------------- ingenuity---------------------*/
+.ingenuity {
+    &__inner {
+        @include inner();
+    }
+
+    &__item-inner {
+        @include list-inner();
+    }
+
+    &__img {
+        max-width: rem(332);
+        margin-bottom: rem(25);
+
+        @include mq(desktop) {
+            max-width: rem(350);
+        }
+    }
+
+    &__body,
+    &__operation {
+        @include mq(desktop) {
+            display: grid;
+            grid-auto-flow: column;
+            gap: rem(50);
+            align-items: center;
+        }
+    }
+
+    &__text {
+        margin-bottom: rem(40);
+    }
+
+    &__operation-img {
+        display: flex;
+        flex-direction: column;
+        gap: rem(20);
+    }
+}
+
+/*--------------------- reflection ---------------------*/
+.reflection {
+    &__inner {
+        @include inner();
+    }
+
+    &__text {
+        p {
+            margin-bottom: rem(20);
+        }
+    }
+}
+
+
+.markdown {
+    margin-top: rem(40);
+    color: $color-text;
+    line-height: 1.9;
+
+    h2 {
+        @include font-mincho-think();
+        font-size: rem(28);
+        color: $color-main;
+        margin-top: rem(80);
+        margin-bottom: rem(24);
+    }
+
+    h3 {
+        font-size: rem(22);
+        color: $color-main;
+        margin-top: rem(48);
+        margin-bottom: rem(16);
+    }
+
+    p {
+        margin-top: rem(16);
+        line-height: 1.9;
+    }
+
+    ul {
+        list-style: disc;
+        padding-left: 1.5em;
+        margin-top: rem(16);
+    }
+
+    li {
+        margin-top: rem(8);
+    }
+
+    a {
+        color: #7da2e3;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin-top: rem(24);
+        margin-bottom: rem(24);
     }
 }
