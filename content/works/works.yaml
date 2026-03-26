@@ -1,0 +1,24 @@
+works:
+  - title: 日昇工業所｜公式サイト
+    label: 進級制作品
+    slug: nissyo
+    image: /image/images-001.webp
+    href: /works/nissyo
+
+  - title: ブログサイト
+    label: 授業課題
+    slug: blog
+    image: /image/blog_main.webp
+    href: /works/blog
+
+  - title: 星座占い
+    label: 授業課題
+    slug: uranai
+    image: /image/uranai_main.webp
+    href: /works/uranai
+
+  - title: 名刺デザイン
+    label: 授業課題
+    slug: card
+    image: /image/name-card_main.webp
+    href: /works/card

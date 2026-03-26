@@ -1,10 +1,21 @@
 import Link from "next/link";
 import SummerTriangle from "@/components/SummerTriangle";
-import { getWorkData } from "@/lib/markdown";
+import { getWorkData, getWorksList } from "@/lib/markdown";
 
 export default async function WorkDetailPage({ params }) {
     const { slug } = await params;
     const work = await getWorkData(slug);
+    const works = getWorksList();
+
+    const renderParagraphs = (value) => {
+        if (Array.isArray(value)) {
+            return value.map((text, i) => <p key={`p-${i}`}>{text}</p>);
+        }
+        if (value) {
+            return <p>{value}</p>;
+        }
+        return null;
+    };
 
     return (
         <>
@@ -36,27 +47,19 @@ export default async function WorkDetailPage({ params }) {
                     <div className="side-nav__works">
                         <h3 className="side-nav__works-title">作品紹介</h3>
                         <ul className="side-nav__works-list">
-                            <li>
-                                <Link className="side-nav__works-link" href="/works/blog">
-                                    ブログサイト
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className="side-nav__works-link is-active" href={`/works/${slug}`}>
-                                    日昇工業所｜公式サイト
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className="side-nav__works-link" href="/works/card">
-                                    名刺デザイン
-                                </Link>
-                            </li>
+                            {works.map((work) => (
+                                <li key={`${work.slug}-${work.href}`}>
+                                    <Link className="side-nav__works-link" href={work.href}>
+                                        {work.title}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </nav>
             </aside>
 
-            <main className="main">
+            <main className={`main work-page work-page--${slug}`}>
                 <section className="project">
                     <div className="project__inner">
                         <p className="project__category">
@@ -71,16 +74,18 @@ export default async function WorkDetailPage({ params }) {
                             <img src={work.thumbnail} alt={work.title} />
                         </div>
 
-                        <div className="url-wrapper">
-                            <a
-                                className="url"
-                                href={work.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                サイトを見る →
-                            </a>
-                        </div>
+                        {work.url && (
+                            <div className="url-wrapper">
+                                <a
+                                    className="url"
+                                    href={work.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    サイトを見る →
+                                </a>
+                            </div>
+                        )}
 
                         <div className="project__list">
                             <div className="project__item list__item">
@@ -92,77 +97,80 @@ export default async function WorkDetailPage({ params }) {
                                 <h3 className="project__item-title list__title">{work.roleLabel}</h3>
                                 <p className="project__item-text list__text">{work.role}</p>
                             </div>
-                        </div>
 
-                        <div className="project__item list__item">
-                            <h3 className="project__item-title list__title">
-                                {work.techLabel}
-                            </h3>
-                            <p className="project__item-text list__text">
-                                {work.tech}
-                            </p>
-                        </div>
+                            <div className="project__item list__item">
+                                <h3 className="project__item-title list__title">{work.techLabel}</h3>
+                                <p className="project__item-text list__text">{work.tech}</p>
+                            </div>
 
-                        <div className="project__item project__tool-item list__item">
-                            <h3 className="project__item-title list__title">{work.toolsLabel}</h3>
-                            <p className="project__item-text list__text">{work.tools}</p>
+                            <div className="project__item list__item">
+                                <h3 className="project__item-title list__title">{work.toolsLabel}</h3>
+                                <p className="project__item-text list__text">{work.tools}</p>
+                            </div>
                         </div>
                     </div>
                 </section>
 
                 <section className="overview">
-                    <h2 className="overview__title sub-title">
-                        作品概要
-                    </h2>
+                    <h2 className="overview__title sub-title">作品概要</h2>
                     <div className="overview__inner">
                         <div className="overview__text">
-                            {work.overview.map((text, i) => (
-                                <p key={i}>{text}</p>
+                            {work.overview?.map((text, i) => (
+                                <p key={`overview-${i}`}>{text}</p>
                             ))}
                         </div>
                     </div>
                 </section>
+
                 <section className="process">
-                    <h2 className="process__title sub-title">
-                        制作工程
-                    </h2>
+                    <h2 className="process__title sub-title">制作工程</h2>
                     <div className="process__inner">
-                        {work.process.map((item, i) => (
-                            <div className="process__item list__item" key={i}>
+                        {work.process?.filter((item) => item.show !== false).map((item, i) => (
+                            <div className="process__item list__item" key={`${item.title}-${i}`}>
                                 <h3 className="process__item-title list__title">{item.title}</h3>
 
                                 <div className="process__item-inner">
                                     {item.type === "hearing" && (
                                         <>
-                                            <div className="process__text process__hearing-text">
-                                                <p>{item.lead}</p>
-                                            </div>
+                                            {item.lead && (
+                                                <div className="process__text process__hearing-text">
+                                                    <p>{item.lead}</p>
+                                                </div>
+                                            )}
 
-                                            <ul className="process__list">
-                                                {item.points.map((point, index) => (
-                                                    <li key={index}>{point}</li>
-                                                ))}
-                                            </ul>
+                                            {Array.isArray(item.points) && item.points.length > 0 && (
+                                                <ul className="process__list">
+                                                    {item.points.map((point, index) => (
+                                                        <li key={`${item.title}-point-${index}`}>{point}</li>
+                                                    ))}
+                                                </ul>
+                                            )}
                                         </>
                                     )}
 
                                     {item.type === "design" && (
                                         <>
-                                            <div className="process__text process__design-lead">
-                                                <p>{item.lead}</p>
-                                            </div>
+                                            {item.lead && (
+                                                <div className="process__text process__design-lead">
+                                                    <p>{item.lead}</p>
+                                                </div>
+                                            )}
 
-                                            <figure className="process__img process__img-design">
-                                                {item.images.map((src, index) => (
-                                                    <img key={index} src={src} alt="" />
-                                                ))}
-                                            </figure>
+                                            {Array.isArray(item.images) && item.images.length > 0 && (
+                                                <figure className="process__img process__img-design">
+                                                    {item.images.map((src, index) => (
+                                                        <img key={`${src}-${index}`} src={src} alt="" />
+                                                    ))}
+                                                </figure>
+                                            )}
 
-                                            <div className="process__text process__design-desc">
-                                                {item.desc.map((text, index) => (
-                                                    <p key={index}>{text}</p>
-                                                ))}
-                                            </div>
+                                            {Array.isArray(item.desc) && item.desc.length > 0 && (
+                                                <div className="process__text process__design-desc">
+                                                    {item.desc.map((text, index) => (
+                                                        <p key={`${item.title}-desc-${index}`}>{text}</p>
+                                                    ))}
+                                                </div>
+                                            )}
                                         </>
                                     )}
 
@@ -170,33 +178,61 @@ export default async function WorkDetailPage({ params }) {
                                         <>
                                             <div className="process__body">
                                                 <figure className="process__img process__code-img">
-                                                    <img src={item.mainImage} alt="" />
+                                                    {item.mainImage && <img src={item.mainImage} alt="" />}
+                                                    {!item.mainImage && Array.isArray(item.images) && item.images[0] && (
+                                                        <img src={item.images[0]} alt="" />
+                                                    )}
                                                 </figure>
 
                                                 <div className="process__text process__code-text">
-                                                    {item.text.map((text, index) => (
-                                                        <p key={index}>{text}</p>
-                                                    ))}
+                                                    {Array.isArray(item.text) &&
+                                                        item.text.map((text, index) => (
+                                                            <p key={`${item.title}-text-${index}`}>{text}</p>
+                                                        ))}
+
+                                                    {!Array.isArray(item.text) && item.text && <p>{item.text}</p>}
+
+                                                    {!item.text && item.lead && <p>{item.lead}</p>}
+
+                                                    {!item.text &&
+                                                        Array.isArray(item.desc) &&
+                                                        item.desc.map((text, index) => (
+                                                            <p key={`${item.title}-desc-${index}`}>{text}</p>
+                                                        ))}
                                                 </div>
                                             </div>
 
-                                            <div className="process__cms">
-                                                <figure className="process__img process__code-img">
-                                                    <img src={item.subImage} alt="" />
-                                                </figure>
+                                            {(item.subImage || item.subText || (Array.isArray(item.images) && item.images[1])) && (
+                                                <div className="process__cms">
+                                                    <figure className="process__img process__code-img">
+                                                        {item.subImage && <img src={item.subImage} alt="" />}
+                                                        {!item.subImage && Array.isArray(item.images) && item.images[1] && (
+                                                            <img src={item.images[1]} alt="" />
+                                                        )}
+                                                    </figure>
 
-                                                <div className="process__text process__cms-text">
-                                                    <p>{item.subText}</p>
+                                                    <div className="process__text process__cms-text">
+                                                        {item.subText && <p>{item.subText}</p>}
+
+                                                        {!item.subText &&
+                                                            Array.isArray(item.desc) &&
+                                                            item.desc.slice(1).map((text, index) => (
+                                                                <p key={`${item.title}-subdesc-${index}`}>{text}</p>
+                                                            ))}
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            )}
                                         </>
                                     )}
 
                                     {item.type === "adjustment" && (
                                         <div className="process__text process__adjustment-text">
-                                            {item.text.map((text, index) => (
-                                                <p key={index}>{text}</p>
-                                            ))}
+                                            {Array.isArray(item.text) &&
+                                                item.text.map((text, index) => (
+                                                    <p key={`${item.title}-adjust-${index}`}>{text}</p>
+                                                ))}
+
+                                            {!Array.isArray(item.text) && item.text && <p>{item.text}</p>}
                                         </div>
                                     )}
                                 </div>
@@ -204,55 +240,68 @@ export default async function WorkDetailPage({ params }) {
                         ))}
                     </div>
                 </section>
+
                 <section className="ingenuity">
-                    <h2 className="ingenuity__title sub-title">
-                        工夫した点
-                    </h2>
+                    <h2 className="ingenuity__title sub-title">工夫した点</h2>
                     <div className="ingenuity__inner">
-                        {work.ingenuity.map((item, i) => (
-                            <div className="ingenuity__item list__item" key={i}>
-                                <h3 className="ingenuity__item-title list__title">{item.title}</h3>
+                        {work.ingenuity
+                            ?.filter((item) => item.show !== false)
+                            .map((item, i) => (
+                                <div className="ingenuity__item list__item" key={`${item.title}-${i}`}>
+                                    <h3 className="ingenuity__item-title list__title">{item.title}</h3>
 
-                                <div className="ingenuity__item-inner">
-                                    {(item.type === "update" || item.type === "form") &&
-                                        item.blocks.map((block, index) => (
-                                            <div className="ingenuity__body" key={index}>
-                                                <figure className="ingenuity__img">
-                                                    <img src={block.image} alt="" />
-                                                </figure>
+                                    <div className="ingenuity__item-inner">
+                                        {(item.type === "update" || item.type === "form") &&
+                                            Array.isArray(item.blocks) &&
+                                            item.blocks.map((block, index) => (
+                                                <div className="ingenuity__body" key={`${item.title}-block-${index}`}>
+                                                    {block.image && (
+                                                        <figure className="ingenuity__img">
+                                                            <img src={block.image} alt="" />
+                                                        </figure>
+                                                    )}
 
-                                                <div className="ingenuity__text">
-                                                    <p>{block.text}</p>
+                                                    <div className="ingenuity__text">
+                                                        {Array.isArray(block.text)
+                                                            ? block.text.map((text, i) => (
+                                                                <p key={`${item.title}-text-${i}`}>{text}</p>
+                                                            ))
+                                                            : block.text && <p>{block.text}</p>}
+                                                    </div>
+                                                </div>
+                                            ))}
+
+                                        {item.type === "operation" && (
+                                            <div className="ingenuity__operation">
+                                                {Array.isArray(item.images) && item.images.length > 0 && (
+                                                    <figure className="ingenuity__img ingenuity__operation-img">
+                                                        {item.images.map((src, index) => (
+                                                            <img key={`${src}-${index}`} src={src} alt="" />
+                                                        ))}
+                                                    </figure>
+                                                )}
+
+                                                <div className="ingenuity__text ingenuity__operation-text">
+                                                    {Array.isArray(item.text)
+                                                        ? item.text.map((text, i) => (
+                                                            <p key={`${item.title}-operation-${i}`}>{text}</p>
+                                                        ))
+                                                        : item.text && <p>{item.text}</p>}
                                                 </div>
                                             </div>
-                                        ))}
-
-                                    {item.type === "operation" && (
-                                        <div className="ingenuity__operation">
-                                            <figure className="ingenuity__img ingenuity__operation-img">
-                                                {item.images.map((src, index) => (
-                                                    <img key={index} src={src} alt="" />
-                                                ))}
-                                            </figure>
-
-                                            <div className="ingenuity__text ingenuity__operation-text">
-                                                <p>{item.text}</p>
-                                            </div>
-                                        </div>
-                                    )}
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
                     </div>
                 </section>
+
                 <section className="reflection">
-                    <h2 className="reflection__title sub-title">
-                        作品制作を通じて
-                    </h2>
+                    <h2 className="reflection__title sub-title">作品制作を通じて</h2>
                     <div className="reflection__inner">
                         <div className="reflection__text">
                             {work.reflection?.map((text, i) => (
-                                <p key={i}>{text}</p>
+                                <p key={`reflection-${i}`}>{text}</p>
                             ))}
                         </div>
                     </div>
@@ -265,15 +314,15 @@ export default async function WorkDetailPage({ params }) {
                     <address className="footer__contact">
                         <div className="footer__item">
                             <p className="footer__label">ブログ</p>
-                            <a href="" className="footer__link">Visit blog →</a>
+                            <Link href="" className="footer__link">Visit blog →</Link>
                         </div>
                         <div className="footer__item">
                             <p className="footer__label">メールアドレス</p>
-                            <a href="" className="footer__link">Email me →</a>
+                            <Link href="" className="footer__link">Email me →</Link>
                         </div>
                         <div className="footer__item">
                             <p className="footer__label">GitHub</p>
-                            <a href="" className="footer__link">View GitHub →</a>
+                            <Link href="" className="footer__link">View GitHub →</Link>
                         </div>
                     </address>
                     <small className="footer__copy">&copy;2026 Goto Takumi</small>

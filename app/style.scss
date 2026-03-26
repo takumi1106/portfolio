@@ -28,7 +28,7 @@ $font-family-gothic: "Shippori Antique";
 
 // --- Breakpoints ---
 $breakpoints: (
-    "tablet": 391px,
+    "tablet": 413px,
     "desktop": 1200px
 );
 
@@ -84,12 +84,16 @@ $breakpoints: (
 // インナー幅の指定
 // @param {number} $mw - max-width
 // @param {number} $w  - width
-@mixin inner($mw-l: 880px, $mw-m: 450px, $mw-s: 342px, $w: percentage(math.div(342, 390))) {
+@mixin inner($mw-l: 880px, $mw-m: 670px, $mw-s: 342px, $w: percentage(math.div(342, 390))) {
     max-width: $mw-s;
     width: $w;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: rem(100);
+
+    @include mq(tablet) {
+        max-width: $mw-m;
+    }
 
     @include mq(desktop) {
         max-width: $mw-l;
@@ -109,7 +113,7 @@ body {
     font-size: $font-size-base;
     letter-spacing: ls(15);
     color: $color-text;
-    background-color: #0b1324;
+    background-color: #100F0F;
     position: relative;
     overflow-x: hidden;
 }
@@ -142,7 +146,7 @@ img {
     margin: 0 0 rem(50);
     text-align: center;
 
-    @include mq(desktop) {
+    @include mq(tablet) {
         font-size: rem(16);
         margin: 0 0 rem(70);
     }
@@ -312,21 +316,16 @@ $side-nav-gap: 3vw;
     right: rem(16);
     bottom: rem(70);
     z-index: 3000;
-
     width: rem(56);
     height: rem(56);
     border-radius: 50%;
-
     background: rgba(90, 145, 225, 0.6);
     box-shadow:
         0 0 rem(28) rgba(90, 145, 225, 0.6),
         0 0 rem(10) rgba(90, 145, 225, 0.6);
-
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
     mix-blend-mode: screen;
-
-    /* ★ここを grid → flex に */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -336,12 +335,26 @@ $side-nav-gap: 3vw;
     cursor: pointer;
 
     &__line {
+        display: block;
         width: rem(30);
         height: 2px;
         background: $color-main;
         border-radius: 999px;
-        display: block;
-        margin: 0; // ← marginは使わない
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    &.is-active {
+        .hamburger__line:nth-child(1) {
+            transform: translateY(rem(10)) rotate(45deg);
+        }
+
+        .hamburger__line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger__line:nth-child(3) {
+            transform: translateY(rem(-10)) rotate(-45deg);
+        }
     }
 
     @include mq(desktop) {
@@ -352,41 +365,23 @@ $side-nav-gap: 3vw;
 /* ドロワー本体 */
 .drawer {
     position: fixed;
-    top: 0;
-    right: 0;
-    width: rem(260);
-    height: 100dvh;
-    background: rgba($color-base, 0.98);
+    inset: 0 0 0 auto;
+    width: 80%;
+    max-width: rem(320);
+    background: rgba(90, 145, 225, 1);
     transform: translateX(100%);
     transition: transform 0.3s ease;
-    z-index: 4000;
-    padding: rem(80) rem(20) rem(20);
+    z-index: 2000;
+}
 
-    @include mq(desktop) {
-        display: none;
-    }
-
-    &.drawer__is-open {
-        transform: translateX(0);
-    }
-
-    &__list {
-        display: grid;
-        gap: rem(18);
-    }
-
-    &__link {
-        color: $color-main;
-        text-decoration: none;
-        letter-spacing: 0.08em;
-    }
+.drawer.is-open {
+    transform: translateX(0);
 }
 
 /* オーバーレイ */
 .drawer__overlay {
     position: fixed;
     inset: 0;
-    background: rgba(90, 145, 225, 0.6);
     z-index: 2400;
 }
 
@@ -412,10 +407,14 @@ $side-nav-gap: 3vw;
     color: $color-main;
     margin-left: rem(24);
 
-    @include mq(desktop) {
+    @include mq(tablet) {
         font-size: $space-xl;
         padding-bottom: rem(10);
         margin-bottom: rem(70);
+        margin-left: rem(60);
+    }
+
+    @include mq(desktop) {
         margin-left: rem(100);
     }
 
@@ -423,14 +422,13 @@ $side-nav-gap: 3vw;
         content: "";
         position: absolute;
         right: rem(40);
-        max-width: rem(350);
+        max-width: rem(1000);
         width: 100%;
         bottom: 0;
         height: 1px;
         background-color: $color-main;
 
-        @include mq(desktop) {
-            max-width: rem(1000);
+        @include mq(tablet) {
             right: rem(130);
         }
     }
@@ -442,6 +440,14 @@ $side-nav-gap: 3vw;
     gap: rem(40) percentage(math.div(15, 390));
     margin-bottom: rem(40);
 
+    &__item {
+        margin-bottom: rem(50);
+
+        @include mq(tablet) {
+            margin-bottom: 0;
+        }
+    }
+
     &__title {
         position: relative;
         font-size: rem(20);
@@ -449,6 +455,10 @@ $side-nav-gap: 3vw;
         color: $color-main;
         margin-bottom: rem(25);
         letter-spacing: ls(10);
+
+        @include mq(tablet) {
+            font-size: $space-l;
+        }
 
         @include mq(desktop) {
             font-size: $space-l;
@@ -483,6 +493,10 @@ $side-nav-gap: 3vw;
     &__inner {
         margin-left: rem(24);
 
+        @include mq(tablet) {
+            margin-left: rem(60);
+        }
+
         @include mq(desktop) {
             margin-left: rem(100);
         }
@@ -492,6 +506,10 @@ $side-nav-gap: 3vw;
         @include font-mincho-think();
         font-size: rem(36);
         margin-top: rem(30);
+
+        @include mq(tablet) {
+            font-size: rem(54);
+        }
 
         @include mq(desktop) {
             font-size: rem(68);
@@ -506,6 +524,11 @@ $side-nav-gap: 3vw;
         padding-bottom: rem(12);
         position: relative; // ★ 必須
 
+        @include mq(tablet) {
+            font-size: rem(28);
+            margin-left: rem(165);
+        }
+
         @include mq(desktop) {
             font-size: rem(36);
             padding-bottom: rem(17);
@@ -519,12 +542,15 @@ $side-nav-gap: 3vw;
         position: absolute;
         bottom: 0;
         right: rem(50); // ← ここで「線だけ左に寄せる」
-        width: rem(340); // 線の長さ
+        width: rem(1000); // 線の長さ
         height: 2px;
         background-color: $color-main;
 
+        @include mq(tablet) {
+            right: rem(100);
+        }
+
         @include mq(desktop) {
-            width: rem(1000);
             right: rem(130);
         }
     }
@@ -541,12 +567,19 @@ $side-nav-gap: 3vw;
         margin: rem(50) 0 rem(7) 0;
         color: $color-main;
 
-        @include mq(desktop) {
+        @include mq(tablet) {
             margin-top: 0;
         }
     }
 
     &__contact {
+        @include mq(tablet) {
+            display: grid;
+            grid-auto-flow: column;
+            gap: percentage(math.div(100, 740));
+            margin-left: 0;
+        }
+
         @include mq(desktop) {
             display: grid;
             grid-auto-flow: column;
@@ -593,7 +626,7 @@ $side-nav-gap: 3vw;
         display: block;
         font-size: rem(12);
         color: rgba($color-main, 0.8);
-        margin: rem(100) 0 rem(30) 0;
+        margin: rem(100) 0 rem(-60) 0;
         text-align: center;
     }
 }
@@ -614,6 +647,10 @@ $side-nav-gap: 3vw;
         letter-spacing: 0;
         color: $color-main;
 
+        @include mq(tablet) {
+            font-size: $space-xl;
+        }
+
         @include mq(desktop) {
             font-size: rem(40);
             margin-bottom: rem(10);
@@ -624,6 +661,10 @@ $side-nav-gap: 3vw;
             color: $color-text;
             letter-spacing: 0;
             margin-bottom: rem(280);
+
+            @include mq(tablet) {
+                font-size: rem(22);
+            }
 
             @include mq(desktop) {
                 font-size: rem(26);
@@ -667,7 +708,7 @@ $side-nav-gap: 3vw;
         margin-bottom: rem(10);
         font-size: rem(14);
 
-        @include mq(desktop) {
+        @include mq(tablet) {
             text-align: left;
         }
 
@@ -697,12 +738,12 @@ $side-nav-gap: 3vw;
         width: rem(200);
         margin: 0 auto rem(15);
 
-        @include mq(desktop) {
+        @include mq(tablet) {
+            text-align: left;
             margin: 0 0 rem(20); // auto消す
             padding-bottom: rem(20);
             width: auto; // 固定幅やめる（必要ならmax-widthに）
             max-width: rem(200);
-            text-align: left;
         }
     }
 
@@ -710,7 +751,7 @@ $side-nav-gap: 3vw;
         text-align: center;
         font-size: rem(14);
 
-        @include mq(desktop) {
+        @include mq(tablet) {
             text-align: left;
         }
 
@@ -732,12 +773,11 @@ $side-nav-gap: 3vw;
             border-bottom: 1px solid $color-main;
             width: rem(300);
 
-            @include mq(desktop) {
+            @include mq(tablet) {
                 margin: 0 0 rem(20); // auto消す
                 padding-bottom: rem(20);
                 width: auto; // 固定幅やめる（必要ならmax-widthに）
                 max-width: rem(300);
-                text-align: left;
             }
         }
     }
@@ -745,13 +785,13 @@ $side-nav-gap: 3vw;
     &__text {
         text-align: center;
 
-        @include mq(desktop) {
+        @include mq(tablet) {
             text-align: left;
         }
     }
 
     &__body {
-        @include mq(desktop) {
+        @include mq(tablet) {
             display: grid;
             grid-template-columns: rem(240) 1fr; // 画像幅 + 残り
             column-gap: rem(80); // ← pxベースのほうがデザイン通りになりやすい
@@ -804,10 +844,6 @@ $side-nav-gap: 3vw;
         text-align: center;
     }
 
-    &__box {
-        margin-bottom: rem(40);
-    }
-
     &__label {
         font-size: rem(14);
         letter-spacing: 0;
@@ -823,10 +859,15 @@ $side-nav-gap: 3vw;
     }
 
     &__list {
-        @include mq(desktop) {
+        @include mq(tablet) {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: rem(100) rem(100);
+            column-gap: percentage(math.div(100, 740));
+            margin-bottom: rem(20);
+        }
+
+        @include mq(desktop) {
+            column-gap: percentage(math.div(100, 880));
         }
     }
 
@@ -857,13 +898,24 @@ $side-nav-gap: 3vw;
         }
     }
 
+    &__box {
+        margin-bottom: rem(50);
+
+        @include mq(tablet) {
+
+            &:nth-child(3),
+            &:nth-child(4) {
+                margin-bottom: rem(100);
+            }
+        }
+    }
+
     &__item:last-child {
-        margin-bottom: rem(70);
+        margin-bottom: rem(0);
         display: none;
 
-        @include mq(desktop) {
+        @include mq(tablet) {
             display: block;
-            margin-bottom: rem(70);
         }
     }
 
@@ -932,6 +984,10 @@ $side-nav-gap: 3vw;
         max-width: rem(240);
         margin: rem(50) auto;
 
+        @include mq(tablet) {
+            max-width: rem(300);
+        }
+
         @include mq(desktop) {
             max-width: rem(360);
         }
@@ -941,6 +997,10 @@ $side-nav-gap: 3vw;
         color: $color-main;
         font-size: rem(26);
         margin-bottom: rem(20);
+
+        @include mq(tablet) {
+            font-size: rem(28);
+        }
 
         @include mq(desktop) {
             font-size: $space-xl;
@@ -990,6 +1050,27 @@ $side-nav-gap: 3vw;
         }
     }
 
+    @include mq(tablet) {
+        &__pro {
+            display: grid;
+            grid-template-columns: 1fr rem(390);
+            column-gap: percentage(math.div(70, 1440));
+            align-items: center;
+        }
+
+        &__status {
+            max-height: rem(190);
+        }
+
+        &__list {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        &__certification {
+            font-size: rem(18);
+        }
+    }
+
     @include mq(desktop) {
         &__pro {
             display: grid;
@@ -1024,6 +1105,11 @@ $side-nav-gap: 3vw;
         margin-bottom: rem(30);
         color: $color-main;
 
+        @include mq(tablet) {
+            font-size: rem(25);
+            margin-bottom: rem(35);
+        }
+
         @include mq(desktop) {
             font-size: $space-xl;
             margin-bottom: rem(40);
@@ -1039,7 +1125,7 @@ $side-nav-gap: 3vw;
         padding-left: $space-l; // SP時の字下げ（任意）
     }
 
-    @include mq(desktop) {
+    @include mq(tablet) {
         &__catch {
             br {
                 display: none; // ← PCでは改行しない
@@ -1053,7 +1139,7 @@ $side-nav-gap: 3vw;
 
     &__text {
         display: grid;
-        row-gap: rem(25);
+        row-gap: rem(20);
         color: $color-text;
 
         br {
@@ -1095,7 +1181,7 @@ $side-nav-gap: 3vw;
 
     &__text {
         p {
-            margin-bottom: rem(25);
+            margin-bottom: rem(20);
 
             br {
                 display: none;
@@ -1121,6 +1207,10 @@ $side-nav-gap: 3vw;
             }
         }
 
+        @include mq(tablet) {
+            margin-bottom: rem(75);
+        }
+
         @include mq(desktop) {
             margin-bottom: rem(100);
         }
@@ -1132,7 +1222,7 @@ $side-nav-gap: 3vw;
     &__inner {
         @include inner();
 
-        @include mq(desktop) {
+        @include mq(tablet) {
             display: block;
         }
     }
@@ -1145,6 +1235,10 @@ $side-nav-gap: 3vw;
         color: rgba(240, 240, 240, 0.95);
         margin: rem(50);
 
+        @include mq(tablet) {
+            font-size: $space-xxl;
+        }
+
         @include mq(desktop) {
             font-size: rem(44);
             margin: rem(100) 0 rem(50);
@@ -1153,6 +1247,10 @@ $side-nav-gap: 3vw;
 
     &__box {
         margin-bottom: rem(40);
+
+        @include mq(tablet) {
+            margin-bottom: rem(50);
+        }
     }
 
     &__label {
@@ -1169,10 +1267,14 @@ $side-nav-gap: 3vw;
     }
 
     &__list {
-        @include mq(desktop) {
+        @include mq(tablet) {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: rem(100) rem(100);
+            column-gap: percentage(math.div(100, 670));
+        }
+
+        @include mq(desktop) {
+            column-gap: percentage(math.div(100, 880));
         }
     }
 
@@ -1243,11 +1345,26 @@ $side-nav-gap: 3vw;
         @include inner();
     }
 
+    &__card-inner {
+        @include inner();
+        margin-bottom: 0;
+    }
+
+    &__card-list {
+        @include mq(desktop) {
+            margin-bottom: rem(50);
+        }
+    }
+
     &__category {
         font-size: rem(20);
         color: rgba(255, 255, 255, 0.75);
         text-align: center;
         margin-top: rem(60);
+
+        @include mq(tablet) {
+            font-size: $space-l;
+        }
 
         @include mq(desktop) {
             font-size: rem(32);
@@ -1259,6 +1376,10 @@ $side-nav-gap: 3vw;
         color: $color-main;
         text-align: center;
 
+        @include mq(tablet) {
+            font-size: rem(38);
+        }
+
         @include mq(desktop) {
             font-size: rem(48);
         }
@@ -1268,23 +1389,29 @@ $side-nav-gap: 3vw;
         max-width: rem(248);
         margin: rem(50) auto;
 
+        @include mq(tablet) {
+            max-width: rem(380);
+        }
+
         @include mq(desktop) {
             max-width: rem(450);
         }
     }
 
     &__list {
-        @include mq(desktop) {
+        @include mq(tablet) {
             display: grid;
-            grid-auto-flow: column;
+            grid-template-columns: repeat(2, 1fr);
+            gap: rem(40) percentage(math.div(15, 390));
+            margin-bottom: rem(40);
         }
     }
 
     &__item {
         margin-bottom: rem(40);
 
-        @include mq(desktop) {
-            margin-bottom: rem(50);
+        @include mq(tablet) {
+            margin-bottom: 0;
         }
     }
 
@@ -1324,7 +1451,19 @@ $side-nav-gap: 3vw;
     }
 
     &__text {
-        margin-bottom: rem(20);
+        margin-bottom: rem(50);
+
+        @include mq(tablet) {
+            margin-bottom: 0;
+        }
+
+        p {
+            margin-bottom: rem(20);
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
 
         br {
             display: none;
@@ -1333,6 +1472,10 @@ $side-nav-gap: 3vw;
                 display: inline;
             }
         }
+    }
+
+    &__hearing-text {
+        margin-bottom: rem(20);
     }
 
     &__list {
@@ -1348,25 +1491,47 @@ $side-nav-gap: 3vw;
         margin-bottom: rem(35);
     }
 
-    &__img-design {
-        display: grid;
-        row-gap: rem(35);
-        margin-bottom: rem(35);
-        max-width: rem(332);
+    &__img {
+        margin-bottom: rem(25);
 
-        img:first-child {
-            @include mq(desktop) {
-                max-width: rem(380);
-            }
+        @include mq(tablet) {
+            margin-bottom: 0;
         }
+    }
 
-        img:last-child {
-            @include mq(desktop) {
-                max-width: rem(430);
-            }
-        }
-
+    &__single-img {
         @include mq(desktop) {
+            margin-bottom: rem(35);
+        }
+    }
+
+    &__img-design {
+        margin-bottom: rem(35);
+
+        img {
+            width: rem(332);
+
+            &:first-child {
+                max-width: rem(380);
+                margin-bottom: rem(35);
+
+                @include mq(tablet) {
+                    width: rem(290);
+                    margin-bottom: 0;
+                }
+
+                @include mq(desktop) {
+                    width: rem(380);
+                }
+            }
+
+            @include mq(desktop) {
+                width: rem(380);
+            }
+        }
+
+        @include mq(tablet) {
+            display: grid;
             grid-auto-flow: column;
             column-gap: rem(50);
         }
@@ -1381,11 +1546,13 @@ $side-nav-gap: 3vw;
     }
 
     &__code-img {
+        width: 100%;
         max-width: rem(332);
-        margin-bottom: rem(35);
 
-        @include mq(desktop) {
-            max-width: rem(350);
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
     }
 
@@ -1396,16 +1563,29 @@ $side-nav-gap: 3vw;
             br {
                 display: none;
             }
+
+            @include mq(tablet) {
+                margin-bottom: 0;
+            }
         }
     }
 
     &__body,
     &__cms {
-        @include mq(desktop) {
+        p {
+            margin-bottom: rem(20);
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        @include mq(tablet) {
             display: grid;
             grid-auto-flow: column;
             gap: rem(50);
             align-items: center;
+            margin-bottom: rem(40);
         }
     }
 
@@ -1425,6 +1605,11 @@ $side-nav-gap: 3vw;
         max-width: rem(332);
         margin-bottom: rem(25);
 
+        @include mq(tablet) {
+            max-width: rem(250);
+            margin-bottom: 0;
+        }
+
         @include mq(desktop) {
             max-width: rem(350);
         }
@@ -1432,16 +1617,29 @@ $side-nav-gap: 3vw;
 
     &__body,
     &__operation {
-        @include mq(desktop) {
+        @include mq(tablet) {
             display: grid;
             grid-auto-flow: column;
             gap: rem(50);
             align-items: center;
+            margin-bottom: rem(40);
         }
     }
 
     &__text {
         margin-bottom: rem(40);
+
+        @include mq(tablet) {
+            margin-bottom: 0;
+        }
+
+        p {
+            margin-bottom: rem(20);
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
     }
 
     &__operation-img {
@@ -1464,7 +1662,9 @@ $side-nav-gap: 3vw;
     }
 }
 
-
+//===============================================================
+// markdown
+//===============================================================
 .markdown {
     margin-top: rem(40);
     color: $color-text;
@@ -1512,5 +1712,89 @@ $side-nav-gap: 3vw;
         display: block;
         margin-top: rem(24);
         margin-bottom: rem(24);
+    }
+}
+
+.work-page--nissyo {
+    .process {
+        &__img-design {
+            img:last-child {
+                width: rem(332);
+
+                @include mq(desktop) {
+                    width: rem(420);
+                }
+            }
+        }
+    }
+}
+
+.work-page--blog {
+    .process {
+        &__body {
+            justify-content: center;
+        }
+
+        &__img-design {
+            img:first-child {
+                @include mq(desktop) {
+                    max-width: rem(380);
+                    height: rem(300);
+                }
+            }
+
+            img:last-child {
+                @include mq(desktop) {
+                    width: rem(430);
+                    height: rem(300);
+                }
+            }
+        }
+
+        &__img-code {
+            height: rem(250);
+        }
+    }
+}
+
+.work-page--uranai {
+    .process {
+        @include mq(tablet) {
+            &__img {
+                margin-bottom: rem(35);
+            }
+
+            &__item {
+                margin-bottom: rem(40);
+            }
+        }
+    }
+}
+
+.work-page--card {
+    .ingenuity {
+        &__body {
+            @include mq(desktop) {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .process {
+        &__item {
+            margin-bottom: rem(50);
+        }
+
+        &__img {
+            img:first-child {
+                @include mq(tablet) {
+                    width: rem(305);
+                }
+
+                @include mq(desktop) {
+                    width: rem(440);
+                }
+            }
+        }
     }
 }

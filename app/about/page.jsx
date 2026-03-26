@@ -1,9 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import SummerTriangle from "@/components/SummerTriangle";
+import { getWorksList } from "@/lib/markdown";
 
 export default function AboutPage() {
+    const works = getWorksList();
     return (
         <>
             <SummerTriangle />
@@ -33,9 +34,13 @@ export default function AboutPage() {
                     <div className="side-nav__works">
                         <h3 className="side-nav__works-title">作品紹介</h3>
                         <ul className="side-nav__works-list">
-                            <li><a className="side-nav__works-link" href="#work-blog">ブログサイト</a></li>
-                            <li><a className="side-nav__works-link" href="#work-nissho">日昇工業所｜公式サイト</a></li>
-                            <li><a className="side-nav__works-link" href="#work-card">名刺デザイン</a></li>
+                            {works.map((work) => (
+                                <li key={`${work.slug}-${work.href}`}>
+                                    <Link className="side-nav__works-link" href={work.href}>
+                                        {work.title}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </nav>
@@ -54,8 +59,7 @@ export default function AboutPage() {
                                     後藤 匠<span className="aboutpro__myname__sub"> (Goto Takumi)</span>
                                 </p>
                                 <div className="aboutpro__text">
-                                    <p>トライデントコンピュータ専門学校の
-                                        Webデザイン学科2年生の後藤 匠です。フロントエンドエンジニアを志望し、見やすく使いやすいUIの実装を目指して日々学習と制作に取り組んでいます。</p>
+                                    <p>トライデントコンピュータ専門学校のWebデザイン学科2年生の後藤 匠です。フロントエンドエンジニアを志望し、見やすく使いやすいUIの実装を目指して日々学習と制作に取り組んでいます。</p>
                                 </div>
                             </div>
                         </div>
@@ -118,12 +122,7 @@ export default function AboutPage() {
                             <div className="skill__item list__item">
                                 <h3 className="skill__item-title list__title">制作でのこだわり</h3>
                                 <div className="skill__item-text list__text">
-                                    <p>レスポンシブ対応では、画面サイズが変
-                                        わってもレイアウトや情報の意味が崩れ
-                                        ない構成を意識しています。また、フォ
-                                        ーカスの可視化やキーボード操作などの
-                                        基本的なアクセシビリティ対応を行い、
-                                        誰でも迷わず使えるUIを目指しています。</p>
+                                    <p>レスポンシブ対応では、画面サイズが変わってもレイアウトや情報の意味が崩れない構成を意識しています。また、フォーカスの可視化やキーボード操作などの基本的なアクセシビリティ対応を行い、誰でも迷わず使えるUIを目指しています。</p>
                                 </div>
                             </div>
                             <div className="skill__item list__item">
@@ -140,20 +139,12 @@ export default function AboutPage() {
                     <h2 className="comment__title sub-title">COMMENT</h2>
                     <div className="comment__inner">
                         <div className="comment__text">
-                            <p>ポートフォリオをご覧いただきありがとう
-                                ございます。<br />まだ成長途中ですが、日々
-                                学びながら制作を続けています。</p>
-                            <p>トライデントコンピュータ専門学校 Web
-                                デザイン学科2年の後藤 匠です。</p>
-                            <p>制作では、レスポンシブ対応やアクセシ
-                                ビリティへの配慮を大切にし、見やすく、<br />
-                                環境が変わっても崩れないUIを意識して
-                                います。</p>
-                            <p>趣味のカラオケや麻雀では、上達のため
-                                に工夫することを楽しんでいます。</p>
-                            <p>まだ成長途中ですが、安心して使えるUI
-                                を実装できるエンジニアを目指していま
-                                す。</p>
+                            <p>ポートフォリオをご覧いただきありがとうございます。<br />まだ成長途中ですが、日々学びながら制作を続けています。</p>
+                            <p>トライデントコンピュータ専門学校Webデザイン学科2年の後藤 匠です。</p>
+                            <p>制作では、レスポンシブ対応やアクセシビリティへの配慮を大切にし、見やすく、<br />
+                                環境が変わっても崩れないUIを意識しています。</p>
+                            <p>趣味のカラオケや麻雀では、上達のために工夫することを楽しんでいます。</p>
+                            <p>まだ成長途中ですが、安心して使えるUIを実装できるエンジニアを目指しています。</p>
                         </div>
                     </div>
                 </section>

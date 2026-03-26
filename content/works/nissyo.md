@@ -13,7 +13,7 @@ roleLabel: 担当範囲
 role: 企画 / コーディング / デザイン
 
 techLabel: 作成技術
-tech: HTML / Sass / JavaScript / microCMS / Formspree
+tech: HTML / Sass / JavaScript / microCMS
 
 toolsLabel: 制作ツール
 tools: VSCode / Figma / Photoshop / Illustrator / Formspree
@@ -47,9 +47,9 @@ process:
     type: coding
     mainImage: /image/nissyo-code1.webp
     text:
-      - まずはHTMLでページ全体の構造を組み、BEM設計を意識しながらSassでスタイルを実装しました。
-      - デザイン通りに再現するだけでなく、後から修正しやすい構成になるようクラス設計にも配慮しています。
-      - また、後から自分以外の人が見ても理解しやすいよう、Sass内に意図や注意点をコメントとして残しながら実装しました。保守性を意識し、引き継ぎしやすいコードになるよう工夫しています。
+      - HTMLでページ全体の構造を組み、BEM設計を意識してSassでスタイルを実装しました。
+      - デザインの再現だけでなく、後から修正しやすいようクラス設計にも配慮しています。
+      - 他の人が見ても理解しやすいよう、コメントを残し保守性を意識しました。
     subImage: /image/nissyo-code2.webp
     subText: microCMSのAPIキーをフロント側に露出させないため、PHPで中継する構成を採用しました。これにより、セキュリティを確保しつつ、最新のお知らせを取得できるようにしています。
 
@@ -65,7 +65,7 @@ ingenuity:
       - image: /image/nissyo-cms1.webp
         text: 更新されたお知らせをファーストビューに表示し、サイトを開いてすぐ確認できるようにしました。また、古い情報ばかりにならないよう、最新3件のみ表示しています。
       - image: /image/nissyo-cms2.webp
-        text: microCMSの管理画面では、入力ミスや記述のばらつきを防ぐため、APIスキーマを設定して入力項目を制限しました。当初は入力箇所が分かりにくい状態だったため、必須項目や入力形式を定義し、管理者がどこに何を入力すればよいか分かりやすい構造にしています。
+        text: microCMSでは、入力ミスや記述のばらつきを防ぐためにAPIスキーマを設定し、入力項目を制限しました。必須項目や入力形式を定義することで、管理者が迷わず入力できる構造にしています。
 
   - title: 操作性への配慮
     type: operation
