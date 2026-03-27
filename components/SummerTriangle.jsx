@@ -13,9 +13,7 @@ export default function SummerTriangle() {
         let triangleStars = [];
         let smallStars = [];
         let brightStars = [];
-        let shootingStars = [];
         let animationId;
-        let shootingTimer;
 
         function setTriangleStars() {
             if (window.innerWidth >= 1024) {
@@ -60,19 +58,6 @@ export default function SummerTriangle() {
             }
         }
 
-        function createShootingStar() {
-            const startX = Math.random() * canvas.width * 0.65;
-            const startY = Math.random() * canvas.height * 0.3;
-
-            shootingStars.push({
-                x: startX,
-                y: startY,
-                len: Math.random() * 70 + 60,
-                speed: Math.random() * 5 + 4,
-                alpha: 0.8,
-            });
-        }
-
         function drawSkyStars(time) {
             smallStars.forEach((star) => {
                 ctx.beginPath();
@@ -96,7 +81,6 @@ export default function SummerTriangle() {
 
         function drawTriangleStars() {
             triangleStars.forEach((star) => {
-                // 光の層
                 ctx.beginPath();
                 ctx.strokeStyle = "rgba(255,235,170,0.14)";
                 ctx.lineWidth = 1;
@@ -108,7 +92,6 @@ export default function SummerTriangle() {
                 ctx.lineTo(star.x, star.y + 12);
                 ctx.stroke();
 
-                // 本体
                 ctx.beginPath();
                 ctx.strokeStyle = "rgba(255,235,170,0.5)";
                 ctx.lineWidth = 1;
@@ -119,7 +102,6 @@ export default function SummerTriangle() {
                 ctx.lineTo(star.x, star.y + 8);
                 ctx.stroke();
 
-                // 中心の点
                 ctx.beginPath();
                 ctx.fillStyle = "rgba(255,245,200,0.45)";
                 ctx.arc(star.x, star.y, 3.8, 0, Math.PI * 2);
@@ -141,42 +123,11 @@ export default function SummerTriangle() {
             ctx.shadowBlur = 0;
         }
 
-        function drawShootingStars() {
-            shootingStars = shootingStars.filter((star) => star.alpha > 0);
-
-            shootingStars.forEach((star) => {
-                ctx.beginPath();
-
-                const gradient = ctx.createLinearGradient(
-                    star.x,
-                    star.y,
-                    star.x - star.len,
-                    star.y - star.len * 0.28
-                );
-                gradient.addColorStop(0, `rgba(255,255,255,${star.alpha})`);
-                gradient.addColorStop(1, "rgba(255,255,255,0)");
-
-                ctx.strokeStyle = gradient;
-                ctx.lineWidth = 1.5;
-                ctx.shadowBlur = 8;
-                ctx.shadowColor = "rgba(255,255,255,0.45)";
-                ctx.moveTo(star.x, star.y);
-                ctx.lineTo(star.x - star.len, star.y - star.len * 0.28);
-                ctx.stroke();
-                ctx.shadowBlur = 0;
-
-                star.x += star.speed;
-                star.y += star.speed * 0.15;
-                star.alpha -= 0.008;
-            });
-        }
-
         function draw(time = 0) {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawSkyStars(time);
             drawTriangleLines();
             drawTriangleStars();
-            drawShootingStars();
         }
 
         function resizeCanvas() {
@@ -195,18 +146,11 @@ export default function SummerTriangle() {
         resizeCanvas();
         animate();
 
-        shootingTimer = setInterval(() => {
-            if (Math.random() > 0.7) {
-                createShootingStar();
-            }
-        }, 7000);
-
         window.addEventListener("resize", resizeCanvas);
 
         return () => {
             window.removeEventListener("resize", resizeCanvas);
             cancelAnimationFrame(animationId);
-            clearInterval(shootingTimer);
         };
     }, []);
 

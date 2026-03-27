@@ -762,11 +762,11 @@ img {
   font-size: 0.875rem;
   letter-spacing: 0;
   text-align: left;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.75);
 }
 .works__box-title {
   font-size: 1.125rem;
-  color: rgba(230, 230, 230, 0.9);
+  color: #fff;
   margin-bottom: 0.625rem;
   text-align: left;
 }
@@ -1197,10 +1197,11 @@ img {
   font-size: 0.875rem;
   letter-spacing: 0;
   text-align: left;
+  color: rgba(255, 255, 255, 0.75);
 }
 .workslist__box-title {
   font-size: 1.125rem;
-  color: rgba(230, 230, 230, 0.9);
+  color: #fff;
   margin-bottom: 0.625rem;
   text-align: left;
 }

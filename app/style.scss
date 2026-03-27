@@ -848,12 +848,12 @@ $side-nav-gap: 3vw;
         font-size: rem(14);
         letter-spacing: 0;
         text-align: left;
-        color: $color-main;
+        color: rgba($color-text, 0.75);
     }
 
     &__box-title {
         font-size: rem(18);
-        color: rgba(230, 230, 230, 0.9);
+        color: $color-main;
         margin-bottom: rem(10);
         text-align: left;
     }
@@ -1257,11 +1257,12 @@ $side-nav-gap: 3vw;
         font-size: rem(14);
         letter-spacing: 0;
         text-align: left;
+        color: rgba($color-text, 0.75);
     }
 
     &__box-title {
         font-size: rem(18);
-        color: rgba(230, 230, 230, 0.9);
+        color: $color-main;
         margin-bottom: rem(10);
         text-align: left;
     }
