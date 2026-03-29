@@ -382,10 +382,18 @@ $side-nav-gap: 3vw;
     width: 90%;
     max-width: rem(250);
     height: 100vh;
-    background: rgba(100, 110, 225, 0.9);
+    background: rgba(90, 110, 225, 0.9);
     transform: translateX(-100%);
     transition: transform 0.3s ease;
-    z-index: 2500; // ← overlayより上にする
+    z-index: 2500;
+
+    @include mq(tablet) {
+        max-width: rem(350);
+    }
+
+    &.is-open {
+        transform: translateX(0);
+    }
 
     &__list {
         position: relative;
@@ -407,6 +415,10 @@ $side-nav-gap: 3vw;
         }
     }
 
+    &__item {
+        // 必要になったらここに追加
+    }
+
     &__link {
         position: relative;
         display: inline-block;
@@ -414,6 +426,29 @@ $side-nav-gap: 3vw;
 
         @include mq(tablet) {
             font-size: rem(30);
+        }
+
+        &:not(.is-active) {
+            color: rgba(255, 255, 255, 0.6);
+
+            &:hover {
+                color: $color-main;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: rem(-2);
+                width: 0;
+                height: 0.75px;
+                background: currentColor;
+                transition: width 0.3s ease;
+            }
+
+            &:hover::after {
+                width: 100%;
+            }
         }
 
         &.is-active {
@@ -431,36 +466,12 @@ $side-nav-gap: 3vw;
         }
     }
 
-    &__link:not(.is-active) {
-        color: rgba(255, 255, 255, 0.6);
-
-        &:hover {
-            color: $color-main;
-        }
-
-        &::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: rem(-2);
-            width: 0;
-            height: 0.75px;
-            background: currentColor;
-            transition: width 0.3s ease;
-        }
-
-        &:hover::after {
-            width: 100%;
-        }
-    }
-
     &__works {
-        margin: rem(60) rem(40);
-    }
+        margin: rem(20) rem(40);
 
-    &__works-list {
-        display: grid;
-        row-gap: rem(15);
+        @include mq(tablet) {
+            margin: rem(20) rem(60);
+        }
     }
 
     &__works-title {
@@ -468,53 +479,13 @@ $side-nav-gap: 3vw;
         margin-bottom: $space-m;
     }
 
-    &__works-item {
-        font-size: rem(14);
-        letter-spacing: ls(10);
-    }
-}
-
-.drawer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 90%;
-    max-width: rem(250);
-    height: 100vh;
-    background: rgba(90, 110, 225, 0.9);
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    z-index: 2500;
-
-    @include mq(tablet) {
-        max-width: rem(350);
-    }
-
-    /* 開いた状態 */
-    &.is-open {
-        transform: translateX(0);
-    }
-
-    /* overlay */
-    &__overlay {
-        position: fixed;
-        inset: 0;
-        z-index: 2400;
-        background: rgba(0, 0, 0, 0.2);
-    }
-
-    /* worksエリア */
-    &__works {
-        margin: rem(20) rem(40);
-    }
-
     &__works-list {
         display: grid;
         row-gap: rem(15);
-        margin: rem(50) rem(40);
+        margin: rem(40);
 
         @include mq(tablet) {
-            margin: rem(60) rem(60);
+            margin: rem(60);
         }
     }
 
@@ -527,15 +498,10 @@ $side-nav-gap: 3vw;
         }
     }
 
-    /* リンク */
     &__works-link {
         position: relative;
         display: inline-block;
         transition: 0.3s;
-
-        &.is-active {
-            pointer-events: none;
-        }
 
         &:not(.is-active) {
             color: rgba(255, 255, 255, 0.6);
@@ -556,19 +522,25 @@ $side-nav-gap: 3vw;
             transition: width 0.3s ease;
         }
 
-        /* hoverで線 */
         &:hover::after {
             width: 100%;
         }
 
-        /* active */
         &.is-active {
             color: $color-main;
+            pointer-events: none;
 
             &::after {
                 width: 100%;
             }
         }
+    }
+
+    &__overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 2400;
+        background: rgba(0, 0, 0, 0.2);
     }
 }
 
@@ -1165,6 +1137,10 @@ $side-nav-gap: 3vw;
         }
     }
 
+    &__item {
+        margin-bottom: 0;
+    }
+
     &__img {
         margin-bottom: rem(20);
         max-width: rem(240);
@@ -1356,6 +1332,10 @@ $side-nav-gap: 3vw;
             grid-template-columns: repeat(2, 1fr);
             gap: rem(60) percentage(math.div(100, 1440));
         }
+    }
+
+    &__item {
+        margin-bottom: 0;
     }
 }
 
