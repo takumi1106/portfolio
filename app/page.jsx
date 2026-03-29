@@ -2,6 +2,17 @@ import { getWorksList } from "@/lib/markdown";
 import Link from "next/link";
 import SummerTriangle from "@/components/SummerTriangle";
 import MobileMenu from "@/components/MobileMenu";
+import { Shippori_Mincho, Shippori_Antique } from "next/font/google";
+
+const mincho = Shippori_Mincho({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
+const gothic = Shippori_Antique({
+  subsets: ["latin"],
+  weight: ["400"],
+});
 
 export default function Home() {
   const works = getWorksList();
@@ -29,7 +40,6 @@ export default function Home() {
           </ul>
 
           <div className="side-nav__works">
-            <h3 className="side-nav__works-title">作品紹介</h3>
             <ul className="side-nav__works-list">
               {works.map((work) => (
                 <li key={`${work.slug}-${work.href}`}>
@@ -43,7 +53,7 @@ export default function Home() {
         </nav>
       </aside>
 
-      <MobileMenu />
+      <MobileMenu works={works} />
 
       <main className="main" id="home">
         <section className="mainvisual">
@@ -62,7 +72,7 @@ export default function Home() {
           <div className="top-about__inner">
             <div className="top-about__body">
               <div className="top-about__img">
-                <img src="/image/page2.jpeg" alt="" />
+                <img src="/image/" alt="" />
               </div>
               <div className="top-about__main">
                 <div className="top-about__school">

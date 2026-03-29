@@ -1,6 +1,18 @@
 import Link from "next/link";
 import SummerTriangle from "@/components/SummerTriangle";
 import { getWorksList } from "@/lib/markdown";
+import MobileMenu from "@/components/MobileMenu";
+import { Shippori_Mincho, Shippori_Antique } from "next/font/google";
+
+const mincho = Shippori_Mincho({
+    subsets: ["latin"],
+    weight: ["400", "700"],
+});
+
+const gothic = Shippori_Antique({
+    subsets: ["latin"],
+    weight: ["400"],
+});
 
 export default function UranaiPage() {
     const works = getWorksList();
@@ -28,16 +40,22 @@ export default function UranaiPage() {
                             <Link className="side-nav__link" href="/about">ABOUT</Link>
                         </li>
                         <li className="side-nav__item">
-                            <Link className="side-nav__link is-active" href="/works">WORKS</Link>
+                            <Link className="side-nav__link" href="/works">WORKS</Link>
                         </li>
                     </ul>
 
                     <div className="side-nav__works">
-                        <h3 className="side-nav__works-title">作品紹介</h3>
                         <ul className="side-nav__works-list">
                             {works.map((work) => (
                                 <li key={`${work.slug}-${work.href}`}>
-                                    <Link className="side-nav__works-link" href={work.href}>
+                                    <Link
+                                        href={work.href}
+                                        className={
+                                            work.href === "/works/uranai"
+                                                ? "side-nav__works-link is-active"
+                                                : "side-nav__works-link"
+                                        }
+                                    >
                                         {work.title}
                                     </Link>
                                 </li>
@@ -46,6 +64,8 @@ export default function UranaiPage() {
                     </div>
                 </nav>
             </aside>
+
+            <MobileMenu works={works} />
 
             <main className="main work-page work-page--uranai">
                 <section className="project">
@@ -65,7 +85,7 @@ export default function UranaiPage() {
                         <div className="url-wrapper">
                             <a
                                 className="url"
-                                href="#"
+                                href="https://takumi1106.github.io/horoscope/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >

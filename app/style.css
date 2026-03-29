@@ -131,16 +131,7 @@ img {
 }
 .side-nav__works {
   border-top: 1px solid rgba(255, 255, 255, 0.7);
-  padding-top: 1.5625rem;
-}
-.side-nav__works-title {
-  font-family: "Shippori Mincho", serif;
-  font-weight: 600;
-  font-style: normal;
-  font-size: 1.5rem;
-  letter-spacing: 0.24em;
-  margin-bottom: 1.25rem;
-  color: #fff;
+  padding-top: 2.5rem;
 }
 .side-nav__works-list {
   display: grid;
@@ -174,6 +165,14 @@ img {
 .side-nav__works-link:hover::after, .side-nav__works-link:focus-visible::after {
   width: 100%;
 }
+.side-nav__works-link.is-active {
+  color: #fff;
+  pointer-events: none;
+  cursor: default;
+}
+.side-nav__works-link.is-active::after {
+  width: 100%;
+}
 
 /* メインが右サイドメニューに被らないようにする */
 @media (width >= 1200px) and (width >= 1200px) {
@@ -184,17 +183,18 @@ img {
   }
 }
 
+/* ------------------- ハンバーガーメニュー ---------------------------- */
 /* スマホ用ハンバーガー：PCでは消す */
 .hamburger {
   position: fixed;
   right: 1rem;
   bottom: 4.375rem;
   z-index: 3000;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3.625rem;
+  height: 3.625rem;
   border-radius: 50%;
-  background: rgba(90, 145, 225, 0.6);
-  box-shadow: 0 0 1.75rem rgba(90, 145, 225, 0.6), 0 0 0.625rem rgba(90, 145, 225, 0.6);
+  background: rgba(90, 145, 225, 0.8);
+  box-shadow: 0 0 1.75rem rgba(90, 145, 225, 0.8), 0 0 0.625rem rgba(90, 145, 225, 0.8);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
   mix-blend-mode: screen;
@@ -232,24 +232,178 @@ img {
 /* ドロワー本体 */
 .drawer {
   position: fixed;
-  inset: 0 0 0 auto;
-  width: 80%;
-  max-width: 20rem;
-  background: rgb(90, 145, 225);
-  transform: translateX(100%);
+  top: 0;
+  left: 0;
+  width: 90%;
+  max-width: 15.625rem;
+  height: 100vh;
+  background: rgba(100, 110, 225, 0.9);
+  transform: translateX(-100%);
   transition: transform 0.3s ease;
-  z-index: 2000;
+  z-index: 2500;
+}
+.drawer__list {
+  position: relative;
+  margin: 3.125rem 2.5rem;
+  display: grid;
+  row-gap: 0.9375rem;
+}
+@media (width >= 413px) {
+  .drawer__list {
+    margin: 3.125rem 3.75rem;
+  }
+}
+.drawer__list::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1.5625rem;
+  width: 90%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+}
+.drawer__link {
+  position: relative;
+  display: inline-block;
+  font-size: 1.375rem;
+}
+@media (width >= 413px) {
+  .drawer__link {
+    font-size: 1.875rem;
+  }
+}
+.drawer__link.is-active {
+  color: #fff;
+  pointer-events: none;
+}
+.drawer__link.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.125rem;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+}
+.drawer__link:not(.is-active) {
+  color: rgba(255, 255, 255, 0.6);
+}
+.drawer__link:not(.is-active):hover {
+  color: #fff;
+}
+.drawer__link:not(.is-active)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.125rem;
+  width: 0;
+  height: 0.75px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+.drawer__link:not(.is-active):hover::after {
+  width: 100%;
+}
+.drawer__works {
+  margin: 3.75rem 2.5rem;
+}
+.drawer__works-list {
+  display: grid;
+  row-gap: 0.9375rem;
+}
+.drawer__works-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.drawer__works-item {
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
 }
 
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90%;
+  max-width: 15.625rem;
+  height: 100vh;
+  background: rgba(90, 110, 225, 0.9);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 2500;
+  /* 開いた状態 */
+  /* overlay */
+  /* worksエリア */
+  /* リンク */
+}
+@media (width >= 413px) {
+  .drawer {
+    max-width: 21.875rem;
+  }
+}
 .drawer.is-open {
   transform: translateX(0);
 }
-
-/* オーバーレイ */
 .drawer__overlay {
   position: fixed;
   inset: 0;
   z-index: 2400;
+  background: rgba(0, 0, 0, 0.2);
+}
+.drawer__works {
+  margin: 1.25rem 2.5rem;
+}
+.drawer__works-list {
+  display: grid;
+  row-gap: 0.9375rem;
+  margin: 3.125rem 2.5rem;
+}
+@media (width >= 413px) {
+  .drawer__works-list {
+    margin: 3.75rem 3.75rem;
+  }
+}
+.drawer__works-item {
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+}
+@media (width >= 413px) {
+  .drawer__works-item {
+    font-size: 1rem;
+  }
+}
+.drawer__works-link {
+  position: relative;
+  display: inline-block;
+  transition: 0.3s;
+  /* hoverで線 */
+  /* active */
+}
+.drawer__works-link.is-active {
+  pointer-events: none;
+}
+.drawer__works-link:not(.is-active) {
+  color: rgba(255, 255, 255, 0.6);
+}
+.drawer__works-link:not(.is-active):hover {
+  color: #fff;
+}
+.drawer__works-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.25rem;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+.drawer__works-link:hover::after {
+  width: 100%;
+}
+.drawer__works-link.is-active {
+  color: #fff;
+}
+.drawer__works-link.is-active::after {
+  width: 100%;
 }
 
 .visually-hidden {
@@ -265,9 +419,6 @@ img {
 }
 
 .sub-title {
-  font-family: "Shippori Mincho", serif;
-  font-weight: 600;
-  font-style: normal;
   font-size: 1.375rem;
   padding-bottom: 0.3125rem;
   position: relative;
@@ -1480,7 +1631,7 @@ img {
   width: 20.75rem;
 }
 .process__img-design img:first-child {
-  max-width: 23.75rem;
+  width: 23.75rem;
   margin-bottom: 2.1875rem;
 }
 @media (width >= 413px) {

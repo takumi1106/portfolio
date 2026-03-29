@@ -1,6 +1,18 @@
 import Link from "next/link";
 import SummerTriangle from "@/components/SummerTriangle";
 import { getWorksList } from "@/lib/markdown";
+import MobileMenu from "@/components/MobileMenu";
+import { Shippori_Mincho, Shippori_Antique } from "next/font/google";
+
+const mincho = Shippori_Mincho({
+    subsets: ["latin"],
+    weight: ["400", "700"],
+});
+
+const gothic = Shippori_Antique({
+    subsets: ["latin"],
+    weight: ["400"],
+});
 
 export default function WorksPage() {
     const works = getWorksList();
@@ -27,7 +39,6 @@ export default function WorksPage() {
                     </ul>
 
                     <div className="side-nav__works">
-                        <h3 className="side-nav__works-title">作品紹介</h3>
                         <ul className="side-nav__works-list">
                             {works.map((work) => (
                                 <li key={`${work.slug}-${work.href}`}>
@@ -41,22 +52,7 @@ export default function WorksPage() {
                 </nav>
             </aside>
 
-            <button className="hamburger" type="button" aria-label="メニューを開く" aria-controls="drawer" aria-expanded="false">
-                <span className="hamburger__line"></span>
-                <span className="hamburger__line"></span>
-                <span className="hamburger__line"></span>
-            </button>
-
-            <nav id="drawer" className="drawer" aria-label="モバイルナビゲーション">
-                <ul className="drawer__list">
-                    <li className="drawer__item"><Link href="/" className="drawer__link">HOME</Link></li>
-                    <li className="drawer__item"><Link href="/about" className="drawer__link">ABOUT</Link></li>
-                    <li className="drawer__item"><Link href="/works" className="drawer__link">WORKS</Link></li>
-                    <li className="drawer__item"><a href="#contact" className="drawer__link">CONTACT</a></li>
-                </ul>
-            </nav>
-
-            <div className="drawer__overlay" hidden></div>
+            <MobileMenu works={works} />
 
             <main className="main">
                 <section className="workslist">

@@ -2,22 +2,25 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-export default function MobileMenu() {
+export default function MobileMenu({ works }) {
     const [isOpen, setIsOpen] = useState(false);
+
+    const closeMenu = () => setIsOpen(false);
+
+    const pathname = usePathname();
 
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key === "Escape") {
-                setIsOpen(false);
+                closeMenu();
             }
         };
 
         document.addEventListener("keydown", handleKeyDown);
         return () => document.removeEventListener("keydown", handleKeyDown);
     }, []);
-
-    const closeMenu = () => setIsOpen(false);
 
     return (
         <>
@@ -41,20 +44,49 @@ export default function MobileMenu() {
             >
                 <ul className="drawer__list">
                     <li className="drawer__item">
-                        <Link href="/" className="drawer__link" onClick={closeMenu}>
+                        <Link
+                            href="/"
+                            className={`drawer__link ${pathname === "/" ? "is-active" : ""}`}
+                            onClick={closeMenu}
+                        >
                             HOME
                         </Link>
                     </li>
+
                     <li className="drawer__item">
-                        <Link href="/about" className="drawer__link" onClick={closeMenu}>
+                        <Link
+                            href="/about"
+                            className={`drawer__link ${pathname === "/about" ? "is-active" : ""}`}
+                            onClick={closeMenu}
+                        >
                             ABOUT
                         </Link>
                     </li>
+
                     <li className="drawer__item">
-                        <Link href="/works" className="drawer__link" onClick={closeMenu}>
+                        <Link
+                            href="/works"
+                            className={`drawer__link ${pathname === "/works" ? "is-active" : ""}`}
+                            onClick={closeMenu}
+                        >
                             WORKS
                         </Link>
                     </li>
+                </ul>
+
+                <ul className="drawer__works-list">
+                    {works.map((work) => (
+                        <li className="drawer__works-item" key={`${work.slug}-${work.href}`}>
+                            <Link
+                                href={work.href}
+                                className={`drawer__works-link ${pathname === work.href ? "is-active" : ""
+                                    }`}
+                                onClick={closeMenu}
+                            >
+                                {work.title}
+                            </Link>
+                        </li>
+                    ))}
                 </ul>
             </nav>
 
