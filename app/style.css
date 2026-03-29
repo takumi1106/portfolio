@@ -206,6 +206,12 @@ img {
   padding: 0;
   cursor: pointer;
 }
+@media (width >= 413px) {
+  .hamburger {
+    width: 4.6875rem;
+    height: 4.6875rem;
+  }
+}
 .hamburger__line {
   display: block;
   width: 1.875rem;
@@ -213,6 +219,11 @@ img {
   background: #fff;
   border-radius: 999px;
   transition: transform 0.3s ease, opacity 0.3s ease;
+}
+@media (width >= 413px) {
+  .hamburger__line {
+    width: 2.5rem;
+  }
 }
 .hamburger.is-active .hamburger__line:nth-child(1) {
   transform: translateY(0.625rem) rotate(45deg);

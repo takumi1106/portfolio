@@ -337,6 +337,11 @@ $side-nav-gap: 3vw;
     padding: 0;
     cursor: pointer;
 
+    @include mq(tablet) {
+        width: rem(75);
+        height: rem(75);
+    }
+
     &__line {
         display: block;
         width: rem(30);
@@ -344,6 +349,10 @@ $side-nav-gap: 3vw;
         background: $color-main;
         border-radius: 999px;
         transition: transform 0.3s ease, opacity 0.3s ease;
+
+        @include mq(tablet) {
+            width: rem(40);
+        }
     }
 
     &.is-active {

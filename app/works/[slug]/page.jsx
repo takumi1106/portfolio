@@ -335,15 +335,17 @@ export default async function WorkDetailPage({ params }) {
                     <address className="footer__contact">
                         <div className="footer__item">
                             <p className="footer__label">ブログ</p>
-                            <Link href="" className="footer__link">Visit blog →</Link>
+                            <Link href="https://goto-take-1106.secret.jp/blog/" className="footer__link">Visit blog →</Link>
                         </div>
                         <div className="footer__item">
                             <p className="footer__label">メールアドレス</p>
-                            <Link href="" className="footer__link">Email me →</Link>
+                            <address className="footer__link">
+                                <a href="mailto:takumi.g.116@gmail.com">Email me →</a>
+                            </address>
                         </div>
                         <div className="footer__item">
                             <p className="footer__label">GitHub</p>
-                            <Link href="" className="footer__link">View GitHub →</Link>
+                            <Link href="https://github.com/takumi1106" className="footer__link">View GitHub →</Link>
                         </div>
                     </address>
                     <small className="footer__copy">&copy;2026 Goto Takumi</small>
