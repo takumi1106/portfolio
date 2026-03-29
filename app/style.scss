@@ -415,10 +415,6 @@ $side-nav-gap: 3vw;
         }
     }
 
-    &__item {
-        // 必要になったらここに追加
-    }
-
     &__link {
         position: relative;
         display: inline-block;
@@ -663,7 +659,7 @@ $side-nav-gap: 3vw;
     &__title {
         @include font-mincho-think();
         font-size: rem(36);
-        margin-top: rem(30);
+        margin-top: rem(18);
 
         @include mq(tablet) {
             font-size: rem(54);
