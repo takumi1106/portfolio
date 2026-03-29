@@ -700,6 +700,7 @@ img {
 @media (width >= 1200px) {
   .mainvisual__title__sub-title {
     font-size: 1.625rem;
+    margin-bottom: 16.875rem;
   }
 }
 .mainvisual__scroll {
