@@ -14,6 +14,10 @@ const gothic = Shippori_Antique({
     weight: ["400"],
 });
 
+export const metadata = {
+    title: "WORKS",
+};
+
 export default function WorksPage() {
     const works = getWorksList();
 

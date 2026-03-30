@@ -14,6 +14,10 @@ const gothic = Shippori_Antique({
     weight: ["400"],
 });
 
+export const metadata = {
+    title: "12星座占い",
+};
+
 export default function UranaiPage() {
     const works = getWorksList();
 
