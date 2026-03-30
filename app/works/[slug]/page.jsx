@@ -95,7 +95,7 @@ export default async function WorkDetailPage({ params }) {
                         </h2>
 
                         <div className="project__img">
-                            <img src={work.thumbnail} alt={work.title} />
+                            <img src={work.thumbnail} alt={work.title} loading="lazy" />
                         </div>
 
                         {work.url && (
@@ -183,7 +183,7 @@ export default async function WorkDetailPage({ params }) {
                                             {Array.isArray(item.images) && item.images.length > 0 && (
                                                 <figure className="process__img process__img-design">
                                                     {item.images.map((src, index) => (
-                                                        <img key={`${src}-${index}`} src={src} alt="" />
+                                                        <img key={`${src}-${index}`} src={src} alt="" loading="lazy" />
                                                     ))}
                                                 </figure>
                                             )}
@@ -204,7 +204,7 @@ export default async function WorkDetailPage({ params }) {
                                                 <figure className="process__img process__code-img">
                                                     {item.mainImage && <img src={item.mainImage} alt="" />}
                                                     {!item.mainImage && Array.isArray(item.images) && item.images[0] && (
-                                                        <img src={item.images[0]} alt="" />
+                                                        <img src={item.images[0]} alt="" loading="lazy" />
                                                     )}
                                                 </figure>
 
@@ -231,7 +231,7 @@ export default async function WorkDetailPage({ params }) {
                                                     <figure className="process__img process__code-img">
                                                         {item.subImage && <img src={item.subImage} alt="" />}
                                                         {!item.subImage && Array.isArray(item.images) && item.images[1] && (
-                                                            <img src={item.images[1]} alt="" />
+                                                            <img src={item.images[1]} alt="" loading="lazy" />
                                                         )}
                                                     </figure>
 
@@ -281,7 +281,8 @@ export default async function WorkDetailPage({ params }) {
                                                 <div className="ingenuity__body" key={`${item.title}-block-${index}`}>
                                                     {block.image && (
                                                         <figure className="ingenuity__img">
-                                                            <img src={block.image} alt="" />
+                                                            <img src={block.image} alt=""
+                                                                loading="lazy" />
                                                         </figure>
                                                     )}
 
@@ -300,7 +301,9 @@ export default async function WorkDetailPage({ params }) {
                                                 {Array.isArray(item.images) && item.images.length > 0 && (
                                                     <figure className="ingenuity__img ingenuity__operation-img">
                                                         {item.images.map((src, index) => (
-                                                            <img key={`${src}-${index}`} src={src} alt="" />
+                                                            <img key={`${src}-${index}`} src={src} alt=""
+                                                                loading="lazy"
+                                                            />
                                                         ))}
                                                     </figure>
                                                 )}

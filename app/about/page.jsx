@@ -69,7 +69,7 @@ export default function AboutPage() {
                     <div className="aboutpro__inner">
                         <div className="aboutpro__pro">
                             <div className="aboutpro__img">
-                                <img src="./image/about__img.webp" alt="" />
+                                <img src="./image/about__img.webp" alt="後藤匠のプロフィール写真" loading="lazy" />
                             </div>
                             <div className="aboutpro__status">
                                 <p className="aboutpro__myname">

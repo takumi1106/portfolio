@@ -72,7 +72,7 @@ export default function Home() {
           <div className="top-about__inner">
             <div className="top-about__body">
               <div className="top-about__img">
-                <img src="/image/top-about_img.webp" alt="後藤匠のプロフィール写真" />
+                <img src="/image/top-about_img.webp" alt="後藤匠のプロフィール写真" loading="lazy" />
               </div>
               <div className="top-about__main">
                 <div className="top-about__school">
@@ -108,7 +108,7 @@ export default function Home() {
                     <h3 className="works__box-title">{work.title}</h3>
                     <Link className="works__link" href={work.href}>
                       <div className="works__img">
-                        <img src={work.image} alt={work.title} />
+                        <img src={work.image} alt={work.title} loading="lazy" />
                       </div>
                     </Link>
                   </article>
