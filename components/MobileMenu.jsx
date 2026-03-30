@@ -25,12 +25,16 @@ export default function MobileMenu({ works }) {
     return (
         <>
             <button
+                tabIndex={-1}
                 className={`hamburger ${isOpen ? "is-active" : ""}`}
                 type="button"
                 aria-label="メニューを開く"
                 aria-controls="drawer"
                 aria-expanded={isOpen}
-                onClick={() => setIsOpen((prev) => !prev)}
+                onClick={(e) => {
+                    setIsOpen((prev) => !prev);
+                    e.currentTarget.blur();
+                }}
             >
                 <span className="hamburger__line"></span>
                 <span className="hamburger__line"></span>
@@ -46,6 +50,7 @@ export default function MobileMenu({ works }) {
                     <li className="drawer__item">
                         <Link
                             href="/"
+                            tabIndex={-1}
                             className={`drawer__link ${pathname === "/" ? "is-active" : ""}`}
                             onClick={closeMenu}
                         >
@@ -56,6 +61,7 @@ export default function MobileMenu({ works }) {
                     <li className="drawer__item">
                         <Link
                             href="/about"
+                            tabIndex={-1}
                             className={`drawer__link ${pathname === "/about" ? "is-active" : ""}`}
                             onClick={closeMenu}
                         >
@@ -66,6 +72,7 @@ export default function MobileMenu({ works }) {
                     <li className="drawer__item">
                         <Link
                             href="/works"
+                            tabIndex={-1}
                             className={`drawer__link ${pathname === "/works" ? "is-active" : ""}`}
                             onClick={closeMenu}
                         >
@@ -79,6 +86,7 @@ export default function MobileMenu({ works }) {
                         <li className="drawer__works-item" key={`${work.slug}-${work.href}`}>
                             <Link
                                 href={work.href}
+                                tabIndex={-1}
                                 className={`drawer__works-link ${pathname === work.href ? "is-active" : ""
                                     }`}
                                 onClick={closeMenu}

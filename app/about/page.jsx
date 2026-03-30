@@ -22,7 +22,7 @@ export default function AboutPage() {
             <SummerTriangle />
             <header className="header">
                 <div className="header__inner">
-                    <Link href="/">
+                    <Link tabIndex={-1} href="/">
                         <h1 className="header__title">PORTFOLIO</h1>
                         <p className="header__sub-title">feat.Goto Takumi</p>
                     </Link>

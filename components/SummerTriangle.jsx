@@ -14,6 +14,7 @@ export default function SummerTriangle() {
         let smallStars = [];
         let brightStars = [];
         let animationId;
+        let scrollY = 0;
 
         function setTriangleStars() {
             if (window.innerWidth >= 1024) {
@@ -36,15 +37,15 @@ export default function SummerTriangle() {
             brightStars = [];
 
             const isDesktop = window.innerWidth >= 1024;
-            const smallCount = isDesktop ? 65 : 45;
-            const brightCount = isDesktop ? 10 : 6;
+            const smallCount = isDesktop ? 35 : 25;
+            const brightCount = isDesktop ? 40 : 32;
 
             for (let i = 0; i < smallCount; i++) {
                 smallStars.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    r: Math.random() * 1.2 + 0.85,
-                    alpha: Math.random() * 0.35 + 0.15,
+                    r: Math.random() * 1.2 + 0.5,
+                    alpha: Math.random() * 0.25 + 0.12,
                 });
             }
 
@@ -52,10 +53,16 @@ export default function SummerTriangle() {
                 brightStars.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    r: Math.random() * 1.6 + 1,
+                    r: Math.random() * 1.4 + 0.9,
                     phase: Math.random() * Math.PI * 2,
+                    speed: Math.random() * 0.18 + 0.04,
+                    glow: Math.random() * 4 + 8,
                 });
             }
+        }
+
+        function handleScroll() {
+            scrollY = window.scrollY;
         }
 
         function drawSkyStars(time) {
@@ -67,25 +74,28 @@ export default function SummerTriangle() {
             });
 
             brightStars.forEach((star) => {
-                const twinkle = 0.45 + Math.sin(time * 0.002 + star.phase) * 0.2;
+                const y = star.y + scrollY * 0.035;
+                const twinkle = 0.55 + Math.sin(time * 0.008 + star.phase) * 0.12;//星をピカピカ
 
                 ctx.beginPath();
-                ctx.fillStyle = `rgba(255,245,220,${twinkle})`;
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = "rgba(255,245,220,0.65)";
-                ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255,248,230,${twinkle})`;
+                ctx.shadowBlur = star.glow;
+                ctx.shadowColor = `rgba(255,245,220,${twinkle * 0.7})`;
+                ctx.arc(star.x, y, star.r, 0, Math.PI * 2);
                 ctx.fill();
                 ctx.shadowBlur = 0;
             });
         }
 
-        function drawTriangleStars() {
-            triangleStars.forEach((star) => {
+        function drawTriangleStars(time) {
+            triangleStars.forEach((star, i) => {
+                const twinkle = 0.6 + Math.sin(time * 0.001 + i) * 0.1;
+
                 ctx.beginPath();
-                ctx.strokeStyle = "rgba(255,235,170,0.14)";
+                ctx.strokeStyle = `rgba(255,235,170,${0.2 * twinkle})`;
                 ctx.lineWidth = 1;
-                ctx.shadowBlur = 14;
-                ctx.shadowColor = "rgba(255,235,170,0.6)";
+                ctx.shadowBlur = 14 * twinkle;
+                ctx.shadowColor = "rgba(255,255,170,0.8)";
                 ctx.moveTo(star.x - 12, star.y);
                 ctx.lineTo(star.x + 12, star.y);
                 ctx.moveTo(star.x, star.y - 12);
@@ -93,7 +103,7 @@ export default function SummerTriangle() {
                 ctx.stroke();
 
                 ctx.beginPath();
-                ctx.strokeStyle = "rgba(255,235,170,0.5)";
+                ctx.strokeStyle = `rgba(255,235,170,${0.8 * twinkle})`;
                 ctx.lineWidth = 1;
                 ctx.shadowBlur = 0;
                 ctx.moveTo(star.x - 8, star.y);
@@ -103,8 +113,8 @@ export default function SummerTriangle() {
                 ctx.stroke();
 
                 ctx.beginPath();
-                ctx.fillStyle = "rgba(255,245,200,0.45)";
-                ctx.arc(star.x, star.y, 3.8, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255,245,200,${0.4 * twinkle})`;
+                ctx.arc(star.x, star.y, 4.5, 0, Math.PI * 2);
                 ctx.fill();
             });
         }
@@ -115,10 +125,10 @@ export default function SummerTriangle() {
             ctx.lineTo(triangleStars[1].x, triangleStars[1].y);
             ctx.lineTo(triangleStars[2].x, triangleStars[2].y);
             ctx.closePath();
-            ctx.strokeStyle = "rgba(255,235,170,0.35)";
+            ctx.strokeStyle = "rgba(255,235,170,0.65)";
             ctx.lineWidth = 1;
             ctx.shadowBlur = 6;
-            ctx.shadowColor = "rgba(255,235,170,0.22)";
+            ctx.shadowColor = "rgba(255,235,170,0.32)";
             ctx.stroke();
             ctx.shadowBlur = 0;
         }
@@ -147,9 +157,11 @@ export default function SummerTriangle() {
         animate();
 
         window.addEventListener("resize", resizeCanvas);
+        window.addEventListener("scroll", handleScroll);
 
         return () => {
             window.removeEventListener("resize", resizeCanvas);
+            window.removeEventListener("scroll", handleScroll);
             cancelAnimationFrame(animationId);
         };
     }, []);

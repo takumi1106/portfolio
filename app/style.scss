@@ -173,6 +173,15 @@ img {
     }
 }
 
+a:focus-visible,
+.drawer__link:focus-visible,
+.drawer__works-link:focus-visible,
+.side-nav__link:focus-visible,
+.side-nav__works-link:focus-visible {
+    outline: 2px solid $color-main;
+    outline-offset: rem(4);
+}
+
 // 右サイドメニューの幅＆余白（ここを変えるだけで全体追従）
 $side-nav-w: rem(300);
 $side-nav-gap: 3vw;
@@ -1027,17 +1036,27 @@ $side-nav-gap: 3vw;
         }
     }
 
+    &__link {
+        display: block;
+
+        &:hover .works__img,
+        &:focus-visible .works__img {
+            background: rgba(207, 235, 244, 0.4);
+        }
+
+        &:focus-visible {
+            outline: 2px solid $color-main;
+            outline-offset: rem(4);
+        }
+    }
+
     &__img {
         padding: rem(15);
         background: rgba(207, 235, 244, 0.2);
+        transition: 0.4s;
 
         @include mq(desktop) {
             padding: rem(20);
-        }
-
-        &:hover {
-            background: rgba(207, 235, 244, 0.4);
-            transition: 0.4s;
         }
 
         img {
@@ -1443,17 +1462,27 @@ $side-nav-gap: 3vw;
         }
     }
 
+    &__link {
+        display: block;
+
+        &:hover .workslist__img,
+        &:focus-visible .workslist__img {
+            background: rgba(207, 235, 244, 0.4);
+        }
+
+        &:focus-visible {
+            outline: 2px solid $color-main;
+            outline-offset: rem(4);
+        }
+    }
+
     &__img {
         padding: rem(15);
         background: rgba(207, 235, 244, 0.2);
+        transition: 0.4s;
 
         @include mq(desktop) {
             padding: rem(20);
-        }
-
-        &:hover {
-            background: rgba(207, 235, 244, 0.4);
-            transition: 0.4s;
         }
 
         img {
@@ -1962,4 +1991,10 @@ $side-nav-gap: 3vw;
             }
         }
     }
+}
+
+/* フォーカス */
+/* マウスでクリックした時は無効 */
+:focus {
+    outline: none;
 }
