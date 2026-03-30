@@ -2,19 +2,23 @@ works:
   - title: 日昇工業所｜公式サイト
     label: 進級制作品｜[企業賞]
     image: /image/images-001.webp
+    alt: 日昇工業所の公式サイトの作品画像
     href: /works/nissyo
 
-  - title: ブログサイト
+  - title: 小鳥たちのブログツリー
     label: 授業課題
     image: /image/blog_main.webp
+    alt: ブログの作品画像
     href: /works/blog
 
-  - title: 星座占い
+  - title: 12星座占い
     label: 授業課題
     image: /image/uranai_main.webp
+    alt: 星占いサイトの作品画像
     href: /works/uranai
 
   - title: 名刺デザイン
     label: 個人制作
     image: /image/name-card_main.webp
+    alt: 名刺の作品画像
     href: /works/card

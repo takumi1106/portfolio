@@ -3,22 +3,26 @@ works:
     label: 進級制作品
     slug: nissyo
     image: /image/images-001.webp
+    alt: 日昇工業所の公式サイトの作品画像
     href: /works/nissyo
 
-  - title: ブログサイト
+  - title: ブ小鳥たちのブログツリー
     label: 授業課題
     slug: blog
     image: /image/blog_main.webp
+    alt: ブログの作品画像
     href: /works/blog
 
-  - title: 星座占い
+  - title: 12星座占い
     label: 授業課題
     slug: uranai
     image: /image/uranai_main.webp
+    alt: 星占いサイトの作品画像
     href: /works/uranai
 
   - title: 名刺デザイン
     label: 授業課題
     slug: card
     image: /image/name-card_main.webp
+    alt: 名刺の作品画像
     href: /works/card

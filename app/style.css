@@ -5,7 +5,7 @@ body {
   font-style: normal;
   font-size: 16;
   letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.92);
   background-color: #100F0F;
   position: relative;
   overflow-x: hidden;
@@ -437,7 +437,7 @@ a:focus-visible,
   content: "";
   position: absolute;
   right: 2.5rem;
-  max-width: 62.5rem;
+  max-width: 93.75rem;
   width: 100%;
   bottom: 0;
   height: 1px;
@@ -564,7 +564,7 @@ a:focus-visible,
   position: absolute;
   bottom: 0;
   right: 3.125rem;
-  width: 62.5rem;
+  width: 93.75rem;
   height: 2px;
   background-color: #fff;
 }
@@ -697,7 +697,7 @@ a:focus-visible,
 }
 .mainvisual__title__sub-title {
   font-size: 1.125rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.92);
   letter-spacing: 0;
   margin-bottom: 14.375rem;
 }
@@ -725,7 +725,7 @@ a:focus-visible,
 
 /* ------------------------ about ----------------------- */
 .top-about {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.92);
 }
 .top-about__inner {
   max-width: 342px;
@@ -749,11 +749,17 @@ a:focus-visible,
   height: 14.1875rem;
   margin: 0 auto 2.1875rem;
 }
-@media (width >= 1200px) {
+@media (width >= 413px) {
   .top-about__img {
     width: 15rem;
-    height: 22.5rem;
+    height: 20rem;
     margin: 0;
+  }
+}
+@media (width >= 1200px) {
+  .top-about__img {
+    width: 100%;
+    height: 100%;
   }
 }
 .top-about__school {
@@ -1006,7 +1012,7 @@ a:focus-visible,
 
 /* ------------------------ aboutpro ----------------------- */
 .aboutpro {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.92);
   font-size: 0.875rem;
 }
 .aboutpro__certification {
@@ -1206,7 +1212,7 @@ a:focus-visible,
 .ideal__text {
   display: grid;
   row-gap: 1.25rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.92);
 }
 .ideal__text br {
   display: none;
@@ -1804,7 +1810,7 @@ a:focus-visible,
 
 .markdown {
   margin-top: 2.5rem;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.92);
   line-height: 1.9;
 }
 .markdown h2 {
@@ -1899,7 +1905,7 @@ a:focus-visible,
 }
 @media (width >= 1200px) {
   .work-page--card .process__img img:first-child {
-    width: 27.5rem;
+    width: 23.75rem;
   }
 }
 

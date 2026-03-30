@@ -72,7 +72,7 @@ export default function Home() {
           <div className="top-about__inner">
             <div className="top-about__body">
               <div className="top-about__img">
-                <img src="/image/" alt="" />
+                <img src="/image/top-about_img.webp" alt="後藤匠のプロフィール写真" />
               </div>
               <div className="top-about__main">
                 <div className="top-about__school">

@@ -79,7 +79,7 @@ export default function UranaiPage() {
                         </h2>
 
                         <div className="project__img">
-                            <img src="/image/uranai_title.webp" alt="占いサイトのタイトル画像" />
+                            <img src="/image/uranai_title.webp" alt="占いサイトの作品画像" />
                         </div>
 
                         <div className="url-wrapper">
@@ -96,7 +96,7 @@ export default function UranaiPage() {
                         <div className="project__list">
                             <div className="project__item list__item">
                                 <h3 className="project__item-title list__title">制作期間</h3>
-                                <p className="project__item-text list__text">1週間</p>
+                                <p className="project__item-text list__text">約1週間</p>
                             </div>
 
                             <div className="project__item list__item">
@@ -135,7 +135,7 @@ export default function UranaiPage() {
                         <div className="process__item list__item">
                             <div className="process__item-inner">
                                 <figure className="process__img process__single-img">
-                                    <img src="/image/uranai_process.webp" alt="占いサイト制作工程" />
+                                    <img src="/image/uranai_process.webp" alt="占いサイトのデザイン、コード" />
                                 </figure>
 
                                 <div className="process__item list__item">
@@ -163,7 +163,7 @@ export default function UranaiPage() {
                                 <div className="process__item list__item">
                                     <h3 className="process__item-title list__title">JavaScript</h3>
                                     <div className="process__text process__single-text">
-                                        <p>最後に、今回の課題であるJavaScriptを導入しました。占い結果の表示をはじめ、フェードインの演出や背景の流れ星のアニメーションにも使用しています。</p>
+                                        <p>今回の課題としてJavaScriptを導入し、占い結果の表示に加え、フェードイン演出や背景の流れ星のアニメーションの実装にも活用しました。</p>
                                         <p>占い結果の処理では、当時履修したばかりの関数式を用いて実装し、理解を深めながら制作を進めました。</p>
                                     </div>
                                 </div>
@@ -198,7 +198,7 @@ export default function UranaiPage() {
                             <div className="ingenuity__item-inner">
                                 <div className="ingenuity__body">
                                     <figure className="ingenuity__img">
-                                        <img src="/image/uranai_main.webp" alt="占いサイトのデザイン画面" />
+                                        <img src="/image/uranai_main.webp" alt="占いサイトの画面" />
                                     </figure>
 
                                     <div className="ingenuity__text">
@@ -215,7 +215,7 @@ export default function UranaiPage() {
                     <h2 className="reflection__title sub-title">学んだこと</h2>
                     <div className="reflection__inner">
                         <div className="reflection__text">
-                            <p>制作当初は、JavaScriptを学んですぐだったこともあり、関数式を十分に理解できていませんでした。</p>
+                            <p>制作当初は、関数式を学んで間もなかったこともあり、十分に理解できていませんでした。</p>
                             <p>そのため、完成して提出した際に「関数式がしっかり使えていない」という指摘を受けました。</p>
                             <p>そこで生成AIを参考にしながらコードを見直し、作り直していく中で関数式の仕組みを理解することができました。</p>
                         </div>

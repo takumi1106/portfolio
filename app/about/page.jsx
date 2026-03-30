@@ -65,7 +65,7 @@ export default function AboutPage() {
                     <div className="aboutpro__inner">
                         <div className="aboutpro__pro">
                             <div className="aboutpro__img">
-                                <img src="./image/images-001.webp" alt="" />
+                                <img src="./image/about__img.webp" alt="" />
                             </div>
                             <div className="aboutpro__status">
                                 <p className="aboutpro__myname">

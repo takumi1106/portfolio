@@ -14,7 +14,7 @@ $space-xxl: 2.5rem; // 40px
 $space-xxxl: 3rem; // 48px
 
 // --- Colors ---
-$color-text: rgba(255, 255, 255, 0.85);
+$color-text: rgba(255, 255, 255, 0.92);
 $color-main: #fff;
 $color-base: #1A2A47;
 $color-star: #F2F7FF;
@@ -585,7 +585,7 @@ $side-nav-gap: 3vw;
         content: "";
         position: absolute;
         right: rem(40);
-        max-width: rem(1000);
+        max-width: rem(1500);
         width: 100%;
         bottom: 0;
         height: 1px;
@@ -705,7 +705,7 @@ $side-nav-gap: 3vw;
         position: absolute;
         bottom: 0;
         right: rem(50); // ← ここで「線だけ左に寄せる」
-        width: rem(1000); // 線の長さ
+        width: rem(1500); // 線の長さ
         height: 2px;
         background-color: $color-main;
 
@@ -861,10 +861,15 @@ $side-nav-gap: 3vw;
         height: rem(227);
         margin: 0 auto rem(35);
 
-        @include mq(desktop) {
+        @include mq(tablet) {
             width: rem(240);
-            height: rem(360);
+            height: rem(320);
             margin: 0;
+        }
+
+        @include mq(desktop) {
+            width: 100%;
+            height: 100%;
         }
     }
 
@@ -1986,7 +1991,7 @@ $side-nav-gap: 3vw;
                 }
 
                 @include mq(desktop) {
-                    width: rem(440);
+                    width: rem(380);
                 }
             }
         }
