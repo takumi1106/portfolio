@@ -87,7 +87,7 @@ export default async function WorkDetailPage({ params }) {
                 <section className="project">
                     <div className="project__inner">
                         <p className="project__category">
-                            {work.category}　[Webサイト]
+                            {work.category}
                         </p>
 
                         <h2 className="project__title">

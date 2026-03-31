@@ -75,7 +75,7 @@ export default function UranaiPage() {
                 <section className="project">
                     <div className="project__inner">
                         <p className="project__category">
-                            授業制作　[Webサイト]
+                            授業制作
                         </p>
 
                         <h2 className="project__title">
