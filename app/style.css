@@ -452,7 +452,7 @@ a:focus-visible,
 .list {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 2.5rem 3.8461538462%;
+  gap: 2.5rem 4%;
   margin-bottom: 2.5rem;
 }
 .list__item {
