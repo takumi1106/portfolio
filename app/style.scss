@@ -600,7 +600,7 @@ $side-nav-gap: 3vw;
 .list {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: rem(40) percentage(math.div(15, 375));
+    gap: rem(40) percentage(math.div(10, 375));
     margin-bottom: rem(40);
 
     &__item {
