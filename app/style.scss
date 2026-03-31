@@ -1138,8 +1138,9 @@ $side-nav-gap: 3vw;
     color: $color-text;
     font-size: rem(14);
 
-    &__certification {
-        letter-spacing: ls(5);
+    &__certification,
+    &__school {
+        letter-spacing: ls(3);
     }
 
     &__inner {
@@ -1205,7 +1206,12 @@ $side-nav-gap: 3vw;
         font-size: rem(16);
     }
 
-    &__certification-list {
+    &__school-list {
+        margin-bottom: rem(40);
+    }
+
+    &__certification-list,
+    &__school-list {
         display: grid;
         row-gap: rem(20);
         list-style: disc;
@@ -1234,6 +1240,15 @@ $side-nav-gap: 3vw;
         }
     }
 
+    &__school-list {
+        margin-bottom: rem(40);
+
+        @include mq(desktop) {
+            grid-template-columns: 1fr 1.7fr;
+            gap: rem(30) percentage(math.div(30, 1440));
+        }
+    }
+
     @include mq(tablet) {
         &__pro {
             display: grid;
@@ -1250,7 +1265,8 @@ $side-nav-gap: 3vw;
             grid-template-columns: repeat(3, 1fr);
         }
 
-        &__certification {
+        &__certification,
+        &__school {
             font-size: rem(18);
         }
     }
