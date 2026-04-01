@@ -412,7 +412,7 @@ a:focus-visible,
 }
 
 .sub-title {
-  font-size: 1.375rem;
+  font-size: 1.625rem;
   padding-bottom: 0.3125rem;
   position: relative;
   margin-bottom: 3.125rem;
@@ -422,7 +422,7 @@ a:focus-visible,
 }
 @media (width >= 413px) {
   .sub-title {
-    font-size: 2rem;
+    font-size: 2.25rem;
     padding-bottom: 0.625rem;
     margin-bottom: 4.375rem;
     margin-left: 3.75rem;
@@ -452,7 +452,7 @@ a:focus-visible,
 .list {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 2.5rem 2.6666666667%;
+  gap: 3.125rem 2.6666666667%;
   margin-bottom: 2.5rem;
 }
 .list__item {
@@ -465,7 +465,7 @@ a:focus-visible,
 }
 .list__title {
   position: relative;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   padding-left: 0.625rem;
   color: #fff;
   margin-bottom: 1.5625rem;
@@ -473,12 +473,11 @@ a:focus-visible,
 }
 @media (width >= 413px) {
   .list__title {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 }
 @media (width >= 1200px) {
   .list__title {
-    font-size: 1.5rem;
     margin-bottom: 1.875rem;
   }
 }
@@ -1258,7 +1257,6 @@ a:focus-visible,
 }
 .skill__list {
   grid-template-columns: 1fr;
-  row-gap: 2.5rem;
 }
 @media (width >= 1200px) {
   .skill__list {
@@ -1501,7 +1499,7 @@ a:focus-visible,
 }
 @media (width >= 413px) {
   .project__category {
-    font-size: 1.5rem;
+    font-size: 1.875rem;
   }
 }
 @media (width >= 1200px) {
@@ -1779,7 +1777,7 @@ a:focus-visible,
   }
 }
 .ingenuity__text {
-  margin-bottom: 2.5rem;
+  margin-bottom: 3.125rem;
 }
 @media (width >= 413px) {
   .ingenuity__text {
@@ -1893,12 +1891,12 @@ a:focus-visible,
   height: 15.625rem;
 }
 
+.work-page--uranai .process__text {
+  margin-bottom: 3.125rem;
+}
 @media (width >= 413px) {
   .work-page--uranai .process__img {
     margin-bottom: 2.1875rem;
-  }
-  .work-page--uranai .process__item {
-    margin-bottom: 2.5rem;
   }
 }
 

@@ -38,7 +38,7 @@ process:
        レイアウトや情報の優先順位を意識しながら、どの位置に何を配置するかを大まかに決めていきました。
       - その後、Photoshopを使用してワイヤーフレームを制作し、ラフをもとに画面構成や配色を具体化しました。余白の取り方や要素同士のバランスを調整しながら、視認性や使いやすさを意識してデザインを詰めていきました。
 
-  - title: コーディング・WordPress導入
+  - title: コーディング
     type: coding
     mainImage: /image/blog_code.webp
     text:
@@ -61,7 +61,7 @@ ingenuity:
     type: operation
     show: false
 
-  - title: 操作性の工夫（視認性の向上）
+  - title: 視認性の工夫
     type: form
     blocks:
       - image: /image/blog_hover.webp

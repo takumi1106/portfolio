@@ -562,7 +562,7 @@ $side-nav-gap: 3vw;
 }
 
 .sub-title {
-    font-size: rem(22);
+    font-size: rem(26);
     padding-bottom: rem(5);
     position: relative;
     margin-bottom: rem(50);
@@ -571,7 +571,7 @@ $side-nav-gap: 3vw;
     margin-left: rem(24);
 
     @include mq(tablet) {
-        font-size: $space-xl;
+        font-size: rem(36);
         padding-bottom: rem(10);
         margin-bottom: rem(70);
         margin-left: rem(60);
@@ -600,7 +600,7 @@ $side-nav-gap: 3vw;
 .list {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: rem(40) percentage(math.div(10, 375));
+    gap: rem(50) percentage(math.div(10, 375));
     margin-bottom: rem(40);
 
     &__item {
@@ -613,18 +613,17 @@ $side-nav-gap: 3vw;
 
     &__title {
         position: relative;
-        font-size: rem(20);
+        font-size: $space-l;
         padding-left: rem(10);
         color: $color-main;
         margin-bottom: rem(25);
         letter-spacing: ls(10);
 
         @include mq(tablet) {
-            font-size: $space-l;
+            font-size: rem(28);
         }
 
         @include mq(desktop) {
-            font-size: $space-l;
             margin-bottom: rem(30);
         }
 
@@ -1364,7 +1363,6 @@ $side-nav-gap: 3vw;
 
     &__list {
         grid-template-columns: 1fr;
-        row-gap: rem(40);
 
         @include mq(desktop) {
             grid-template-columns: repeat(2, 1fr);
@@ -1578,7 +1576,7 @@ $side-nav-gap: 3vw;
         margin-top: rem(60);
 
         @include mq(tablet) {
-            font-size: $space-l;
+            font-size: rem(30);
         }
 
         @include mq(desktop) {
@@ -1842,7 +1840,7 @@ $side-nav-gap: 3vw;
     }
 
     &__text {
-        margin-bottom: rem(40);
+        margin-bottom: rem(50);
 
         @include mq(tablet) {
             margin-bottom: 0;
@@ -1974,13 +1972,13 @@ $side-nav-gap: 3vw;
 
 .work-page--uranai {
     .process {
+        &__text {
+            margin-bottom: rem(50);
+        }
+
         @include mq(tablet) {
             &__img {
                 margin-bottom: rem(35);
-            }
-
-            &__item {
-                margin-bottom: rem(40);
             }
         }
     }
