@@ -28,7 +28,7 @@ $font-family-gothic: "Shippori Antique";
 
 // --- Breakpoints ---
 $breakpoints: (
-    "tablet": 413px,
+    "tablet": 431px,
     "desktop": 1200px
 );
 
@@ -1066,8 +1066,16 @@ $side-nav-gap: 3vw;
         img {
             max-width: rem(345);
             width: 100%;
-            height: 100%;
+            height: rem(190);
             z-index: 1000;
+
+            @include mq(tablet) {
+                height: rem(170);
+            }
+
+            @include mq(desktop) {
+                height: rem(210);
+            }
         }
     }
 
@@ -1731,17 +1739,15 @@ $side-nav-gap: 3vw;
             width: rem(332);
 
             &:first-child {
-                width: rem(380);
-                margin-bottom: rem(35);
+                margin-bottom: rem(40);
 
                 @include mq(tablet) {
-                    width: rem(290);
                     margin-bottom: 0;
                 }
+            }
 
-                @include mq(desktop) {
-                    width: rem(380);
-                }
+            @include mq(tablet) {
+                width: rem(305);
             }
 
             @include mq(desktop) {
@@ -1953,44 +1959,29 @@ $side-nav-gap: 3vw;
     }
 }
 
+//===============================================================
+// 詳細ページのデザイン変更点
+//===============================================================
 .work-page--nissyo {
     .process {
         &__img-design {
-            img:last-child {
-                width: rem(332);
+            img {
+                &:first-child {
+                    @include mq(tablet) {
+                        width: rem(270);
+                    }
 
-                @include mq(desktop) {
-                    width: rem(420);
+                    @include mq(desktop) {
+                        width: rem(380);
+                    }
+                }
+
+                &:last-child {
+                    @include mq(desktop) {
+                        width: rem(420);
+                    }
                 }
             }
-        }
-    }
-}
-
-.work-page--blog {
-    .process {
-        &__body {
-            justify-content: center;
-        }
-
-        &__img-design {
-            img:first-child {
-                @include mq(desktop) {
-                    max-width: rem(380);
-                    height: rem(300);
-                }
-            }
-
-            img:last-child {
-                @include mq(desktop) {
-                    width: rem(430);
-                    height: rem(300);
-                }
-            }
-        }
-
-        &__img-code {
-            height: rem(250);
         }
     }
 }
@@ -2009,33 +2000,7 @@ $side-nav-gap: 3vw;
     }
 }
 
-.work-page--card {
-    .ingenuity {
-        &__body {
-            @include mq(desktop) {
-                margin-bottom: 0;
-            }
-        }
-    }
-
-    .process {
-        &__item {
-            margin-bottom: rem(50);
-        }
-
-        &__img {
-            img:first-child {
-                @include mq(tablet) {
-                    width: rem(305);
-                }
-
-                @include mq(desktop) {
-                    width: rem(380);
-                }
-            }
-        }
-    }
-}
+/* ------------------------------------------------------ */
 
 /* フォーカス */
 /* マウスでクリックした時は無効 */

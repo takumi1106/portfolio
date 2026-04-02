@@ -2,9 +2,10 @@
 title: 新校舎インタビュー動画
 category: グループ制作作品
 date: 2026
-url: https://goto-take-1106.secret.jp/nissyo/index.html
+url: https://youtu.be/0wEk1RPnZPM
+type: video
 
-thumbnail: /image/images-001.webp
+thumbnail: /image/school-movie_main.webp
 alt: 新校舎インタビュー動画の作品画像
 
 periodLabel: 制作期間
@@ -37,8 +38,8 @@ process:
     type: design
     lead: 動画構成を決定した後、スケジュールを調整し、数日に分けて新校舎の外装・内装のほか、インタビューや学生の反応の撮影を行いました。
     images:
-      - /image/nissyo-note.webp
-      - /image/nissyo-design.webp
+      - /image/school-movie_photograph1.webp
+      - /image/school-movie_photograph2.webp
     desc:
       - 撮影前に新校舎の下見を行い、内装・外装の撮影と並行してインタビューの撮影場所を選定しました。
       - その後、インタビュー撮影では被写体ごとに場所を変え、2台のカメラで異なる角度から撮影することで、編集に活用できる映像を収録しました。
@@ -46,12 +47,12 @@ process:
 
   - title: 動画編集
     type: coding
-    mainImage: /image/nissyo-code1.webp
+    mainImage: /image/school-movie_listen1.webp
     text:
       - その後、役割を分担し、私は文字起こしとオープニング編集（学生の反応部分）を担当しました。
       - 文字起こしでは、Adobe Premiere ProのAI機能も使用可能でしたが、精度を重視し、音声を確認しながら手作業で作成し、先生と確認後にDiscordで共有しました。
     subText: オープニング編集では、学生同士で撮影された映像から印象的なシーンを選び、複数のカットをつなぎ合わせて構成しました。
-    subImage: /image/nissyo-code2.webp
+    subImage: /image/school-movie_edit1.webp
 
   - title: 細かい調整
     type: adjustment
@@ -62,20 +63,19 @@ ingenuity:
   - title: 文字起こしでの工夫
     type: update
     blocks:
-      - image: /image/nissyo-cms1.webp
-        text: 文字起こしを行う際は、聞き取りづらい部分があったため、イヤホンを使用して音声を繰り返し確認し、正確に反映できるよう工夫しました。
-      - image: /image/nissyo-cms2.webp
+      - text: 文字起こしを行う際は、聞き取りづらい部分があったため、イヤホンを使用して音声を繰り返し確認し、正確に反映できるよう工夫しました。
+      - image: /image/school-movie_listen2.webp
         text: さらに、パソコンのメモアプリに入力することで、共有する際や編集時に必要な部分をすぐにコピー＆ペーストできるようにし、スムーズに反映できるよう工夫しました。
 
   - title: 編集での工夫
     show: false
 
-  - title: 送信・運用の工夫
+  - title: 編集の工夫
     type: form
     blocks:
-      - image: /image/nissyo-form1.webp
+      - image: /image/school-movie_edit2.webp
         text: 多数の動画を何度も見返し、学生スタッフの笑顔や驚きなどのリアクションに加え、楽しそうな話し声が伝わるシーンを基準に切り抜きました。
-      - image: /image/nissyo-form2.webp
+      - image: /image/school-movie_edit3.webp
         text: その後、先生からアドバイスをいただきながら、時系列にとらわれず印象的なシーンをつなぐことで、より興味を引くオープニングとなるよう工夫しました。
 
 reflection:

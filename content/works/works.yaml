@@ -13,6 +13,13 @@ works:
     alt: ブログの作品画像
     href: /works/blog
 
+  - title: 新校舎インタビュー動画
+    label: グループ制作
+    slug: school-movie
+    image: /image/school-movie_main.webp
+    alt: インタビュー動画の作品画像
+    href: /works/school-movie
+
   - title: 12星座占い
     label: 授業課題
     slug: uranai

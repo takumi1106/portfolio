@@ -106,7 +106,7 @@ export default async function WorkDetailPage({ params }) {
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    サイトを見る →
+                                    {work.type === "video" ? "動画を見る →" : "サイトを見る →"}
                                 </a>
                             </div>
                         )}
