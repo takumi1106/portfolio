@@ -46,12 +46,47 @@ process:
 
   - title: コーディング
     type: coding
-    mainImage: /image/nissyo-code1.webp
+    code: |
+      // インナー幅の指定
+      // @param {number} $mw - max-width
+      // @param {number} $w  - width
+      @mixin inner($mw-l: 900px, $mw-m: 450px, $mw-s: 342px, $w: percentage(math.div(342, 390))) {
+      max-width: $mw-s;
+      width: $w;
+      margin-left: auto;
+      margin-right: auto;
+
+        @include mq(tablet) {
+          max-width: $mw-m;
+        }
+
+        @include mq(desktop) {
+          max-width: $mw-l;
+        }
+      }
     text:
-      - HTMLでページ全体の構造を組み、BEM設計を意識してSassでスタイルを実装しました。
-      - デザインの再現だけでなく、後から修正しやすいようクラス設計にも配慮しています。
-      - 他の人が見ても理解しやすいよう、コメントを残し保守性を意識しました。
-    subImage: /image/nissyo-code2.webp
+    - HTMLでページ全体の構造を組み、BEM設計を意識してSassでスタイルを実装しました。
+    - デザインの再現だけでなく、後から修正しやすいようクラス設計にも配慮しています。また、他の人が見ても理解しやすいようコメントを残し、保守性を意識しました。
+    - 上記は、レイアウトの再利用性を高めるために作成したインナー幅を管理するSassのmixinです。ブレークポイントごとに最大幅を切り替えられるようにし、レスポンシブ対応を効率的に行えるようにしています。
+    subCode: |
+      <?php
+      $api_key = "********";
+
+      // microCMS APIを呼ぶ
+      $curl = curl_init();
+      curl_setopt_array($curl, [
+        CURLOPT_URL => "https://xxxxx.microcms.io/api/v1/news?limit=3",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER => [
+          "X-MICROCMS-API-KEY: {$api_key}"
+        ]
+      ]);
+
+      $response = curl_exec($curl);
+      curl_close($curl);
+
+      header("Content-Type: application/json");
+      echo $response;
     subText: microCMSのAPIキーをフロント側に露出させないため、PHPで中継する構成を採用しました。これにより、セキュリティを確保しつつ、最新のお知らせを取得できるようにしています。
 
   - title: 細かい調整

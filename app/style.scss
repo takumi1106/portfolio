@@ -1775,18 +1775,21 @@ $side-nav-gap: 3vw;
         }
     }
 
-    &__code-text {
-        p {
-            margin-bottom: rem(20);
+    &__code-wrap {
+        width: 100%;
+        max-width: none;
+    }
 
-            br {
-                display: none;
-            }
-
-            @include mq(tablet) {
-                margin-bottom: 0;
-            }
-        }
+    &__code {
+        background: rgba(171, 171, 171, 0.6);
+        padding: rem(10);
+        border-radius: 5px;
+        overflow-x: auto;
+        font-family: monospace;
+        font-size: 14px;
+        width: 100%;
+        max-width: none;
+        white-space: pre-wrap;
     }
 
     &__body,
@@ -1806,8 +1809,24 @@ $side-nav-gap: 3vw;
             align-items: center;
             margin-bottom: rem(40);
         }
+
+        &.is-code {
+            display: block;
+
+            @include mq(tablet) {
+                display: block;
+            }
+        }
     }
 
+    &__body.is-code,
+    &__cms.is-code {
+        display: block;
+
+        @include mq(tablet) {
+            display: block;
+        }
+    }
 }
 
 /*--------------------- ingenuity---------------------*/

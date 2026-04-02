@@ -200,11 +200,22 @@ export default async function WorkDetailPage({ params }) {
 
                                     {item.type === "coding" && (
                                         <>
-                                            <div className="process__body">
-                                                <figure className="process__img process__code-img">
-                                                    {item.mainImage && <img src={item.mainImage} alt="" />}
-                                                    {!item.mainImage && Array.isArray(item.images) && item.images[0] && (
-                                                        <img src={item.images[0]} alt="" loading="lazy" />
+                                            <div className={`process__body ${item.code ? "is-code" : ""}`}>
+                                                <figure
+                                                    className={`process__img ${item.code ? "process__code-wrap" : "process__code-img"
+                                                        }`}
+                                                >
+                                                    {item.code ? (
+                                                        <pre className="process__code">
+                                                            <code>{item.code}</code>
+                                                        </pre>
+                                                    ) : (
+                                                        <>
+                                                            {item.mainImage && <img src={item.mainImage} alt="" />}
+                                                            {!item.mainImage && Array.isArray(item.images) && item.images[0] && (
+                                                                <img src={item.images[0]} alt="" loading="lazy" />
+                                                            )}
+                                                        </>
                                                     )}
                                                 </figure>
 
@@ -226,12 +237,23 @@ export default async function WorkDetailPage({ params }) {
                                                 </div>
                                             </div>
 
-                                            {(item.subImage || item.subText || (Array.isArray(item.images) && item.images[1])) && (
-                                                <div className="process__cms">
-                                                    <figure className="process__img process__code-img">
-                                                        {item.subImage && <img src={item.subImage} alt="" />}
-                                                        {!item.subImage && Array.isArray(item.images) && item.images[1] && (
-                                                            <img src={item.images[1]} alt="" loading="lazy" />
+                                            {(item.subImage || item.subText || item.subCode || (Array.isArray(item.images) && item.images[1])) && (
+                                                <div className={`process__cms ${item.subCode ? "is-code" : ""}`}>
+                                                    <figure
+                                                        className={`process__img ${item.subCode ? "process__code-wrap" : "process__code-img"
+                                                            }`}
+                                                    >
+                                                        {item.subCode ? (
+                                                            <pre className="process__code">
+                                                                <code>{item.subCode}</code>
+                                                            </pre>
+                                                        ) : (
+                                                            <>
+                                                                {item.subImage && <img src={item.subImage} alt="" />}
+                                                                {!item.subImage && Array.isArray(item.images) && item.images[1] && (
+                                                                    <img src={item.images[1]} alt="" loading="lazy" />
+                                                                )}
+                                                            </>
                                                         )}
                                                     </figure>
 
