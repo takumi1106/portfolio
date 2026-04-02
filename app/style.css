@@ -1042,9 +1042,14 @@ a:focus-visible,
   color: #fff;
   margin: 3.125rem auto;
 }
+@media (width >= 413px) {
+  .aboutpro__title {
+    font-size: 2.375rem;
+  }
+}
 @media (width >= 1200px) {
   .aboutpro__title {
-    font-size: 2.75rem;
+    font-size: 3rem;
   }
 }
 .aboutpro__item {
@@ -1058,6 +1063,7 @@ a:focus-visible,
 @media (width >= 413px) {
   .aboutpro__img {
     max-width: 18.75rem;
+    margin: 0 auto 0;
   }
 }
 @media (width >= 1200px) {
@@ -1139,6 +1145,7 @@ a:focus-visible,
     -moz-column-gap: 4.8611111111%;
          column-gap: 4.8611111111%;
     align-items: center;
+    margin-bottom: 3.125rem;
   }
   .aboutpro__status {
     max-height: 11.875rem;
@@ -1350,12 +1357,12 @@ a:focus-visible,
 }
 @media (width >= 413px) {
   .workslist__title {
-    font-size: 2.5rem;
+    font-size: 2.375rem;
   }
 }
 @media (width >= 1200px) {
   .workslist__title {
-    font-size: 2.75rem;
+    font-size: 3rem;
     margin: 6.25rem 0 3.125rem;
   }
 }
