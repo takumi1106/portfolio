@@ -562,7 +562,7 @@ $side-nav-gap: 3vw;
 }
 
 .sub-title {
-    font-size: rem(26);
+    font-size: rem(24);
     padding-bottom: rem(5);
     position: relative;
     margin-bottom: rem(50);
@@ -571,7 +571,7 @@ $side-nav-gap: 3vw;
     margin-left: rem(24);
 
     @include mq(tablet) {
-        font-size: rem(36);
+        font-size: rem(28);
         padding-bottom: rem(10);
         margin-bottom: rem(70);
         margin-left: rem(60);
@@ -613,14 +613,14 @@ $side-nav-gap: 3vw;
 
     &__title {
         position: relative;
-        font-size: $space-l;
+        font-size: rem(22);
         padding-left: rem(10);
         color: $color-main;
         margin-bottom: rem(25);
         letter-spacing: ls(10);
 
         @include mq(tablet) {
-            font-size: rem(28);
+            font-size: rem(26);
         }
 
         @include mq(desktop) {
