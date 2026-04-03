@@ -1998,6 +1998,24 @@ $side-nav-gap: 3vw;
             }
         }
     }
+
+    .ingenuity {
+        &__body-code {
+            display: block;
+        }
+
+        &__code {
+            background: rgba(171, 171, 171, 0.5);
+            padding: rem(10);
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: monospace;
+            font-size: 14px;
+            width: 100%;
+            max-width: none;
+            white-space: pre-wrap;
+        }
+    }
 }
 
 /* ------------------------------------------------------ */

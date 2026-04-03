@@ -183,10 +183,38 @@ export default function UranaiPage() {
                             <h3 className="ingenuity__item-title list__title">コーディング</h3>
 
                             <div className="ingenuity__item-inner">
-                                <div className="ingenuity__body">
-                                    <figure className="ingenuity__img">
-                                        <img src="/image/uranai_js.webp" alt="占いサイトのコード画面" />
-                                    </figure>
+                                <div className="ingenuity__body ingenuity__body-code">
+                                    <pre className="ingenuity__code">
+                                        <code>
+                                            {`const rankList = ['1位', '2位', '3位', '4位', '5位', '6位', '7位', '8位', '9位', '10位', '11位', '12位'];
+
+const messageList = [
+    '今月は自信が運を引き寄せる月。注目度が高まり、思い切った行動が吉。プレゼンや告白、勝負事に星が味方します。あなたらしさを堂々と示すと、応援者も増え、良い流れに乗れるでしょう。',
+    '好奇心が幸運を呼ぶ月。新しい挑戦や普段なら選ばない道にこそチャンスあり。旅行や学び、遠方の人との縁もあるかも。前向きに動くほど未来が広がります。',
+    ……];
+
+const shuffleFortunes = function () {
+    const indices = [...Array(rankList.length).keys()];
+    //i = indices.length - 1というのはi = 11
+    // 条件：i > 0 の間続ける
+    //i = 1 まで実行／i = 0 になったら終了（0は最後に残された1つの場所なのでシャッフル不要）
+    //i--はiが１つずつ減る
+    for (let i = indices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [indices[i], indices[j]] = [indices[j], indices[i]];
+    }//for文の最後には；は要らない
+    return indices.map(i => ({
+        rank: rankList[i],
+        message: messageList[i]
+    }));
+};
+
+const fortunes = shuffleFortunes();
+];`}
+
+
+                                        </code>
+                                    </pre>
 
                                     <div className="ingenuity__text">
                                         <p>JavaScriptの実装では、関数式はなるべく自分で書くことを意識しました。しかし、課題提出後に関数式を十分に使えていないという指摘を受けたため、生成AIに分からない部分を聞きながら、コードを見直し作り直しました。</p>
