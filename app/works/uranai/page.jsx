@@ -186,13 +186,7 @@ export default function UranaiPage() {
                                 <div className="ingenuity__body ingenuity__body-code">
                                     <pre className="ingenuity__code">
                                         <code>
-                                            {`const rankList = ['1位', '2位', '3位', '4位', '5位', '6位', '7位', '8位', '9位', '10位', '11位', '12位'];
-
-const messageList = [
-    '今月は自信が運を引き寄せる月。注目度が高まり、思い切った行動が吉。プレゼンや告白、勝負事に星が味方します。あなたらしさを堂々と示すと、応援者も増え、良い流れに乗れるでしょう。',
-    '好奇心が幸運を呼ぶ月。新しい挑戦や普段なら選ばない道にこそチャンスあり。旅行や学び、遠方の人との縁もあるかも。前向きに動くほど未来が広がります。',
-    ……];
-
+                                            {`
 const shuffleFortunes = function () {
     const indices = [...Array(rankList.length).keys()];
     //i = indices.length - 1というのはi = 11
@@ -211,8 +205,6 @@ const shuffleFortunes = function () {
 
 const fortunes = shuffleFortunes();
 ];`}
-
-
                                         </code>
                                     </pre>
 
