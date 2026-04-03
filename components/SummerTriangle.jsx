@@ -33,27 +33,16 @@ export default function SummerTriangle() {
         }
 
         function createSkyStars() {
-            smallStars = [];
             brightStars = [];
 
             const isDesktop = window.innerWidth >= 1024;
-            const smallCount = isDesktop ? 35 : 25;
-            const brightCount = isDesktop ? 40 : 32;
-
-            for (let i = 0; i < smallCount; i++) {
-                smallStars.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    r: Math.random() * 1.2 + 0.5,
-                    alpha: Math.random() * 0.25 + 0.12,
-                });
-            }
+            const brightCount = isDesktop ? 60 : 32;
 
             for (let i = 0; i < brightCount; i++) {
                 brightStars.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    r: Math.random() * 1.4 + 0.9,
+                    r: Math.random() * 1.6 + 1.2,
                     phase: Math.random() * Math.PI * 2,
                     speed: Math.random() * 0.18 + 0.04,
                     glow: Math.random() * 4 + 8,
