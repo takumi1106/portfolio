@@ -3,6 +3,8 @@ import SummerTriangle from "@/components/SummerTriangle";
 import { getWorksList } from "@/lib/markdown";
 import MobileMenu from "@/components/MobileMenu";
 import { Shippori_Mincho, Shippori_Antique } from "next/font/google";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const mincho = Shippori_Mincho({
     subsets: ["latin"],
@@ -184,8 +186,13 @@ export default function UranaiPage() {
 
                             <div className="ingenuity__item-inner">
                                 <div className="ingenuity__body ingenuity__body-code">
-                                    <pre className="ingenuity__code">
-                                        <code>
+                                    <figure className="process__img process__code-wrap">
+                                        <SyntaxHighlighter
+                                            language="javascript"
+                                            style={oneDark}
+                                            className="process__code"
+                                            showLineNumbers
+                                        >
                                             {`const shuffleFortunes = function () {
     const indices = [...Array(rankList.length).keys()];
     //i = indices.length - 1というのはi = 11
@@ -202,10 +209,9 @@ export default function UranaiPage() {
     }));
 };
 
-const fortunes = shuffleFortunes();
-`}
-                                        </code>
-                                    </pre>
+const fortunes = shuffleFortunes();`}
+                                        </SyntaxHighlighter>
+                                    </figure>
 
                                     <div className="ingenuity__text">
                                         <p>JavaScriptの実装では、関数式はなるべく自分で書くことを意識しました。しかし、課題提出後に関数式を十分に使えていないという指摘を受けたため、生成AIに分からない部分を聞きながら、コードを見直し作り直しました。</p>

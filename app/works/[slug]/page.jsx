@@ -3,6 +3,9 @@ import SummerTriangle from "@/components/SummerTriangle";
 import { getWorkData, getWorksList } from "@/lib/markdown";
 import MobileMenu from "@/components/MobileMenu";
 import { Shippori_Mincho, Shippori_Antique } from "next/font/google";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+
 
 const mincho = Shippori_Mincho({
     subsets: ["latin"],
@@ -206,15 +209,25 @@ export default async function WorkDetailPage({ params }) {
                                                         }`}
                                                 >
                                                     {item.code ? (
-                                                        <pre className="process__code">
-                                                            <code>{item.code}</code>
-                                                        </pre>
+                                                        <SyntaxHighlighter
+                                                            language="javascript"
+                                                            style={oneDark}
+                                                            className="process__code"
+                                                            showLineNumbers
+                                                        // customStyle={{
+                                                        //     background: "#040642"
+                                                        // }}
+                                                        >
+                                                            {item.code}
+                                                        </SyntaxHighlighter>
                                                     ) : (
                                                         <>
                                                             {item.mainImage && <img src={item.mainImage} alt="" />}
-                                                            {!item.mainImage && Array.isArray(item.images) && item.images[0] && (
-                                                                <img src={item.images[0]} alt="" loading="lazy" />
-                                                            )}
+                                                            {!item.mainImage &&
+                                                                Array.isArray(item.images) &&
+                                                                item.images[0] && (
+                                                                    <img src={item.images[0]} alt="" loading="lazy" />
+                                                                )}
                                                         </>
                                                     )}
                                                 </figure>
@@ -244,15 +257,22 @@ export default async function WorkDetailPage({ params }) {
                                                             }`}
                                                     >
                                                         {item.subCode ? (
-                                                            <pre className="process__code">
-                                                                <code>{item.subCode}</code>
-                                                            </pre>
+                                                            <SyntaxHighlighter
+                                                                language="javascript"
+                                                                style={oneDark}
+                                                                className="process__code"
+                                                                showLineNumbers
+                                                            >
+                                                                {item.subCode}
+                                                            </SyntaxHighlighter>
                                                         ) : (
                                                             <>
                                                                 {item.subImage && <img src={item.subImage} alt="" />}
-                                                                {!item.subImage && Array.isArray(item.images) && item.images[1] && (
-                                                                    <img src={item.images[1]} alt="" loading="lazy" />
-                                                                )}
+                                                                {!item.subImage &&
+                                                                    Array.isArray(item.images) &&
+                                                                    item.images[1] && (
+                                                                        <img src={item.images[1]} alt="" loading="lazy" />
+                                                                    )}
                                                             </>
                                                         )}
                                                     </figure>
@@ -355,7 +375,7 @@ export default async function WorkDetailPage({ params }) {
                         </div>
                     </div>
                 </section>
-            </main>
+            </main >
 
             <footer className="footer">
                 <h2 className="footer__title sub-title">CONTACT</h2>
