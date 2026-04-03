@@ -186,8 +186,7 @@ export default function UranaiPage() {
                                 <div className="ingenuity__body ingenuity__body-code">
                                     <pre className="ingenuity__code">
                                         <code>
-                                            {`
-const shuffleFortunes = function () {
+                                            {`const shuffleFortunes = function () {
     const indices = [...Array(rankList.length).keys()];
     //i = indices.length - 1というのはi = 11
     // 条件：i > 0 の間続ける
@@ -204,7 +203,7 @@ const shuffleFortunes = function () {
 };
 
 const fortunes = shuffleFortunes();
-];`}
+`}
                                         </code>
                                     </pre>
 
