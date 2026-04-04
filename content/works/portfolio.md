@@ -26,7 +26,7 @@ overview:
 
 process:
   - title: ヒアリング
-    type: hearing
+    type: research
     lead: まず、クライアントと直接対面でヒアリングを行い、サイトの目的や掲載内容、更新頻度などを確認しました。その上で、デザインや機能面について以下の要望をいただきました。
     points:
       - デザインはシンプルで、堅苦しすぎない雰囲気にしたい
@@ -34,7 +34,7 @@ process:
       - 下請け業者としての信頼感が伝わるデザイン
 
   - title: デザイン
-    type: design
+    type: visual
     lead: ヒアリングを終えた後、デザイン工程に移りました。デザイン制作にはノートと Figma を使用し、画面構成や配色を具体化していきました。
     images:
       - /image/nissyo-note.webp
@@ -51,10 +51,10 @@ process:
       // @param {number} $mw - max-width
       // @param {number} $w  - width
       @mixin inner($mw-l: 900px, $mw-m: 450px, $mw-s: 342px, $w: percentage(math.div(342, 390))) {
-      max-width: $mw-s;
-      width: $w;
-      margin-left: auto;
-      margin-right: auto;
+        max-width: $mw-s;
+        width: $w;
+        margin-left: auto;
+        margin-right: auto;
 
         @include mq(tablet) {
           max-width: $mw-m;
@@ -96,27 +96,37 @@ process:
 
 ingenuity:
   - title: 更新性の工夫
-    type: update
+    type: approach
     blocks:
-      - image: /image/nissyo-cms1.webp
-        text: 更新されたお知らせをファーストビューに表示し、サイトを開いてすぐ確認できるようにしました。また、古い情報ばかりにならないよう、最新3件のみ表示しています。
-      - image: /image/nissyo-cms2.webp
-        text: microCMSでは、入力ミスや記述のばらつきを防ぐためにAPIスキーマを設定し、入力項目を制限しました。必須項目や入力形式を定義することで、管理者が迷わず入力できる構造にしています。
+    - image: /image/nissyo-cms1.webp
+      text:
+        - 更新されたお知らせをファーストビューに表示し、サイトを開いてすぐ確認できるようにしました。
+        - また、古い情報ばかりにならないよう、最新3件のみ表示しています。
+    - image: /image/nissyo-cms2.webp
+      text:
+        - microCMSでは、入力ミスや記述のばらつきを防ぐためにAPIスキーマを設定し、入力項目を制限しました。
+        - 必須項目や入力形式を定義することで、管理者が迷わず入力できる構造にしています。
 
   - title: 操作性への配慮
-    type: operation
-    images:
-      - /image/nissyo-operation1.webp
-      - /image/nissyo-operation2.webp
-    text: マウス操作だけでなく、キーボード操作も想定し、Tabキーによる移動やフォーカス表示が分かりやすくなるよう配慮しました。HTMLの標準要素を使用し、環境に依存しにくい操作性を意識しました。
+    type: approach
+    blocks:
+    - image: /image/nissyo-operation1.webp
+      text:
+        - マウス操作だけでなく、キーボード操作も想定し、Tabキーによる移動やフォーカス表示が分かりやすくなるよう配慮しました。
+    - image: /image/nissyo-operation2.webp
+      text:
+        - HTMLの標準要素を使用し、環境に依存しにくい操作性を意識しました。
 
   - title: 送信・運用の工夫
-    type: form
+    type: approach
     blocks:
-      - image: /image/nissyo-form1.webp
-        text: 静的サイト構成のため、サーバー実装不要で導入できる Formspree を採用しました。HTML + JavaScript のみで実装し、表示の軽さと運用のしやすさを意識しています。
-      - image: /image/nissyo-form2.webp
-        text: また、誤送信を防ぐため、送信前に内容を確認できる画面を用意しました。
+    - image: /image/nissyo-form1.webp
+      text:
+        - 静的サイト構成のため、サーバー実装不要で導入できるFormspreeを採用しました。
+        - HTML + JavaScriptのみで実装し、表示の軽さと運用のしやすさを意識しています。
+    - image: /image/nissyo-form2.webp
+      text:
+        - また、誤送信を防ぐため、送信前に内容を確認できる画面を用意しました。
 
 reflection:
   - 本制作では、microCMS や Formspree など初めて扱う技術を導入し、実際にサイトへ組み込み運用する方法を学びました。

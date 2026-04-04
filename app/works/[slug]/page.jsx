@@ -157,10 +157,10 @@ export default async function WorkDetailPage({ params }) {
                                 <h3 className="process__item-title list__title">{item.title}</h3>
 
                                 <div className="process__item-inner">
-                                    {item.type === "hearing" && (
+                                    {item.type === "research" && (
                                         <>
                                             {item.lead && (
-                                                <div className="process__text process__hearing-text">
+                                                <div className="process__text process__research-text">
                                                     <p>{item.lead}</p>
                                                 </div>
                                             )}
@@ -175,7 +175,7 @@ export default async function WorkDetailPage({ params }) {
                                         </>
                                     )}
 
-                                    {item.type === "design" && (
+                                    {item.type === "visual" && (
                                         <>
                                             {item.lead && (
                                                 <div className="process__text process__design-lead">
@@ -214,9 +214,6 @@ export default async function WorkDetailPage({ params }) {
                                                             style={oneDark}
                                                             className="process__code"
                                                             showLineNumbers
-                                                        // customStyle={{
-                                                        //     background: "#040642"
-                                                        // }}
                                                         >
                                                             {item.code}
                                                         </SyntaxHighlighter>
@@ -317,14 +314,12 @@ export default async function WorkDetailPage({ params }) {
                                     <h3 className="ingenuity__item-title list__title">{item.title}</h3>
 
                                     <div className="ingenuity__item-inner">
-                                        {(item.type === "update" || item.type === "form") &&
-                                            Array.isArray(item.blocks) &&
+                                        {Array.isArray(item.blocks) &&
                                             item.blocks.map((block, index) => (
                                                 <div className="ingenuity__body" key={`${item.title}-block-${index}`}>
                                                     {block.image && (
                                                         <figure className="ingenuity__img">
-                                                            <img src={block.image} alt=""
-                                                                loading="lazy" />
+                                                            <img src={block.image} alt="" loading="lazy" />
                                                         </figure>
                                                     )}
 
@@ -337,28 +332,6 @@ export default async function WorkDetailPage({ params }) {
                                                     </div>
                                                 </div>
                                             ))}
-
-                                        {item.type === "operation" && (
-                                            <div className="ingenuity__operation">
-                                                {Array.isArray(item.images) && item.images.length > 0 && (
-                                                    <figure className="ingenuity__img ingenuity__operation-img">
-                                                        {item.images.map((src, index) => (
-                                                            <img key={`${src}-${index}`} src={src} alt=""
-                                                                loading="lazy"
-                                                            />
-                                                        ))}
-                                                    </figure>
-                                                )}
-
-                                                <div className="ingenuity__text ingenuity__operation-text">
-                                                    {Array.isArray(item.text)
-                                                        ? item.text.map((text, i) => (
-                                                            <p key={`${item.title}-operation-${i}`}>{text}</p>
-                                                        ))
-                                                        : item.text && <p>{item.text}</p>}
-                                                </div>
-                                            </div>
-                                        )}
                                     </div>
                                 </div>
                             ))}

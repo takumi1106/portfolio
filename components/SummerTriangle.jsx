@@ -114,7 +114,7 @@ export default function SummerTriangle() {
             ctx.lineTo(triangleStars[1].x, triangleStars[1].y);
             ctx.lineTo(triangleStars[2].x, triangleStars[2].y);
             ctx.closePath();
-            ctx.strokeStyle = "rgba(255,235,170,0.65)";
+            ctx.strokeStyle = "rgba(255,235,170,0.4)";
             ctx.lineWidth = 1;
             ctx.shadowBlur = 6;
             ctx.shadowColor = "rgba(255,235,170,0.32)";

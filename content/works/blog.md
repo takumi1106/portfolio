@@ -25,11 +25,11 @@ overview:
 
 process:
   - title: ヒアリング
-    type: hearing
+    type: research
     show: false
 
   - title: デザイン
-    type: design
+    type: visual
     images:
       - /image/blog_note.webp
       - /image/blog_design.webp
@@ -51,22 +51,23 @@ process:
 
 ingenuity:
   - title: 動きを取り入れた表現
-    type: update
+    type: approach
     blocks:
-      - image: /image/blog-bird.webp
-        text:
-         - 鳥のモチーフを印象的に見せるため、JavaScriptでアニメーションを実装し、鳥が飛んでいるような動きを加えました。静的なデザインに動きを取り入れることで、サイト全体に遊び心を持たせ、ユーザーの印象に残る表現を意識しています。
+    - image: /image/blog-bird.webp
+      text:
+        - 鳥のモチーフを印象的に見せるため、JavaScriptでアニメーションを実装し、鳥が飛んでいるような動きを加えました。
+        - 静的なデザインに動きを取り入れることで、サイト全体に遊び心を持たせ、ユーザーの印象に残る表現を意識しています。
 
   - title: 操作性への配慮
-    type: operation
+    type: approach
     show: false
 
   - title: 視認性の工夫
-    type: form
+    type: approach
     blocks:
-      - image: /image/blog_hover.webp
-        text:
-         - 記事カードにホバーした際に少し浮き上がるアニメーションを加えることで、ユーザーがどの記事を選択しているか分かりやすくしました。
+    - image: /image/blog_hover.webp
+      text:
+        - 記事カードにホバーした際に少し浮き上がるアニメーションを加えることで、ユーザーがどの記事を選択しているか分かりやすくしました。
 
 
 reflection:

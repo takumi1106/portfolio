@@ -27,7 +27,7 @@ overview:
 
 process:
   - title: 動画構成の話し合い
-    type: hearing
+    type: research
     lead: 先生から依頼を受けた後、担当の先生を含めてどのような動画の構成にするかの話し合いを行いました。その結果、以下のような構成とすることに決定しました。
     points:
       - 映画広告風の演出
@@ -35,7 +35,7 @@ process:
       - 学生の反応を取り入れた映像
 
   - title: 動画撮影
-    type: design
+    type: visual
     lead: 動画構成を決定した後、スケジュールを調整し、数日に分けて新校舎の外装・内装のほか、インタビューや学生の反応の撮影を行いました。
     images:
       - /image/school-movie_photograph1.webp
@@ -61,22 +61,22 @@ process:
 
 ingenuity:
   - title: 文字起こしでの工夫
-    type: update
+    type: approach
     blocks:
-      - text: 文字起こしを行う際は、聞き取りづらい部分があったため、イヤホンを使用して音声を繰り返し確認し、正確に反映できるよう工夫しました。
-      - image: /image/school-movie_listen2.webp
-        text: さらに、パソコンのメモアプリに入力することで、共有する際や編集時に必要な部分をすぐにコピー＆ペーストできるようにし、スムーズに反映できるよう工夫しました。
+    - text: 文字起こしを行う際は、聞き取りづらい部分があったため、イヤホンを使用して音声を繰り返し確認し、正確に反映できるよう工夫しました。
+    - image: /image/school-movie_listen2.webp
+      text: さらに、パソコンのメモアプリに入力することで、共有時や編集時に必要な部分をすぐにコピー＆ペーストできるようにし、スムーズに反映できるよう工夫しました。
 
   - title: 編集での工夫
     show: false
 
   - title: 編集の工夫
-    type: form
+    type: approach
     blocks:
-      - image: /image/school-movie_edit2.webp
-        text: 多数の動画を何度も見返し、学生スタッフの笑顔や驚きなどのリアクションに加え、楽しそうな話し声が伝わるシーンを基準に切り抜きました。
-      - image: /image/school-movie_edit3.webp
-        text: その後、先生からアドバイスをいただきながら、時系列にとらわれず印象的なシーンをつなぐことで、より興味を引くオープニングとなるよう工夫しました。
+    - image: /image/school-movie_edit2.webp
+      text: 多数の動画を何度も見返し、学生スタッフの笑顔や驚きなどのリアクションに加え、楽しそうな会話の雰囲気が伝わるシーンを基準に切り抜きました。
+    - image: /image/school-movie_edit3.webp
+      text: その後、先生からアドバイスをいただきながら、時系列にとらわれず印象的なシーンをつなぐことで、より興味を引くオープニングになるよう工夫しました。
 
 reflection:
   - 学校側から新校舎紹介動画の制作を依頼され、当初は期限内に完成できるか不安がありました.Adobe Premiere Proを使用した動画制作も初めてで、最初は戸惑うこともありましたが、試行錯誤を重ねながら取り組みました。
