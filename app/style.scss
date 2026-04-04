@@ -1387,6 +1387,10 @@ $side-nav-gap: 3vw;
     &__item {
         margin-bottom: 0;
     }
+
+    &__item-text {
+        font-size: rem(16);
+    }
 }
 
 /* ------------------------ comment ----------------------- */
@@ -1521,8 +1525,16 @@ $side-nav-gap: 3vw;
         img {
             max-width: rem(345);
             width: 100%;
-            height: 100%;
+            height: rem(190);
             z-index: 1000;
+
+            @include mq(tablet) {
+                height: rem(170);
+            }
+
+            @include mq(desktop) {
+                height: rem(210);
+            }
         }
     }
 

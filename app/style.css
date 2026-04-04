@@ -1284,6 +1284,9 @@ a:focus-visible,
 .skill__item {
   margin-bottom: 0;
 }
+.skill__item-text {
+  font-size: 1rem;
+}
 
 /* ------------------------ comment ----------------------- */
 .comment__inner {
@@ -1433,8 +1436,18 @@ a:focus-visible,
 .workslist__img img {
   max-width: 21.5625rem;
   width: 100%;
-  height: 100%;
+  height: 11.875rem;
   z-index: 1000;
+}
+@media (width >= 431px) {
+  .workslist__img img {
+    height: 10.625rem;
+  }
+}
+@media (width >= 1200px) {
+  .workslist__img img {
+    height: 13.125rem;
+  }
 }
 @media (width >= 1200px) {
   .workslist__item {
