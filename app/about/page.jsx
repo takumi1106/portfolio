@@ -131,8 +131,7 @@ export default function AboutPage() {
                             <div className="skill__item list__item">
                                 <h3 className="skill__item-title list__title">コーディング</h3>
                                 <div className="skill__item-text list__text">
-                                    <p>HTML /
-                                        CSS（Sass）によるコーディングが可能です。BEM設計を意識し、保守性の高い実装を心がけています。JavaScriptでは、フェードインなどの基本的なUIアニメーションの実装が可能です。現在も理解を深めながら継続的に学習を進めています。
+                                    <p>HTML / CSS（Sass）を用いたコーディングが可能です。BEM設計を意識し、保守性の高い実装を心がけています。JavaScriptでは、クリック操作に応じて内容を動的に切り替える処理や、クラスの付け外しによるアニメーション制御を実装できます。
                                     </p>
                                 </div>
                             </div>
