@@ -5,12 +5,13 @@ date: 2025
 url: https://goto-take-1106.secret.jp/blog/
 
 thumbnail: /image/blog_main.webp
+alt: 小鳥たちのブログツリーの作品画像
 
 periodLabel: 制作期間
 period: 2025年 7月 〜 9月上旬（約2ヶ月）
 
 roleLabel: 担当範囲
-role: 企画 / コーディング / デザイン
+role: コーディング / デザイン
 
 techLabel: 作成技術
 tech: HTML / CSS / JavaScript / WordPress

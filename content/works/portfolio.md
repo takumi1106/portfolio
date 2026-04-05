@@ -1,14 +1,14 @@
 ---
-title: 日昇工業所｜公式サイト
-category: 進級制作品
+title: ポートフォリオ
+category: 個人制作品
 date: 2026
-url: https://goto-take-1106.secret.jp/nissyo/index.html
+url: https://portfolio-delta-self-19.vercel.app/
 
 thumbnail: /image/nissyo_main.webp
-alt: 日昇工業所の公式サイトの作品画像
+alt: ポートフォリオの作品画像
 
 periodLabel: 制作期間
-period: 2025年 10月 ~ 2026年 1月（約3ヶ月）
+period: 2026年 1月下旬 ~ 4月上旬（約3ヶ月）
 
 roleLabel: 担当範囲
 role: 企画 / コーディング / デザイン

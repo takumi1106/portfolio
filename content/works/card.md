@@ -4,12 +4,13 @@ category: 個人制作品
 date: 2026
 
 thumbnail: /image/name-card_main.webp
+alt: 名刺デザインの作品画像
 
 periodLabel: 制作期間
 period: 約1週間
 
 roleLabel: 担当範囲
-role: デザイン
+role: 企画 / デザイン
 
 techLabel: 作成技術
 tech: Illustrator
