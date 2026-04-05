@@ -14,10 +14,10 @@ roleLabel: 担当範囲
 role: 企画 / コーディング / デザイン
 
 techLabel: 作成技術
-tech: HTML / Sass / JavaScript / microCMS
+tech: Next.js / HTML / CSS（Sass）/ JavaScript / Markdown
 
 toolsLabel: 制作ツール
-tools: VSCode / Figma / Photoshop / Illustrator / Formspree
+tools: VSCode / Figma / Photoshop / Illustrator / Vercel / GitHub / 生成Ai（補助的に使用）
 
 overview:
   - 三重県伊勢市にある配管工事業者「日昇工業所」のコーポレートサイトを制作させていただきました。
