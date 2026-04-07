@@ -2,7 +2,7 @@
 title: 新校舎インタビュー動画
 category: グループ制作作品
 date: 2026
-url: https://youtu.be/0wEk1RPnZPM
+url: https://www.youtube.com/watch?v=utVfKSHHYTU
 type: video
 
 thumbnail: /image/school-movie_main.webp
@@ -12,7 +12,7 @@ periodLabel: 制作期間
 period: 2025年 10月 ~ 2026年 3月（約6ヶ月）
 
 roleLabel: 担当範囲
-role: 編集 / 撮影 / インタビュー / 文字起こし
+role: 企画 / 編集 / 撮影 / インタビュー / 文字起こし
 
 techLabel: 作成技術
 tech: カット編集 / オープニング編集
