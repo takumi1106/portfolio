@@ -2,19 +2,19 @@ import Link from "next/link";
 import SummerTriangle from "@/components/SummerTriangle";
 import { getWorkData, getWorksList } from "@/lib/markdown";
 import MobileMenu from "@/components/MobileMenu";
-import { Shippori_Mincho, Shippori_Antique } from "next/font/google";
+import { Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 
-const mincho = Shippori_Mincho({
+export const notoSans = Noto_Sans_JP({
     subsets: ["latin"],
     weight: ["400", "700"],
 });
 
-const gothic = Shippori_Antique({
+export const notoSerif = Noto_Serif_JP({
     subsets: ["latin"],
-    weight: ["400"],
+    weight: ["400", "700"],
 });
 
 export const metadata = {

@@ -33,19 +33,13 @@ $breakpoints: (
 );
 
 @mixin font-mincho() {
-    font-family: $font-family-mincho;
+    font-family: YakuHanJP, "Noto Serif JP", serif;
     font-weight: 400;
     font-style: normal;
 }
 
-@mixin font-mincho-think() {
-    font-family: $font-family-mincho;
-    font-weight: 600;
-    font-style: normal;
-}
-
 @mixin font-gothic() {
-    font-family: $font-family-gothic;
+    font-family: YakuHanJP, "Noto Sans JP", sans-serif;
     font-weight: 400;
     font-style: normal;
 }
@@ -214,7 +208,7 @@ $side-nav-gap: 3vw;
     }
 
     &__link {
-        @include font-mincho-think();
+        @include font-mincho();
         letter-spacing: ls(15);
         color: rgba($color-main, 0.65);
         text-decoration: none;
@@ -665,7 +659,7 @@ $side-nav-gap: 3vw;
     }
 
     &__title {
-        @include font-mincho-think();
+        @include font-mincho();
         font-size: rem(36);
         margin-top: rem(18);
 
@@ -1927,7 +1921,7 @@ $side-nav-gap: 3vw;
     line-height: 1.9;
 
     h2 {
-        @include font-mincho-think();
+        @include font-mincho();
         font-size: rem(28);
         color: $color-main;
         margin-top: rem(80);

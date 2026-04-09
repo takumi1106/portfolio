@@ -1,6 +1,6 @@
 @charset "UTF-8";
 body {
-  font-family: "Shippori Antique";
+  font-family: YakuHanJP, "Noto Sans JP", sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: 16;
@@ -99,8 +99,8 @@ a:focus-visible,
   gap: 1.625rem;
 }
 .side-nav__link {
-  font-family: "Shippori Mincho", serif;
-  font-weight: 600;
+  font-family: YakuHanJP, "Noto Serif JP", serif;
+  font-weight: 400;
   font-style: normal;
   letter-spacing: 0.15em;
   color: rgba(255, 255, 255, 0.65);
@@ -147,7 +147,7 @@ a:focus-visible,
   gap: 1.125rem;
 }
 .side-nav__works-link {
-  font-family: "Shippori Antique";
+  font-family: YakuHanJP, "Noto Sans JP", sans-serif;
   font-weight: 400;
   font-style: normal;
   position: relative;
@@ -518,8 +518,8 @@ a:focus-visible,
   }
 }
 .header__title {
-  font-family: "Shippori Mincho", serif;
-  font-weight: 600;
+  font-family: YakuHanJP, "Noto Serif JP", serif;
+  font-weight: 400;
   font-style: normal;
   font-size: 2.25rem;
   margin-top: 1.125rem;
@@ -536,7 +536,7 @@ a:focus-visible,
   }
 }
 .header__sub-title {
-  font-family: "Shippori Mincho", serif;
+  font-family: YakuHanJP, "Noto Serif JP", serif;
   font-weight: 400;
   font-style: normal;
   font-size: 1.25rem;
@@ -1872,8 +1872,8 @@ a:focus-visible,
   line-height: 1.9;
 }
 .markdown h2 {
-  font-family: "Shippori Mincho", serif;
-  font-weight: 600;
+  font-family: YakuHanJP, "Noto Serif JP", serif;
+  font-weight: 400;
   font-style: normal;
   font-size: 1.75rem;
   color: #fff;
