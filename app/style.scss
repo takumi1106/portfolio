@@ -1069,8 +1069,6 @@ $side-nav-gap: 3vw;
 
             aspect-ratio: 16 / 9;
             object-fit: cover;
-
-            z-index: 1000;
         }
     }
 
@@ -1520,11 +1518,11 @@ $side-nav-gap: 3vw;
         }
 
         img {
+            max-width: rem(345);
             width: 100%;
-            height: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
             object-fit: cover;
-            aspect-ratio: 3 / 2;
-            overflow: hidden;
         }
     }
 
