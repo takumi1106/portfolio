@@ -31,59 +31,74 @@ process:
 
   - title: デザイン
     type: visual
-    lead: ヒアリングを終えた後、デザイン工程に移りました。デザイン制作にはノートと Figma を使用し、画面構成や配色を具体化していきました。
+    lead: まず、コンセプトである「夏の大三角」に合う世界観を考え、夜空をイメージしたデザインとしました。その上で、見やすさやページ遷移のしやすさといったユーザビリティも意識しながら、Figmaを用いてデザインを制作しました。
     images:
       - /image/nissyo-note.webp
       - /image/nissyo-design.webp
     desc:
-      - まずはノートに簡単なラフを描き、クライアントに共有することで、サイト全体の雰囲気や方向性をすり合わせました。
-      - その内容をもとに、Figma 上でレイアウトや配色を調整しながらデザインを詰めていきました。
-      - 制作の途中で何度か修正を重ねたため初期案からは大きく変化しましたが、最終的にはクライアントにも納得していただけるデザインに仕上げることができました。
+      - デザインを行う際には、まず配色を重視して検討しました。
+       背景色・夏の大三角を表現する色・文字の配色といった要素を整理し、全体の統一感と視認性の両立を図っています。
+       特に文字色については、背景とのコントラストを考慮し、視認性やアクセシビリティにも配慮しました。
+      - また、情報が読みやすくなるよう、要素の配置や余白の取り方を意識して設計しています。視線の流れや情報の優先度を踏まえ、ユーザーが直感的に内容を把握できるレイアウトとしました。さらに、余白を適切に設けることで各要素の区切りを明確にし、可読性の向上につなげています。
 
   - title: コーディング
     type: coding
     code: |
-      // インナー幅の指定
-      // @param {number} $mw - max-width
-      // @param {number} $w  - width
-      @mixin inner($mw-l: 900px, $mw-m: 450px, $mw-s: 342px, $w: percentage(math.div(342, 390))) {
-        max-width: $mw-s;
-        width: $w;
-        margin-left: auto;
-        margin-right: auto;
-
-        @include mq(tablet) {
-          max-width: $mw-m;
-        }
-
-        @include mq(desktop) {
-          max-width: $mw-l;
-        }
-      }
+      <main className="main">
+        <section className="workslist">
+          <h2 className="workslist__title">WORKS</h2>
+            <div className="workslist__inner">
+              <ul className="workslist__list">
+                {works.map((work) => (
+                  <li className="workslist__item" key={`${work.slug}-${work.href}`}>
+                    <article className="workslist__box">
+                      <p className="workslist__label">{work.label}</p>
+                      <h3 className="workslist__box-title">{work.title}</h3>
+                      <Link className="workslist__link" href={work.href}>
+                        <div className="workslist__img">
+                          <img src={work.image} alt={work.title} />
+                        </div>
+                      </Link>
+                    </article>
+                  </li>
+                ))}
+              </ul>
+            </div>
+        </section>
+      </main>
     text:
-    - HTMLでページ全体の構造を組み、BEM設計を意識してSassでスタイルを実装しました。
-    - デザインの再現だけでなく、後から修正しやすいようクラス設計にも配慮しています。また、他の人が見ても理解しやすいようコメントを残し、保守性を意識しました。
-    - 上記は、レイアウトの再利用性を高めるために作成したインナー幅を管理するSassのmixinです。ブレークポイントごとに最大幅を切り替えられるようにし、レスポンシブ対応を効率的に行えるようにしています。
+    - Next.jsは、静的サイトとの相性が良く、高速な表示が可能である点から採用しました。
+      また、コンポーネント単位で設計することで再利用性を高められる点も理由の一つです。
+    - さらに、データとUIを分離して管理できるため構造を整理しやすく、保守性の向上にもつながると考えています。加えて、Vercelと連携することでデプロイや更新が容易に行える点も魅力であり、開発から公開までを効率的に行える環境を構築しました。
     subCode: |
-      <?php
-      $api_key = "********";
+      <!-- 日昇工業所の作品詳細ページで使用しているMarkdownデータの一例 -->
+      ---
+      title: 日昇工業所｜公式サイト
+      category: 進級制作品
+      date: 2026
+      url: https://goto-take-1106.secret.jp/nissyo/index.html
 
-      // microCMS APIを呼ぶ
-      $curl = curl_init();
-      curl_setopt_array($curl, [
-        CURLOPT_URL => "https://xxxxx.microcms.io/api/v1/news?limit=3",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_HTTPHEADER => [
-          "X-MICROCMS-API-KEY: {$api_key}"
-        ]
-      ]);
+      thumbnail: /image/nissyo_main.webp
+      alt: 日昇工業所の公式サイトの作品画像
 
-      $response = curl_exec($curl);
-      curl_close($curl);
+      periodLabel: 制作期間
+      period: 2025年 10月 ~ 2026年 1月（約3ヶ月）
 
-      header("Content-Type: application/json");
-      echo $response;
-    subText: microCMSのAPIキーをフロント側に露出させないため、PHPで中継する構成を採用しました。これにより、セキュリティを確保しつつ、最新のお知らせを取得できるようにしています。
+      roleLabel: 担当範囲
+      role: 企画 / コーディング / デザイン
+
+      techLabel: 作成技術
+      tech: HTML / CSS（Sass）/ JavaScript / microCMS
+
+      toolsLabel: 制作ツール
+      tools: VSCode / Figma / Photoshop / Illustrator / Formspree / GitHub / 生成Ai（補助的に使用）
+
+      overview:
+        - 三重県伊勢市にある配管工事業者「日昇工業所」のコーポレートサイトを制作させていただきました。
+        - サイトの更新頻度が低い点を踏まえ、表示速度や保守性を重視した静的サイトとして設計し、お知らせなどの更新が必要な箇所には microCMS を導入しています。
+        - また、誰にとっても使いやすい構成を意識し、情報の見やすさや操作のしやすさにも配慮しました。
+    subText:
+     作品情報の管理にはMarkdown形式を採用しており、Next.jsとの相性が良くデータとして扱いやすい点に加え、テキストベースで記述できるため更新が容易であり、GitHubとVercelの連携によって変更内容を自動で反映できる開発フローを構築できる点を理由に選定し、今回の制作では新たな技術として運用にも挑戦しました。
 
   - title: 細かい調整
     type: adjustment
