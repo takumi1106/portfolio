@@ -1,10 +1,10 @@
 ---
-title: ポートフォリオ
-category: 個人制作品
+title: PORTFOLIO
+category: 個人制作品（ポートフォリオ）
 date: 2026
 url: https://portfolio-delta-self-19.vercel.app/
 
-thumbnail: /image/nissyo_main.webp
+thumbnail: /image/portfolio_main.webp
 alt: ポートフォリオの作品画像
 
 periodLabel: 制作期間
@@ -33,8 +33,8 @@ process:
     type: visual
     lead: まず、コンセプトである「夏の大三角」に合う世界観を考え、夜空をイメージしたデザインとしました。その上で、見やすさやページ遷移のしやすさといったユーザビリティも意識しながら、Figmaを用いてデザインを制作しました。
     images:
-      - /image/nissyo-note.webp
-      - /image/nissyo-design.webp
+      - /image/portfolio_design.webp
+      - /image/portfolio_color.webp
     desc:
       - デザインを行う際には、まず配色を重視して検討しました。
        背景色・夏の大三角を表現する色・文字の配色といった要素を整理し、全体の統一感と視認性の両立を図っています。
