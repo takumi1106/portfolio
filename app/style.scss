@@ -1782,6 +1782,7 @@ $side-nav-gap: 3vw;
     &__code-wrap {
         width: 100%;
         max-width: none;
+        margin-bottom: rem(20);
     }
 
     &__code {
@@ -1794,6 +1795,7 @@ $side-nav-gap: 3vw;
         width: 100%;
         max-width: none;
         white-space: pre-wrap;
+        margin-bottom: rem(20);
     }
 
     &__body,
@@ -1877,12 +1879,8 @@ $side-nav-gap: 3vw;
 
     &__code-wrap {
         width: 100%;
-        margin-bottom: rem(25);
+        margin-bottom: rem(20);
         overflow-x: auto;
-
-        @include mq(tablet) {
-            margin-bottom: rem(30);
-        }
     }
 
     &__code {
