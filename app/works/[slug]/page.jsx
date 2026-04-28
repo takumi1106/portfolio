@@ -306,6 +306,7 @@ export default async function WorkDetailPage({ params }) {
 
                 <section className="ingenuity">
                     <h2 className="ingenuity__title sub-title">工夫した点</h2>
+
                     <div className="ingenuity__inner">
                         {work.ingenuity
                             ?.filter((item) => item.show !== false)
@@ -315,23 +316,49 @@ export default async function WorkDetailPage({ params }) {
 
                                     <div className="ingenuity__item-inner">
                                         {Array.isArray(item.blocks) &&
-                                            item.blocks.map((block, index) => (
-                                                <div className="ingenuity__body" key={`${item.title}-block-${index}`}>
-                                                    {block.image && (
-                                                        <figure className="ingenuity__img">
-                                                            <img src={block.image} alt="" loading="lazy" />
-                                                        </figure>
-                                                    )}
+                                            item.blocks.map((block, index) => {
+                                                const isCode = !!block.code;
 
-                                                    <div className="ingenuity__text">
-                                                        {Array.isArray(block.text)
-                                                            ? block.text.map((text, i) => (
-                                                                <p key={`${item.title}-text-${i}`}>{text}</p>
-                                                            ))
-                                                            : block.text && <p>{block.text}</p>}
+                                                return (
+                                                    <div
+                                                        className={`ingenuity__body ${isCode ? "is-code" : "is-image"}`}
+                                                        key={`${item.title}-block-${index}`}
+                                                    >
+
+                                                        {/* ===== コードの場合（上） ===== */}
+                                                        {block.code && (
+                                                            <figure className="ingenuity__code-wrap">
+                                                                <SyntaxHighlighter
+                                                                    language={block.language || "javascript"}
+                                                                    style={oneDark}
+                                                                    className="ingenuity__code"
+                                                                    showLineNumbers
+                                                                >
+                                                                    {block.code}
+                                                                </SyntaxHighlighter>
+                                                            </figure>
+                                                        )}
+
+                                                        {/* ===== 画像の場合（横） ===== */}
+                                                        {!block.code && block.image && (
+                                                            <figure className="ingenuity__img">
+                                                                <img src={block.image} alt={item.title} loading="lazy" />
+                                                            </figure>
+                                                        )}
+
+                                                        {/* テキスト */}
+                                                        {block.text && (
+                                                            <div className="ingenuity__text">
+                                                                {Array.isArray(block.text)
+                                                                    ? block.text.map((text, i) => (
+                                                                        <p key={`${item.title}-text-${i}`}>{text}</p>
+                                                                    ))
+                                                                    : <p>{block.text}</p>}
+                                                            </div>
+                                                        )}
                                                     </div>
-                                                </div>
-                                            ))}
+                                                );
+                                            })}
                                     </div>
                                 </div>
                             ))}

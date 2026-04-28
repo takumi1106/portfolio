@@ -98,7 +98,7 @@ export default function AboutPage() {
                             <h3 className="aboutpro__item-title list__title">出身校</h3>
                             <ul className="aboutpro__school-list">
                                 <li className="aboutpro__school">伊勢学園高等学校 (2023年卒業)</li>
-                                <li className="aboutpro__school">トライデントコンピュータコンピュータ専門学校 (2025年入学)</li>
+                                <li className="aboutpro__school">トライデントコンピュータ専門学校  (2025年入学)</li>
                             </ul>
                         </div>
                         <div className="aboutpro__item list__item">

@@ -1042,7 +1042,9 @@ a:focus-visible,
   }
 }
 .aboutpro__title {
-  font-family: "Shippori Mincho", serif;
+  font-family: YakuHanJP, "Noto Serif JP", serif;
+  font-weight: 400;
+  font-style: normal;
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
@@ -1098,7 +1100,9 @@ a:focus-visible,
 }
 .aboutpro__myname__sub {
   font-size: 1rem;
-  font-family: "Shippori Mincho", serif;
+  font-family: YakuHanJP, "Noto Serif JP", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 @media (width >= 1200px) {
   .aboutpro__myname__sub {
@@ -1361,7 +1365,9 @@ a:focus-visible,
   }
 }
 .workslist__title {
-  font-family: "Shippori Mincho", serif;
+  font-family: YakuHanJP, "Noto Serif JP", serif;
+  font-weight: 400;
+  font-style: normal;
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
@@ -1816,6 +1822,26 @@ a:focus-visible,
     margin-bottom: 2.5rem;
   }
 }
+@media (width >= 431px) {
+  .ingenuity__body.is-code {
+    display: block;
+  }
+}
+.ingenuity__code-wrap {
+  width: 100%;
+  margin-bottom: 1.5625rem;
+  overflow-x: auto;
+}
+@media (width >= 431px) {
+  .ingenuity__code-wrap {
+    margin-bottom: 1.875rem;
+  }
+}
+.ingenuity__code {
+  width: 100%;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
 .ingenuity__text {
   margin-bottom: 3.125rem;
 }
@@ -1829,6 +1855,10 @@ a:focus-visible,
 }
 .ingenuity__text p:last-child {
   margin-bottom: 0;
+}
+.ingenuity__body.is-code .ingenuity__text {
+  width: 100%;
+  max-width: none;
 }
 .ingenuity__operation-img {
   display: flex;

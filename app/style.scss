@@ -23,8 +23,6 @@ $color-bg: #000;
 
 // --- Typography ---
 $font-size-base: 16;
-$font-family-mincho: "Shippori Mincho", serif;
-$font-family-gothic: "Shippori Antique";
 
 // --- Breakpoints ---
 $breakpoints: (
@@ -1148,7 +1146,7 @@ $side-nav-gap: 3vw;
     }
 
     &__title {
-        font-family: $font-family-mincho;
+        @include font-mincho();
         font-size: $space-xl;
         font-weight: bold;
         text-align: center;
@@ -1200,7 +1198,7 @@ $side-nav-gap: 3vw;
 
         &__sub {
             font-size: rem(16);
-            font-family: $font-family-mincho;
+            @include font-mincho();
 
             @include mq(desktop) {
                 font-size: rem(20);
@@ -1443,7 +1441,7 @@ $side-nav-gap: 3vw;
     }
 
     &__title {
-        font-family: $font-family-mincho;
+        @include font-mincho();
         font-size: $space-xl;
         font-weight: bold;
         text-align: center;
@@ -1870,6 +1868,29 @@ $side-nav-gap: 3vw;
         }
     }
 
+    // コードがある時だけ縦並びにする
+    &__body.is-code {
+        @include mq(tablet) {
+            display: block;
+        }
+    }
+
+    &__code-wrap {
+        width: 100%;
+        margin-bottom: rem(25);
+        overflow-x: auto;
+
+        @include mq(tablet) {
+            margin-bottom: rem(30);
+        }
+    }
+
+    &__code {
+        width: 100%;
+        font-size: rem(14);
+        line-height: 1.7;
+    }
+
     &__text {
         margin-bottom: rem(50);
 
@@ -1884,6 +1905,12 @@ $side-nav-gap: 3vw;
                 margin-bottom: 0;
             }
         }
+    }
+
+    // コードがある時の文章は横幅を狭めない
+    &__body.is-code &__text {
+        width: 100%;
+        max-width: none;
     }
 
     &__operation-img {
