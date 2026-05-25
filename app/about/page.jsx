@@ -76,7 +76,7 @@ export default function AboutPage() {
                                     後藤 匠<span className="aboutpro__myname__sub"> (Goto Takumi)</span>
                                 </p>
                                 <div className="aboutpro__text">
-                                    <p>トライデントコンピュータ専門学校のWebデザイン学科2年生の後藤 匠です。フロントエンドエンジニアを志望し、見やすく使いやすいUIの実装を目指して日々学習と制作に取り組んでいます。</p>
+                                    <p>トライデントコンピュータ専門学校のWebデザイン学科2年生の後藤 匠です。フロントエンドエンジニアを志望し、新しい技術を学び続けながら実装を通した成長を大切にしています。</p>
                                 </div>
                             </div>
                         </div>
@@ -115,12 +115,12 @@ export default function AboutPage() {
                 <section className="ideal">
                     <h2 className="ideal__title sub-title">MY IDEAL</h2>
                     <div className="ideal__inner">
-                        <h3 className="ideal__catch">「使いやすさにこだわる<br /><span className="ideal__indent">フロントエンドエンジニア」</span>
+                        <h3 className="ideal__catch">「学び、挑戦し続ける<br /><span className="ideal__indent">フロントエンドエンジニアへ」</span>
                         </h3>
                         <div className="ideal__text">
-                            <p>使いやすさを設計できるフロントエンドエンジニアを目指しています。</p>
-                            <p>見た目だけでなく、操作のしやすさや情報の分かりやすさを意識し、アクセシビリティにも<br />配慮したUIの実装を心がけています。</p>
-                            <p>シンプルで整理されたデザインを大切にしながら、<br />環境が変わっても使いやすい構造を意識して制作しています。</p>
+                            <p>新しい技術を学び続けることを当たり前にし、どんなに難しい実装にも迷わず向き合えるエンジニアを目指しています。</p>
+                            <p>技術は常に進化するからこそ、トレンドを追いかけるだけでなく、深く理解して自分のものにすることを意識しています。</p>
+                            <p>学んだ技術を実際の実装に活かし、できることを着実に広げていくことで、ユーザーにとって使いやすいUIを届けられるエンジニアになりたいと思っています。</p>
                         </div>
                     </div>
                 </section>

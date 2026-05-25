@@ -88,8 +88,8 @@ export default function Home() {
                   <p className="occupation"><span className="label">志望職種</span>フロントエンドエンジニア</p>
                 </div>
                 <div className="top-about__text">
-                  <p>アクセシビリティと扱いやすさを<br />
-                    重視したWeb制作を大切にしています。</p>
+                  <p>新しい技術を学び続け、<br />
+                    学び続けることを大切にしています。</p>
                 </div>
               </div>
             </div>
