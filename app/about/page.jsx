@@ -115,12 +115,12 @@ export default function AboutPage() {
                 <section className="ideal">
                     <h2 className="ideal__title sub-title">MY IDEAL</h2>
                     <div className="ideal__inner">
-                        <h3 className="ideal__catch">「学び、挑戦し続ける<br /><span className="ideal__indent">フロントエンドエンジニアへ」</span>
+                        <h3 className="ideal__catch">「学び、挑戦し続ける<br /><span className="ideal__indent">Webプログラマーへ」</span>
                         </h3>
                         <div className="ideal__text">
-                            <p>新しい技術を学び続けることを当たり前にし、どんなに難しい実装にも迷わず向き合えるエンジニアを目指しています。</p>
-                            <p>技術は常に進化するからこそ、トレンドを追いかけるだけでなく、深く理解して自分のものにすることを意識しています。</p>
-                            <p>学んだ技術を実際の実装に活かし、できることを着実に広げていくことで、ユーザーにとって使いやすいUIを届けられるエンジニアになりたいと思っています。</p>
+                            <p>新しい技術を学び続けることを当たり前にし、Web技術だけでなくさまざまな分野にも挑戦しながら成長していきたいと考えています。</p>
+                            <p>技術は常に進化するからこそ、トレンドを追うだけではなく、仕組みまで理解し、自分の力として身につけることを大切にしています。</p>
+                            <p>学んだ技術を実際の開発に活かし、Webプログラマーとして幅広い技術を身につけながら、ユーザーにとって価値のあるサービスを届けられるエンジニアを目指しています。</p>
                         </div>
                     </div>
                 </section>
