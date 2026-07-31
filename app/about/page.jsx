@@ -76,7 +76,7 @@ export default function AboutPage() {
                                     後藤 匠<span className="aboutpro__myname__sub"> (Goto Takumi)</span>
                                 </p>
                                 <div className="aboutpro__text">
-                                    <p>トライデントコンピュータ専門学校のWebデザイン学科2年生の後藤 匠です。フロントエンドエンジニアを志望し、新しい技術を学び続けながら実装を通した成長を大切にしています。</p>
+                                    <p>トライデントコンピュータ専門学校のWebデザイン学科2年生の後藤 匠です。Webプログラマーを志望し、新しい技術を学び続けながら実装を通した成長を大切にしています。</p>
                                 </div>
                             </div>
                         </div>
@@ -125,20 +125,20 @@ export default function AboutPage() {
                     </div>
                 </section>
                 <section className="skill">
-                    <h2 className="skill__title sub-title">SKILL</h2>
+                    <h2 className="skill__title sub-title">SKILLS & STYLE</h2>
                     <div className="skill__inner">
                         <div className="skill__list list">
                             <div className="skill__item list__item">
                                 <h3 className="skill__item-title list__title">コーディング</h3>
                                 <div className="skill__item-text list__text">
-                                    <p>HTML / CSS（Sass）を用いたコーディングが可能です。BEM設計を意識し、保守性の高い実装を心がけています。JavaScriptでは、クリック操作に応じて内容を動的に切り替える処理や、クラスの付け外しによるアニメーション制御を実装できます。
+                                    <p>HTML / CSS（Sass）を用いたコーディングが可能です。BEM設計を意識し、保守性の高い実装を心がけています。また、JavaScriptやPHPを用いたWebサイト・Webアプリケーション開発にも取り組み、できることを少しずつ広げています。
                                     </p>
                                 </div>
                             </div>
                             <div className="skill__item list__item">
                                 <h3 className="skill__item-title list__title">私の強み</h3>
                                 <div className="skill__item-text list__text">
-                                    <p>作業内容に関係なく、目の前の作業に集中して取り組むことができます。コーディングだけでなく、細かい修正や確認などの地道な作業でも、集中力を切らさずに、最後まで丁寧に取り組むことを大切にしています。完成させるために、居残ってでも作業を進めることがあります。
+                                    <p>作業内容に関係なく、目の前の作業に集中して取り組むことができます。コーディングだけでなく、細かい修正や確認などの地道な作業でも、集中力を切らさずに、最後まで丁寧に取り組むことを大切にしています。最後まで責任を持って取り組み、納得できる品質になるまで改善を重ねることを大切にしています。
                                     </p>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@ export default function AboutPage() {
                             <div className="skill__item list__item">
                                 <h3 className="skill__item-title list__title">制作での進め方</h3>
                                 <div className="skill__item-text list__text">
-                                    <p>コンセプトを決めてデザインを考えた上でコーディングに取り組んでいます。レスポンシブ対応や使いやすさを意識しながら実装を進め、形になった段階で改善を重ねて完成度を高めながら、全体のバランスも確認しています。
+                                    <p>コンセプトを決めてデザインを考えた上でコーディングに取り組んでいます。レスポンシブ対応や使いやすさを意識しながら実装を進め、形になった段階で改善を重ねて完成度を高めながら、完成後も改善を重ねながら品質を高めています。
                                     </p>
                                 </div>
                             </div>
