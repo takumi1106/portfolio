@@ -1686,7 +1686,12 @@ a:focus-visible,
   margin-bottom: 2.1875rem;
 }
 .process__img-design img {
-  width: 20.75rem;
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/3;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .process__img-design img:first-child {
   margin-bottom: 2.5rem;
@@ -1697,21 +1702,12 @@ a:focus-visible,
   }
 }
 @media (width >= 431px) {
-  .process__img-design img {
-    width: 19.0625rem;
-  }
-}
-@media (width >= 1200px) {
-  .process__img-design img {
-    width: 23.75rem;
-  }
-}
-@media (width >= 431px) {
   .process__img-design {
     display: grid;
-    grid-auto-flow: column;
-    -moz-column-gap: 3.125rem;
-         column-gap: 3.125rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    -moz-column-gap: 1.5rem;
+         column-gap: 1.5rem;
+    align-items: start;
   }
 }
 .process__design-desc {
@@ -1930,20 +1926,12 @@ a:focus-visible,
   margin-bottom: 1.5rem;
 }
 
-@media (width >= 431px) {
-  .work-page--nissyo .process__img-design img:first-child {
-    width: 16.875rem;
-  }
+.work-page--nissyo .process__img-design img {
+  aspect-ratio: 1/1;
 }
-@media (width >= 1200px) {
-  .work-page--nissyo .process__img-design img:first-child {
-    width: 23.75rem;
-  }
-}
-@media (width >= 1200px) {
-  .work-page--nissyo .process__img-design img:last-child {
-    width: 26.25rem;
-  }
+
+.work-page--card .process__img-design img {
+  aspect-ratio: 285/181;
 }
 
 .work-page--uranai .process__text {

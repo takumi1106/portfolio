@@ -1,159 +1,321 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { gsap } from "gsap";
+import * as THREE from "three";
 
-export default function SummerTriangle() {
-    const canvasRef = useRef(null);
+const LINE_COLOR = "#ffebaa";
+
+function seededRandom(value) {
+    const result = Math.sin(value * 12.9898 + 78.233) * 43758.5453;
+    return result - Math.floor(result);
+}
+
+function ScrollCamera() {
+    const scrollProgress = useRef(0);
+    const reduceMotion = useRef(false);
 
     useEffect(() => {
-        const canvas = canvasRef.current;
-        if (!canvas) return;
+        reduceMotion.current = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
 
-        const ctx = canvas.getContext("2d");
-        let triangleStars = [];
-        let smallStars = [];
-        let brightStars = [];
-        let animationId;
-        let scrollY = 0;
-
-        function setTriangleStars() {
-            if (window.innerWidth >= 1024) {
-                triangleStars = [
-                    { x: canvas.width * 0.2, y: canvas.height * 0.33 },
-                    { x: canvas.width * 0.73, y: canvas.height * 0.83 },
-                    { x: canvas.width * 0.05, y: canvas.height * 0.74 },
-                ];
-            } else {
-                triangleStars = [
-                    { x: canvas.width * 0.3, y: canvas.height * 0.37 },
-                    { x: canvas.width * 0.95, y: canvas.height * 0.65 },
-                    { x: canvas.width * 0.04, y: canvas.height * 0.57 },
-                ];
-            }
+        function updateScrollProgress() {
+            const scrollableHeight = Math.max(
+                document.documentElement.scrollHeight - window.innerHeight,
+                1
+            );
+            scrollProgress.current = window.scrollY / scrollableHeight;
         }
 
-        function createSkyStars() {
-            brightStars = [];
-
-            const isDesktop = window.innerWidth >= 1024;
-            const brightCount = isDesktop ? 60 : 32;
-
-            for (let i = 0; i < brightCount; i++) {
-                brightStars.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    r: Math.random() * 1.6 + 1.2,
-                    phase: Math.random() * Math.PI * 2,
-                    speed: Math.random() * 0.18 + 0.04,
-                    glow: Math.random() * 4 + 8,
-                });
-            }
-        }
-
-        function handleScroll() {
-            scrollY = window.scrollY;
-        }
-
-        function drawSkyStars(time) {
-            smallStars.forEach((star) => {
-                ctx.beginPath();
-                ctx.fillStyle = `rgba(255,240,180,${star.alpha})`;
-                ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
-                ctx.fill();
-            });
-
-            brightStars.forEach((star) => {
-                const y = star.y + scrollY * 0.035;
-                const twinkle = 0.55 + Math.sin(time * 0.008 + star.phase) * 0.12;//星をピカピカ
-
-                ctx.beginPath();
-                ctx.fillStyle = `rgba(255,248,230,${twinkle})`;
-                ctx.shadowBlur = star.glow;
-                ctx.shadowColor = `rgba(255,245,220,${twinkle * 0.7})`;
-                ctx.arc(star.x, y, star.r, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.shadowBlur = 0;
-            });
-        }
-
-        function drawTriangleStars(time) {
-            triangleStars.forEach((star, i) => {
-                const twinkle = 0.6 + Math.sin(time * 0.001 + i) * 0.1;
-
-                ctx.beginPath();
-                ctx.strokeStyle = `rgba(255,235,170,${0.2 * twinkle})`;
-                ctx.lineWidth = 1;
-                ctx.shadowBlur = 14 * twinkle;
-                ctx.shadowColor = "rgba(255,255,170,0.8)";
-                ctx.moveTo(star.x - 12, star.y);
-                ctx.lineTo(star.x + 12, star.y);
-                ctx.moveTo(star.x, star.y - 12);
-                ctx.lineTo(star.x, star.y + 12);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.strokeStyle = `rgba(255,235,170,${0.8 * twinkle})`;
-                ctx.lineWidth = 1;
-                ctx.shadowBlur = 0;
-                ctx.moveTo(star.x - 8, star.y);
-                ctx.lineTo(star.x + 8, star.y);
-                ctx.moveTo(star.x, star.y - 8);
-                ctx.lineTo(star.x, star.y + 8);
-                ctx.stroke();
-
-                ctx.beginPath();
-                ctx.fillStyle = `rgba(255,245,200,${0.4 * twinkle})`;
-                ctx.arc(star.x, star.y, 4.5, 0, Math.PI * 2);
-                ctx.fill();
-            });
-        }
-
-        function drawTriangleLines() {
-            ctx.beginPath();
-            ctx.moveTo(triangleStars[0].x, triangleStars[0].y);
-            ctx.lineTo(triangleStars[1].x, triangleStars[1].y);
-            ctx.lineTo(triangleStars[2].x, triangleStars[2].y);
-            ctx.closePath();
-            ctx.strokeStyle = "rgba(255,235,170,0.4)";
-            ctx.lineWidth = 1;
-            ctx.shadowBlur = 6;
-            ctx.shadowColor = "rgba(255,235,170,0.32)";
-            ctx.stroke();
-            ctx.shadowBlur = 0;
-        }
-
-        function draw(time = 0) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawSkyStars(time);
-            drawTriangleLines();
-            drawTriangleStars();
-        }
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            setTriangleStars();
-            createSkyStars();
-            draw();
-        }
-
-        function animate(time) {
-            draw(time);
-            animationId = requestAnimationFrame(animate);
-        }
-
-        resizeCanvas();
-        animate();
-
-        window.addEventListener("resize", resizeCanvas);
-        window.addEventListener("scroll", handleScroll);
+        updateScrollProgress();
+        window.addEventListener("scroll", updateScrollProgress, { passive: true });
+        window.addEventListener("resize", updateScrollProgress);
 
         return () => {
-            window.removeEventListener("resize", resizeCanvas);
-            window.removeEventListener("scroll", handleScroll);
-            cancelAnimationFrame(animationId);
+            window.removeEventListener("scroll", updateScrollProgress);
+            window.removeEventListener("resize", updateScrollProgress);
         };
     }, []);
 
-    return <canvas ref={canvasRef} className="bg-canvas" />;
+    useFrame(({ camera }, delta) => {
+        const progress = reduceMotion.current ? 0 : scrollProgress.current;
+
+        camera.position.x = THREE.MathUtils.damp(
+            camera.position.x,
+            progress * 0.9,
+            3.5,
+            delta
+        );
+        camera.position.y = THREE.MathUtils.damp(
+            camera.position.y,
+            -progress * 0.55,
+            3.5,
+            delta
+        );
+        camera.position.z = THREE.MathUtils.damp(
+            camera.position.z,
+            10 - progress * 3.2,
+            3.5,
+            delta
+        );
+        camera.lookAt(0, -progress * 0.2, 0);
+    });
+
+    return null;
+}
+
+function RandomStars({ count }) {
+    const { viewport } = useThree();
+    const groupRef = useRef(null);
+    const starRefs = useRef([]);
+
+    const stars = useMemo(() => {
+        return Array.from({ length: count }, (_, index) => ({
+            x: seededRandom(index * 9 + 1) - 0.5,
+            y: seededRandom(index * 9 + 2) - 0.5,
+            z: seededRandom(index * 9 + 3) * 10 - 5,
+            size: seededRandom(index * 9 + 4) * 0.012 + 0.009,//星のサイズ
+            opacity: seededRandom(index * 9 + 5) * 0.3 + 0.22,
+            duration: seededRandom(index * 9 + 6) * 4 + 3,
+            delay: seededRandom(index * 9 + 7) * 3,
+            driftX: (seededRandom(index * 9 + 8) - 0.5) * 0.06,
+            driftY: (seededRandom(index * 9 + 9) - 0.5) * 0.08,
+            driftZ: seededRandom(index * 9 + 10) * 0.55 + 0.25,
+        }));
+    }, [count]);
+
+    useEffect(() => {
+        const tweens = [];
+
+        if (groupRef.current) {
+            tweens.push(
+                gsap.to(groupRef.current.rotation, {
+                    z: 0.035,
+                    duration: 16,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut",
+                })
+            );
+        }
+
+        starRefs.current.forEach((star, index) => {
+            if (!star) return;
+            const settings = stars[index];
+
+            tweens.push(
+                gsap.to(star.position, {
+                    x: star.position.x + settings.driftX * viewport.width,
+                    y: star.position.y + settings.driftY * viewport.height,
+                    z: star.position.z + settings.driftZ,
+                    duration: settings.duration,
+                    delay: settings.delay,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut",
+                }),
+                gsap.to(star.material, {
+                    opacity: Math.min(settings.opacity + 0.25, 0.78),
+                    duration: settings.duration * 0.55,
+                    delay: settings.delay,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut",
+                })
+            );
+        });
+
+        return () => tweens.forEach((tween) => tween.kill());
+    }, [stars, viewport.width, viewport.height]);
+
+    return (
+        <group ref={groupRef}>
+            {stars.map((star, index) => (
+                <mesh
+                    key={index}
+                    ref={(element) => {
+                        starRefs.current[index] = element;
+                    }}
+                    position={[
+                        star.x * viewport.width * 1.25,
+                        star.y * viewport.height * 1.25,
+                        star.z,
+                    ]}
+                    scale={star.size * (1 + (star.z + 5) * 0.14)}
+                >
+                    <octahedronGeometry args={[1, 0]} />
+                    <meshBasicMaterial
+                        color="#f6d96b"
+                        transparent
+                        opacity={star.opacity}
+                        blending={THREE.AdditiveBlending}
+                        depthWrite={false}
+                        toneMapped={false}
+                    />
+                </mesh>
+            ))}
+        </group>
+    );
+}
+
+function TriangleStar({ position, delay }) {
+    const starRef = useRef(null);
+    const sparkleShape = useMemo(() => {
+        const shape = new THREE.Shape();
+        shape.moveTo(0, 0.24);
+        shape.lineTo(0.025, 0.035);
+        shape.lineTo(0.24, 0);
+        shape.lineTo(0.025, -0.035);
+        shape.lineTo(0, -0.24);
+        shape.lineTo(-0.025, -0.035);
+        shape.lineTo(-0.24, 0);
+        shape.lineTo(-0.025, 0.035);
+        shape.closePath();
+        return shape;
+    }, []);
+
+    useFrame(({ clock }) => {
+        if (!starRef.current) return;
+
+        const pulse = 1 + Math.sin(clock.elapsedTime * 2.2 + delay) * 0.16;
+        starRef.current.scale.setScalar(pulse);
+    });
+
+    return (
+        <group ref={starRef} position={position}>
+            <mesh scale={0.85}>
+                <shapeGeometry args={[sparkleShape]} />
+                <meshBasicMaterial
+                    color={LINE_COLOR}
+                    transparent
+                    opacity={0.16}
+                    blending={THREE.AdditiveBlending}
+                    depthWrite={false}
+                    side={THREE.DoubleSide}
+                    toneMapped={false}
+                />
+            </mesh>
+            <mesh position={[0, 0, 0.01]} scale={0.5}>
+                <shapeGeometry args={[sparkleShape]} />
+                <meshBasicMaterial
+                    color="#fff3a8"
+                    transparent
+                    opacity={0.85}
+                    blending={THREE.AdditiveBlending}
+                    depthWrite={false}
+                    side={THREE.DoubleSide}
+                    toneMapped={false}
+                />
+            </mesh>
+            <mesh position={[0, 0, 0.02]}>
+                <octahedronGeometry args={[0.04, 0]} />
+                <meshBasicMaterial color="#fffbd8" toneMapped={false} />
+            </mesh>
+        </group>
+    );
+}
+
+function GrowingLine({ start, end, delay }) {
+    const positionRef = useRef(null);
+
+    const positions = useMemo(
+        () => new Float32Array([...start, ...start]),
+        [start]
+    );
+
+    useFrame(({ clock }) => {
+        const attribute = positionRef.current;
+        if (!attribute) return;
+
+        const duration = 1.15;
+        const progress = THREE.MathUtils.clamp(
+            (clock.elapsedTime - delay) / duration,
+            0,
+            1
+        );
+        const eased = 1 - Math.pow(1 - progress, 3);
+
+        attribute.setXYZ(
+            1,
+            THREE.MathUtils.lerp(start[0], end[0], eased),
+            THREE.MathUtils.lerp(start[1], end[1], eased),
+            THREE.MathUtils.lerp(start[2], end[2], eased)
+        );
+        attribute.needsUpdate = true;
+    });
+
+    return (
+        <line>
+            <bufferGeometry>
+                <bufferAttribute
+                    ref={positionRef}
+                    attach="attributes-position"
+                    args={[positions, 3]}
+                />
+            </bufferGeometry>
+            <lineBasicMaterial
+                color={LINE_COLOR}
+                transparent
+                opacity={0.8}
+                blending={THREE.AdditiveBlending}
+                depthWrite={false}
+                toneMapped={false}
+            />
+        </line>
+    );
+}
+
+function StarScene() {
+    const { size, viewport } = useThree();
+
+    const triangleStars = useMemo(() => {
+        const desktop = size.width >= 1024;
+        const ratios = desktop
+            ? [[0.2, 0.32], [0.75, 0.86], [0.05, 0.8]]//デスクトップ版
+            : [[0.3, 0.34], [0.9, 0.68], [0.07, 0.6]];//モバイル版
+
+        return ratios.map(([x, y]) => [
+            (x - 0.5) * viewport.width,
+            (0.5 - y) * viewport.height,
+            0,
+        ]);
+    }, [size.width, viewport.width, viewport.height]);
+
+    return (
+        <>
+            {/* 星の数 */}
+            <RandomStars count={size.width >= 1024 ? 370 : 150} />
+
+            <group scale={0.82}>
+                <GrowingLine start={triangleStars[0]} end={triangleStars[1]} delay={0.35} />
+                <GrowingLine start={triangleStars[1]} end={triangleStars[2]} delay={1.5} />
+                <GrowingLine start={triangleStars[2]} end={triangleStars[0]} delay={2.65} />
+
+                {triangleStars.map((position, index) => (
+                    <TriangleStar
+                        key={index}
+                        position={position}
+                        delay={index * 0.8}
+                    />
+                ))}
+            </group>
+        </>
+    );
+}
+
+export default function SummerTriangle() {
+    return (
+        <div className="bg-canvas" aria-hidden="true">
+            <Canvas
+                camera={{ position: [0, 0, 10], fov: 45, near: 0.1, far: 100 }}
+                dpr={[1, 1.75]}
+                gl={{ alpha: true, antialias: true }}
+            >
+                <ScrollCamera />
+                <StarScene />
+            </Canvas>
+        </div>
+    );
 }

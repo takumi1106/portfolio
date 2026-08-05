@@ -1734,7 +1734,11 @@ $side-nav-gap: 3vw;
         margin-bottom: rem(35);
 
         img {
-            width: rem(332);
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
 
             &:first-child {
                 margin-bottom: rem(40);
@@ -1743,20 +1747,13 @@ $side-nav-gap: 3vw;
                     margin-bottom: 0;
                 }
             }
-
-            @include mq(tablet) {
-                width: rem(305);
-            }
-
-            @include mq(desktop) {
-                width: rem(380);
-            }
         }
 
         @include mq(tablet) {
             display: grid;
-            grid-auto-flow: column;
-            column-gap: rem(50);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            column-gap: rem(24);
+            align-items: start;
         }
     }
 
@@ -1989,24 +1986,16 @@ $side-nav-gap: 3vw;
 //===============================================================
 .work-page--nissyo {
     .process {
-        &__img-design {
-            img {
-                &:first-child {
-                    @include mq(tablet) {
-                        width: rem(270);
-                    }
+        &__img-design img {
+            aspect-ratio: 1 / 1;
+        }
+    }
+}
 
-                    @include mq(desktop) {
-                        width: rem(380);
-                    }
-                }
-
-                &:last-child {
-                    @include mq(desktop) {
-                        width: rem(420);
-                    }
-                }
-            }
+.work-page--card {
+    .process {
+        &__img-design img {
+            aspect-ratio: 285 / 181;
         }
     }
 }
